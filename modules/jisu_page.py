@@ -2,6 +2,8 @@ from modules import *
 
 
 class JiSuPage(PageObject):
+    """极速群发"""
+
     def __init__(self, page: Page):
         super().__init__(page)
         self.create_task = self.page.get_by_text("新建任务")
@@ -20,27 +22,22 @@ class JiSuPage(PageObject):
         self.send_content_text = self.page.locator('//div[@class="sendContent"]//span[text()="文本"]')
         self.text_input = self.page.locator('//div[@class="sendContent"]//div[@id="editDiv"]')
         self.sure_in_text_input = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button/span[text()="确 定"]')
-
         self.send_content_picture = self.page.locator('//div[@class="sendContent"]//span[text()="图片"]')
-        # self.add_button = self.page.locator('//div[@class="bscrmCSS-modal-content"]//i[@class="anticon anticon-plus"]')
         self.add_button = self.page.locator('//div[@class="bscrmCSS-modal-content"]//div[@class="sop-upload-btn"]')
         self.upload_suc = self.page.locator('//div[@class="bscrmCSS-message"]//span[text()="上传成功~"]')
-
         self.send_content_video = self.page.locator('//div[@class="sendContent"]//span[text()="视频"]')
         self.send_content_link = self.page.locator('//div[@class="sendContent"]//span[text()="链接"]')
         self.link_title = self.page.get_by_placeholder('请输入链接标题')
         self.link_address = self.page.get_by_placeholder('请输入链接', exact=True)
         self.link_content = self.page.get_by_placeholder('请输入内容简介')
-
         self.send_content_file = self.page.locator('//div[@class="sendContent"]//span[text()="文件"]')
         self.file_name = self.page.get_by_placeholder('请输入文件名称')
-
         self.sure_to_submit = self.page.locator('//div[@class="btnBox"]//button/span[text()="确 定"]')
-
         self.search_task_name = self.page.get_by_placeholder('请输入任务名称')
         self.task_name_in_card = lambda task_name: self.page.locator(
             f'//div[@class="HighMassTexting_main_L"]//span[text()="{task_name}"]')
-        self.load_tip = self.page.locator('//div[@id="prmt-container"]//div[@class="ant-spin ant-spin-spinning"]/span[@class="ant-spin-dot ant-spin-dot-spin"]')
+        self.load_tip = self.page.locator(
+            '//div[@id="prmt-container"]//div[@class="ant-spin ant-spin-spinning"]/span[@class="ant-spin-dot ant-spin-dot-spin"]')
 
     def navigate(self):
         self.jump("/mantis/bscrm/topspeedMassTexting")
@@ -109,4 +106,3 @@ class JiSuPage(PageObject):
 
     def create_person_task(self, task_name, wechat_name_list, person_name_list, send_content_dic):
         self.create_task_func(task_name, wechat_name_list, person_name_list, send_content_dic, task_type='私聊群发')
-

@@ -3,6 +3,7 @@ from utils.tools import get_time_now
 
 
 def test_create_pull_group(pw_page, base_url, data_for_test):
+    """批量拉群"""
     pull_group_page = PullGroupPage(pw_page)
     pull_group_page.page_login(*data_for_test[1], base_url)
 

@@ -2,6 +2,8 @@ from modules import *
 
 
 class PullGroupPage(PageObject):
+    """批量拉群"""
+
     def __init__(self, page: Page):
         super().__init__(page)
         self.create_task = self.page.get_by_text("新建任务")
@@ -28,21 +30,20 @@ class PullGroupPage(PageObject):
             '//div[@class="rember-modal-bottom"]/button[@class="bscrmCSS-btn bscrmCSS-btn-primary"]')
         self.members_count = self.page.locator('//input[@id="toGroupUserNum"]')
         self.group_rate = self.page.locator('//input[@id="toGroupJoinUserRate"]')
-
         self.sure_to_submit = self.page.locator('//div[@class="btnBox"]//button/span[text()="确 定"]')
-
         self.search_task_name = self.page.get_by_placeholder('请输入任务名称')
         self.task_name_in_card = lambda task_name: self.page.locator(
             f'//div[@class="HighMassTexting_main_L"]//span[text()="{task_name}"]')
         self.load_tip = self.page.locator(
             '//div[@class="ant-spin ant-spin-spinning"]/span[@class="ant-spin-dot ant-spin-dot-spin"]')
-        self.group_name_exsit = lambda group_name: self.page.locator(f'//div[@class="table_groupInfo"]//div[contains(text(), "{group_name}")]')
+        self.group_name_exsit = lambda group_name: self.page.locator(
+            f'//div[@class="table_groupInfo"]//div[contains(text(), "{group_name}")]')
 
     def navigate(self):
         self.jump("/mantis/bscrm/batchGrouping")
 
     def create_task_create_group(self, task_name, wechat_name_list, name_list, new_group_name, code,
-                            name_fixed_list, employee, members_count, group_rate):
+                                 name_fixed_list, employee, members_count, group_rate):
         self.create_task.click()
         self.task_name.fill(task_name)
         self.choose_wechat.click()

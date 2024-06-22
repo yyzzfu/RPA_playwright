@@ -2,6 +2,8 @@ from modules import *
 
 
 class FastTaskPage(PageObject):
+    """快捷任务"""
+
     def __init__(self, page: Page):
         super().__init__(page)
         self.create_task = self.page.get_by_text("新建任务")
@@ -14,9 +16,10 @@ class FastTaskPage(PageObject):
         self.search = self.page.get_by_placeholder('请输入查询内容')
         self.muban = lambda muban: self.page.locator(
             f'//table//td[text()="{muban}"]/../td[@class="bscrmCSS-table-selection-column"]')
-
-        self.sure_in = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button[@type="button"]/span[text()="确 定"]/..').last
-        self.sure = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button[@type="button"]/span[text()="确 定"]/..')
+        self.sure_in = self.page.locator(
+            '//div[@class="bscrmCSS-modal-content"]//button[@type="button"]/span[text()="确 定"]/..').last
+        self.sure = self.page.locator(
+            '//div[@class="bscrmCSS-modal-content"]//button[@type="button"]/span[text()="确 定"]/..')
         self.search_button = self.page.locator('//button/span[text()="查 询"]/..')
 
     def navigate(self):

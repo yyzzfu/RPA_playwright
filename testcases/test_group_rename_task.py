@@ -3,6 +3,7 @@ from utils.tools import get_time_now
 
 
 def test_create_group_rename_task(pw_page, base_url, data_for_test):
+    """群名任务"""
     group_rename_page = GroupNameTaskPage(pw_page)
     group_rename_page.page_login(*data_for_test[1], base_url)
 

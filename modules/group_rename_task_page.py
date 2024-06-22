@@ -2,6 +2,8 @@ from modules import *
 
 
 class GroupNameTaskPage(PageObject):
+    """群名任务"""
+
     def __init__(self, page: Page):
         super().__init__(page)
         self.create_task = self.page.get_by_text("新建任务")
@@ -44,9 +46,9 @@ class GroupNameTaskPage(PageObject):
                 expect(self.search_tips).to_be_visible()
                 expect(self.search_tips).not_to_be_visible()
                 if self.group(group_name):
-                    print(len(self.group(group_name)))
                     break
             except Exception as e:
+                self.search.clear()
                 num += 1
                 if num == 5:
                     raise e

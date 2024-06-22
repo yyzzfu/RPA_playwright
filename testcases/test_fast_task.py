@@ -6,6 +6,7 @@ import pytest
 
 @pytest.mark.skip()
 def test_create_fast_task(pw_page, base_url, data_for_test):
+    """快捷任务"""
     muban_page = GroupMuBanPage(pw_page)
     muban_page.page_login(*data_for_test[1], base_url)
 

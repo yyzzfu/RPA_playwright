@@ -3,6 +3,7 @@ from utils.tools import get_path, get_my, get_time_now
 
 
 def test_jisu_create_group_task(pw_page, base_url, data_for_test):
+    """极速群发-群聊群发"""
     wechat_name_list, user = data_for_test
     jisu_page = JiSuPage(pw_page)
     jisu_page.page_login(*user, base_url)
