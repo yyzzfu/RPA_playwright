@@ -2,9 +2,9 @@ from modules.jisu_page import JiSuPage
 from utils.tools import get_path, get_my, get_time_now
 
 
-def test_jisu_create_group_task(page, base_url, data_for_test):
+def test_jisu_create_group_task(pw_page, base_url, data_for_test):
     wechat_name_list, user = data_for_test
-    jisu_page = JiSuPage(page)
+    jisu_page = JiSuPage(pw_page)
     jisu_page.page_login(*user, base_url)
     jisu_page.navigate()
     time_now = get_time_now()
@@ -22,9 +22,9 @@ def test_jisu_create_group_task(page, base_url, data_for_test):
     jisu_page.create_group_task(task_name, wechat_name_list, group_name_list, send_content_dic)
 
 
-def test_jisu_create_person_task(page, base_url, data_for_test):
+def test_jisu_create_person_task(pw_page, base_url, data_for_test):
     wechat_name_list, user = data_for_test
-    jisu_page = JiSuPage(page)
+    jisu_page = JiSuPage(pw_page)
     jisu_page.page_login(*user, base_url)
     jisu_page.navigate()
     time_now = get_time_now()

@@ -2,9 +2,9 @@ from modules.gaoji_page import GaoJiPage
 from utils.tools import get_path, get_my, get_time_now
 
 
-def test_gaoji_create_group_task(page, base_url, data_for_test):
+def test_gaoji_create_group_task(pw_page, base_url, data_for_test):
     wechat_name_list, user = data_for_test
-    gaoji_page = GaoJiPage(page)
+    gaoji_page = GaoJiPage(pw_page)
     gaoji_page.page_login(*user, base_url)
     gaoji_page.navigate()
     time_now = get_time_now()
@@ -21,9 +21,9 @@ def test_gaoji_create_group_task(page, base_url, data_for_test):
     gaoji_page.create_group_task(task_name, wechat_name_list, group_name_list, send_content_dic)
 
 
-def test_gaoji_create_person_task(page, base_url, data_for_test):
+def test_gaoji_create_person_task(pw_page, base_url, data_for_test):
     wechat_name_list, user = data_for_test
-    gaoji_page = GaoJiPage(page)
+    gaoji_page = GaoJiPage(pw_page)
     gaoji_page.page_login(*user, base_url)
     gaoji_page.navigate()
     time_now = get_time_now()
@@ -40,9 +40,9 @@ def test_gaoji_create_person_task(page, base_url, data_for_test):
     gaoji_page.create_person_task(task_name, wechat_name_list, group_name_list, send_content_dic)
 
 
-def test_gaoji_create_notice_task(page, base_url, data_for_test):
+def test_gaoji_create_notice_task(pw_page, base_url, data_for_test):
     wechat_name_list, user = data_for_test
-    gaoji_page = GaoJiPage(page)
+    gaoji_page = GaoJiPage(pw_page)
     gaoji_page.page_login(*user, base_url)
     gaoji_page.navigate()
     time_now = get_time_now()
