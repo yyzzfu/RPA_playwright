@@ -27,11 +27,11 @@ def browser_context_args(browser_context_args):
         **browser_context_args,
         "viewport": {
             "width": 1440,
-            "height": 900,
+            "height": 980,
         },
         "record_video_size": {
             "width": 1440,
-            "height": 900,
+            "height": 980,
         }
     }
 
