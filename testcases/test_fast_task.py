@@ -21,7 +21,7 @@ def test_create_fast_task(pw_page, base_url, data_for_test):
     wechat_name_list = ['fyq测试1']
     fast_page.navigate()
     fast_page.create_task_func(task_name, wechat_name_list, muban_name)
-
+1
 
 
 
