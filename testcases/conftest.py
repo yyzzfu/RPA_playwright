@@ -2,10 +2,11 @@ import hashlib
 import shutil
 import os
 import sys
+import time
 import warnings
-from json import JSONDecodeError
 from typing import Any, Callable, Dict, Generator, List, Optional
 
+import allure
 import pytest
 from playwright.sync_api import (
     Browser,
@@ -21,6 +22,15 @@ import tempfile
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+@pytest.fixture(scope="session")
+def playwright() -> Generator[Playwright, None, None]:
+    pw = sync_playwright().start()
+    session_start_time = time.time()
+    yield pw
+    print(f"-----------本轮测试耗时{int(time.time()-session_start_time)}秒----------")
+    pw.stop()
 
 
 @pytest.fixture(scope="session")
@@ -51,6 +61,21 @@ def context(
     output_dir = pytestconfig.getoption("--output")
     log_dir = os.path.join(output_dir, request.node.name)
     os.makedirs(log_dir, exist_ok=True)
+
+    # video_option = pytestconfig.getoption("--video")
+    # rerun_count = pytestconfig.getoption("--reruns")
+    # browser_context_args["record_video_dir"] = artifacts_folder.name
+    # video_on = False
+    # if video_option == "on":
+    #     if rerun_count:
+    #         if rerun_count == request.node.execution_count:
+    #             video_on = True
+    #     else:
+    #         video_on = True
+    # elif video_option == "retain-on-failure":
+    #     video_on = True
+    # if not video_on:
+    #     browser_context_args.pop("record_video_dir")
 
     context_args_marker = next(request.node.iter_markers("browser_context_args"), None)
     additional_context_args = context_args_marker.kwargs if context_args_marker else {}
@@ -99,6 +124,7 @@ def context(
                     path=screenshot_path,
                     full_page=pytestconfig.getoption("--full-page-screenshot"),
                 )
+                # allure.attach.file(screenshot_path, '最终截图', allure.attachment_type.PNG)
             except Error:
                 pass
 
@@ -119,6 +145,7 @@ def context(
                 video.save_as(
                     path=os.path.join(output_dir, request.node.name, file_name)
                 )
+                # allure.attach.file(os.path.join(output_dir, request.node.name, file_name), "过程录像", allure.attachment_type.WEBM)
             except Error:
                 # Silent catch empty videos.
                 pass

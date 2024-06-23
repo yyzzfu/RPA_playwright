@@ -80,15 +80,17 @@ class JiSuPage(PageObject):
                     self.file_name.fill(file_name)
 
                 num = 0
-                try:
-                    with self.page.expect_file_chooser() as f:
-                        self.add_button.click()
-                        f.value.set_files(path)
-                        break
-                except:
-                    num += 1
-                    if num == 3:
-                        raise Exception('上传文件失败')
+                while True:
+                    try:
+                        self.page.wait_for_timeout(1_000)
+                        with self.page.expect_file_chooser() as f:
+                            self.add_button.click()
+                            break
+                    except:
+                        num += 1
+                        if num == 3:
+                            raise Exception('上传文件失败')
+                f.value.set_files(path)
 
                 # with self.page.expect_file_chooser() as f:
                 #     self.add_button.click()
@@ -103,16 +105,17 @@ class JiSuPage(PageObject):
                 self.link_content.fill(send_content_dic[content]['content'])
 
                 num = 0
-                try:
-                    with self.page.expect_file_chooser() as f:
-                        self.add_button.click()
-                        f.value.set_files(send_content_dic[content]['picture_path'])
-                        break
-                except:
-                    num += 1
-                    if num == 3:
-                        raise Exception('上传文件失败')
-
+                while True:
+                    try:
+                        self.page.wait_for_timeout(1_000)
+                        with self.page.expect_file_chooser() as f:
+                            self.add_button.click()
+                            break
+                    except:
+                        num += 1
+                        if num == 3:
+                            raise Exception('上传文件失败')
+                f.value.set_files(send_content_dic[content]['picture_path'])
                 # with self.page.expect_file_chooser() as f:
                 #     self.add_button.click()
                 # f.value.set_files(send_content_dic[content]['picture_path'])

@@ -1,7 +1,4 @@
 from playwright.sync_api import expect, Page
-import os
-import time
-from utils.tools import get_path
 
 
 class PageObject:
@@ -18,8 +15,7 @@ class PageObject:
     def jump(self, path: str = None):
         if path[0] != "/":
             path = f"/{path}"
-        # self.page.goto(f'{self.page.url.split(".com")[0]}.com{path}')
-        self.page.goto(path, wait_until='commit')
+        self.page.goto(path, wait_until='load')
 
     def page_login(self, username: str, password: str, url):
         """
@@ -28,10 +24,12 @@ class PageObject:
         :param password:
         :return:
         """
+        num = 0
         while True:
             try:
                 self.page.goto(url)
-                self.page.get_by_placeholder("请输入用户名").type(username, delay=30)
+                self.page.reload()
+                self.page.get_by_placeholder("请输入用户名").fill(username)
                 self.page.get_by_placeholder("请输入密码").fill(password)
                 self.page.get_by_role("button", name="登 录").click()
                 expect(self.page.locator(
@@ -39,9 +37,8 @@ class PageObject:
                     timeout=10000)
                 break
             except:
+                num += 1
                 self.page.reload()
+                if num == 10:
+                    raise Exception('登录失败！！！')
                 continue
-
-
-if __name__ == '__main__':
-    print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

@@ -92,16 +92,18 @@ class GaoJiPage(PageObject):
                     self.send_content_file.click()
                     self.file_name.fill(file_name)
                 num = 0
-                try:
-                    with self.page.expect_file_chooser() as f:
-                        self.add_button.click()
-                        f.value.set_files(path)
-                        break
-                except:
-                    num += 1
-                    if num == 3:
-                        raise Exception('上传文件失败')
+                while True:
+                    try:
+                        self.page.wait_for_timeout(1_000)
+                        with self.page.expect_file_chooser() as f:
+                            self.add_button.click()
+                            break
+                    except:
+                        num += 1
+                        if num == 3:
+                            raise Exception('上传文件失败')
 
+                f.value.set_files(path)
                 expect(self.upload_suc).to_be_visible()
                 expect(self.upload_suc).not_to_be_visible()
                 self.sure_in_text_input.click()
@@ -112,16 +114,17 @@ class GaoJiPage(PageObject):
                 self.link_content.fill(send_content_dic[content]['content'])
 
                 num = 0
-                try:
-                    with self.page.expect_file_chooser() as f:
-                        self.add_button.click()
-                        f.value.set_files(send_content_dic[content]['picture_path'])
-                        break
-                except:
-                    num += 1
-                    if num == 3:
-                        raise Exception('上传文件失败')
-
+                while True:
+                    try:
+                        self.page.wait_for_timeout(1_000)
+                        with self.page.expect_file_chooser() as f:
+                            self.add_button.click()
+                            break
+                    except:
+                        num += 1
+                        if num == 3:
+                            raise Exception('上传文件失败')
+                f.value.set_files(send_content_dic[content]['picture_path'])
                 # with self.page.expect_file_chooser() as f:
                 #     self.add_button.click()
                 # f.value.set_files(send_content_dic[content]['picture_path'])
