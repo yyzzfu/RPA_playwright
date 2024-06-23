@@ -56,7 +56,13 @@ class GlobalMap:
             data.updata(**kwargs)
             self.__dump(data)
 
+    def delete_file(self):
+        with FileLock(self.temp_lock_path):
+            if os.path.exists(self.data_json_path):
+                os.remove(self.data_json_path)
+
 
 if __name__ == '__main__':
-    GlobalMap().set('key', 'haha111')
-    GlobalMap().set('key2', 'haha2')
+    # GlobalMap().set('key2', 'haha2')
+    # print(GlobalMap().get('key2111'))
+    print(GlobalMap().delete('key2111'))

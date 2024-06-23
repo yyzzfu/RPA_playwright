@@ -1,9 +1,18 @@
+from json import JSONDecodeError
+
 from modules.pull_group_page import PullGroupPage
 from utils.tools import get_time_now
 
 
 def test_create_pull_group_2(pw_page, base_url, data_for_test, global_map):
     """批量拉群--在已有的群中拉人"""
+    try:
+        group_name_start_with = global_map.get('group_name_start_with')
+        if not group_name_start_with:
+            raise Exception('group_name_start_with未获取到')
+    except JSONDecodeError:
+        raise Exception('group_name_start_with不存在')
+
     pull_group_page = PullGroupPage(pw_page)
     pull_group_page.page_login(*data_for_test[1], base_url)
 
@@ -14,7 +23,6 @@ def test_create_pull_group_2(pw_page, base_url, data_for_test, global_map):
     name_list = ['测试微信']
     members_count = '90'
     group_rate = '100'
-    group_name_start_with = global_map.get('group_name_start_with')
 
     pull_group_page.create_task_pull_kehu(task_name, wechat_name_list, name_list, group_name_start_with,
                                           members_count, group_rate)

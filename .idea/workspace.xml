@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79dc62b0-4b48-498c-a980-c765b51f7d27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/testcases/test_z_pull_group_2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/global_map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/rpa_playwright.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rpa_playwright.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.Auth/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/.Auth/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/Page_Object.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/Page_Object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gaoji_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gaoji_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/jisu_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/jisu_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testcases/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcases/test_pull_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/test_0_pull_group_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testcases/test_z_pull_group_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcases/test_z_pull_group_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/global_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/global_map.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +20,12 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_z_pull_group_2_test_create_pull_group.coverage" NAME="pytest for test_z_pull_group_2.test_create_pull_group Coverage Results" MODIFIED="1719136817819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
-    <SUITE FILE_PATH="coverage/rpa_playwright$global_map.coverage" NAME="global_map Coverage Results" MODIFIED="1719132863257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/rpa_playwright$global_map.coverage" NAME="global_map Coverage Results" MODIFIED="1719139197656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_0_pull_group_1_test_create_pull_group.coverage" NAME="pytest for test_0_pull_group_1.test_create_pull_group Coverage Results" MODIFIED="1719135006069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
-    <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_gaoji_task_test_gaoji_create_group_task.coverage" NAME="pytest for test_gaoji_task.test_gaoji_create_group_task Coverage Results" MODIFIED="1719021246558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
+    <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_gaoji_task_test_gaoji_create_group_task.coverage" NAME="pytest for test_gaoji_task.test_gaoji_create_group_task Coverage Results" MODIFIED="1719143738566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
     <SUITE FILE_PATH="coverage/rpa_playwright$Page_Object.coverage" NAME="Page_Object Coverage Results" MODIFIED="1719136175424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
     <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_group_rename_task_test_create_group_rename_task.coverage" NAME="pytest for test_group_rename_task.test_create_group_rename_task Coverage Results" MODIFIED="1719047793256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
+    <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_z_pull_group_2_test_create_pull_group_2.coverage" NAME="pytest for test_z_pull_group_2.test_create_pull_group_2 Coverage Results" MODIFIED="1719139738929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
     <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_pull_group_test_create_pull_group.coverage" NAME="pytest for test_pull_group.test_create_pull_group Coverage Results" MODIFIED="1719048036304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
     <SUITE FILE_PATH="coverage/rpa_playwright$pytest_for_test_1_test_create_pull_group.coverage" NAME="pytest for test_1.test_create_pull_group Coverage Results" MODIFIED="1719121989585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testcases" />
   </component>
@@ -40,35 +41,39 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="ini" value="1" />
-          <entry key="json" value="3" />
+          <entry key="gitignore" value="2" />
+          <entry key="ini" value="3" />
+          <entry key="json" value="4" />
           <entry key="md" value="1" />
-          <entry key="py" value="46" />
-          <entry key="txt" value="1" />
+          <entry key="png" value="4" />
+          <entry key="py" value="63" />
+          <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Ini" value="1" />
-          <entry key="JSON" value="3" />
+          <entry key="Image" value="4" />
+          <entry key="Ini" value="3" />
+          <entry key="JSON" value="4" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="46" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="63" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="11" />
-          <entry key="ini" value="1" />
-          <entry key="py" value="2037" />
-          <entry key="txt" value="6" />
+          <entry key="gitignore" value="27" />
+          <entry key="ini" value="7" />
+          <entry key="py" value="2425" />
+          <entry key="txt" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Ini" value="1" />
-          <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Python" value="2037" />
+          <entry key="Ini" value="7" />
+          <entry key="PLAIN_TEXT" value="56" />
+          <entry key="Python" value="2425" />
         </counts>
       </usages-collector>
     </session>
@@ -78,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testcases/conftest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
+            <state relative-caret-position="283">
+              <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -88,64 +93,72 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testcases/test_z_pull_group_2.py">
+        <entry file="file://D:/Python/Python38/Lib/site-packages/_pytest/config/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/tools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/mrmy.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testcases/test_0_pull_group_1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="1480" column="8" selection-start-line="1480" selection-start-column="8" selection-end-line="1480" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/gaoji_page.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="127" selection-start-line="127" selection-end-line="127" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/Python/Python38/Lib/site-packages/pytest_playwright/pytest_playwright.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="517">
+              <caret line="386" column="29" selection-start-line="386" selection-start-column="17" selection-end-line="386" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pytest.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/group_rename_task_page.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
+            <state relative-caret-position="503">
               <caret line="54" selection-start-line="54" selection-end-line="54" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.Auth/data.json">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/modules/jisu_page.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1752">
+              <caret line="118" selection-start-line="118" selection-end-line="118" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/Page_Object.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="693">
               <caret line="46" column="51" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
@@ -155,20 +168,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/global_map.py">
+        <entry file="file://$PROJECT_DIR$/modules/pull_group_page.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="342">
+              <caret line="18" column="112" selection-start-line="18" selection-start-column="112" selection-end-line="18" selection-end-column="112" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/__init__.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -186,28 +191,31 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pytest.ini" />
         <option value="$PROJECT_DIR$/modules/group_name_task_page.py" />
         <option value="$PROJECT_DIR$/testcases/test_fast_task.py" />
         <option value="$PROJECT_DIR$/testcases/test_group_rename_task.py" />
         <option value="$PROJECT_DIR$/testcases/test_jisu_task.py" />
         <option value="$PROJECT_DIR$/modules/fast_task_page.py" />
         <option value="$PROJECT_DIR$/modules/group_muban_page.py" />
-        <option value="$PROJECT_DIR$/modules/jisu_page.py" />
         <option value="$PROJECT_DIR$/modules/pull_group_page.py" />
-        <option value="$PROJECT_DIR$/modules/gaoji_page.py" />
         <option value="$PROJECT_DIR$/testcases/test_gaoji_task.py" />
         <option value="$PROJECT_DIR$/modules/group_rename_task_page.py" />
         <option value="$PROJECT_DIR$/testcases/test_1.py" />
-        <option value="$PROJECT_DIR$/utils/global_map.py" />
         <option value="$PROJECT_DIR$/testcases/test_pull_group.py" />
         <option value="$PROJECT_DIR$/utils/__init__.py" />
         <option value="$PROJECT_DIR$/common/global_map.py" />
         <option value="$PROJECT_DIR$/utils/tools.py" />
         <option value="$PROJECT_DIR$/modules/Page_Object.py" />
-        <option value="$PROJECT_DIR$/testcases/conftest.py" />
-        <option value="$PROJECT_DIR$/testcases/test_z_pull_group_2.py" />
         <option value="$PROJECT_DIR$/testcases/test_0_pull_group_1.py" />
+        <option value="$PROJECT_DIR$/.Auth/data.json" />
+        <option value="$PROJECT_DIR$/testcases/test_z_pull_group_2.py" />
+        <option value="$PROJECT_DIR$/utils/global_map.py" />
+        <option value="$PROJECT_DIR$/testcases/conftest.py" />
+        <option value="$PROJECT_DIR$/pytest.ini" />
+        <option value="$PROJECT_DIR$/utils/mrmy.txt" />
+        <option value="$PROJECT_DIR$/modules/gaoji_page.py" />
+        <option value="$PROJECT_DIR$/modules/jisu_page.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -217,11 +225,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="922" />
-    <option name="y" value="-8" />
-    <option name="width" value="1606" />
-    <option name="height" value="962" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="998" />
+    <option name="y" value="-18" />
+    <option name="width" value="1590" />
+    <option name="height" value="954" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -235,16 +243,6 @@
             <path>
               <item name="rpa_playwright" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpa_playwright" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpa_playwright" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpa_playwright" type="462c0819:PsiDirectoryNode" />
-              <item name=".Auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpa_playwright" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpa_playwright" type="462c0819:PsiDirectoryNode" />
-              <item name=".pytest_cache" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rpa_playwright" type="b2602c69:ProjectViewProjectNode" />
@@ -297,7 +295,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_z_pull_group_2.test_create_pull_group">
+  <component name="RunManager" selected="Python tests.pytest for test_gaoji_task.test_gaoji_create_group_task">
     <configuration name="Page_Object" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="rpa_playwright" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -342,7 +340,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_0_pull_group_1.test_create_pull_group" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_gaoji_task.test_gaoji_create_group_task" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="rpa_playwright" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -354,23 +352,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_0_pull_group_1.test_create_pull_group&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_1.test_create_pull_group" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="rpa_playwright" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testcases" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_1.test_create_pull_group&quot;" />
+      <option name="_new_target" value="&quot;test_gaoji_task.test_gaoji_create_group_task&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -390,20 +372,36 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="rpa_playwright" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testcases" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_z_pull_group_2.test_create_pull_group_2&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python tests.pytest for test_1.test_create_pull_group" />
       <item itemvalue="Python.global_map" />
-      <item itemvalue="Python tests.pytest for test_0_pull_group_1.test_create_pull_group" />
       <item itemvalue="Python.Page_Object" />
       <item itemvalue="Python tests.pytest for test_z_pull_group_2.test_create_pull_group" />
+      <item itemvalue="Python tests.pytest for test_z_pull_group_2.test_create_pull_group_2" />
+      <item itemvalue="Python tests.pytest for test_gaoji_task.test_gaoji_create_group_task" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest for test_gaoji_task.test_gaoji_create_group_task" />
+        <item itemvalue="Python tests.pytest for test_z_pull_group_2.test_create_pull_group_2" />
+        <item itemvalue="Python.global_map" />
         <item itemvalue="Python tests.pytest for test_z_pull_group_2.test_create_pull_group" />
         <item itemvalue="Python.Page_Object" />
-        <item itemvalue="Python tests.pytest for test_0_pull_group_1.test_create_pull_group" />
-        <item itemvalue="Python.global_map" />
-        <item itemvalue="Python tests.pytest for test_1.test_create_pull_group" />
       </list>
     </recent_temporary>
   </component>
@@ -446,46 +444,62 @@
       <option name="project" value="LOCAL" />
       <updated>1719072883237</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="添加global_map">
+      <created>1719137230237</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719137230238</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_group_rename_task_test_create_group_rename_task - 2024.06.22 at 17h 04m 44s.xml">
-      <configuration name="pytest for test_group_rename_task.test_create_group_rename_task" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_group_rename_task_test_create_group_rename_task - 2024.06.22 at 17h 13m 41s.xml">
-      <configuration name="pytest for test_group_rename_task.test_create_group_rename_task" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_group_rename_task_test_create_group_rename_task - 2024.06.22 at 17h 17m 22s.xml">
-      <configuration name="pytest for test_group_rename_task.test_create_group_rename_task" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_pull_group_test_create_pull_group - 2024.06.22 at 17h 21m 21s.xml">
-      <configuration name="pytest for test_pull_group.test_create_pull_group" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_1_test_create_pull_group - 2024.06.23 at 13h 46m 15s.xml">
-      <configuration name="pytest for test_1.test_create_pull_group" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_1_test_create_pull_group - 2024.06.23 at 13h 52m 29s.xml">
-      <configuration name="pytest for test_1.test_create_pull_group" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_1_test_create_pull_group - 2024.06.23 at 13h 53m 30s.xml">
-      <configuration name="pytest for test_1.test_create_pull_group" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_0_pull_group_1_test_create_pull_group - 2024.06.23 at 17h 26m 58s.xml">
-      <configuration name="pytest for test_0_pull_group_1.test_create_pull_group" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_0_pull_group_1_test_create_pull_group - 2024.06.23 at 17h 30m 39s.xml">
-      <configuration name="pytest for test_0_pull_group_1.test_create_pull_group" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group - 2024.06.23 at 18h 00m 49s.xml">
       <configuration name="pytest for test_z_pull_group_2.test_create_pull_group" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 29m 56s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 38m 45s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 42m 51s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 44m 08s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 45m 28s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 48m 50s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_z_pull_group_2_test_create_pull_group_2 - 2024.06.23 at 18h 49m 02s.xml">
+      <configuration name="pytest for test_z_pull_group_2.test_create_pull_group_2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_gaoji_task_test_gaoji_create_group_task - 2024.06.23 at 19h 54m 57s.xml">
+      <configuration name="pytest for test_gaoji_task.test_gaoji_create_group_task" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_gaoji_task_test_gaoji_create_group_task - 2024.06.23 at 19h 59m 59s.xml">
+      <configuration name="pytest for test_gaoji_task.test_gaoji_create_group_task" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1613" height="965" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16023166" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21235521" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -494,7 +508,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39975992" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32893157" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32893157" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
@@ -528,7 +542,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="调整" />
     <MESSAGE value="添加注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加注释" />
+    <MESSAGE value="添加global_map" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加global_map" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -553,55 +568,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pytest.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Python/Python38/Lib/site-packages/playwright/sync_api/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="92" column="8" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/gaoji_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/group_muban_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/pull_group_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="112" selection-start-line="18" selection-start-column="112" selection-end-line="18" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testcases/test_group_rename_task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/fast_task_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="55" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -613,13 +583,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testcases/test_1.py" />
-    <entry file="file://D:/Python/Python38/Lib/site-packages/pytest_playwright/pytest_playwright.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3952">
-          <caret line="226" column="4" selection-start-line="226" selection-start-column="4" selection-end-line="226" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testcases/test_fast_task.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -640,23 +603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testcases/test_gaoji_task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/jisu_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-992">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Python/Python38/Lib/json/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-814">
@@ -664,12 +610,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.pytest_cache/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/.Auth/data.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/testcases/test_z_pull_group_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
+        <state relative-caret-position="612">
           <caret line="41" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -677,49 +639,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/mrmy.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://D:/Python/Python38/Lib/site-packages/playwright/sync_api/_generated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1213">
+          <caret line="12605" column="6" selection-start-line="12605" selection-start-column="6" selection-end-line="12605" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/-387674092/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="842" column="6" selection-start-line="842" selection-start-column="6" selection-end-line="842" selection-end-column="6" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/global_map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        <state relative-caret-position="498">
+          <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/test-results/test_gaoji_create_person_task[chromium]/test-failed-1.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/Page_Object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="46" column="51" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testcases/conftest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testcases/test_z_pull_group_2.py">
+    <entry file="file://$PROJECT_DIR$/utils/mrmy.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -733,10 +683,119 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testcases/test_gaoji_task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testcases/test_group_rename_task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testcases/test-results/test_gaoji_create_group_task[chromium]/test-failed-1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/fast_task_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="25" column="55" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/group_muban_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/group_rename_task_page.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
+        <state relative-caret-position="503">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/jisu_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1752">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Page_Object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="46" column="51" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/pull_group_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="112" selection-start-line="18" selection-start-column="112" selection-end-line="18" selection-end-column="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-results/test_gaoji_create_group_task[chromium]/test-failed-1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/gaoji_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python/Python38/Lib/site-packages/_pytest/config/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="1480" column="8" selection-start-line="1480" selection-start-column="8" selection-end-line="1480" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testcases/conftest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python/Python38/Lib/site-packages/pytest_playwright/pytest_playwright.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="386" column="29" selection-start-line="386" selection-start-column="17" selection-end-line="386" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pytest.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
         </state>
       </provider>
     </entry>

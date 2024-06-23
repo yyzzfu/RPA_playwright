@@ -91,9 +91,17 @@ class GaoJiPage(PageObject):
                     file_name = send_content_dic[content]['file_name']
                     self.send_content_file.click()
                     self.file_name.fill(file_name)
-                with self.page.expect_file_chooser() as f:
-                    self.add_button.click()
-                f.value.set_files(path)
+                num = 0
+                try:
+                    with self.page.expect_file_chooser() as f:
+                        self.add_button.click()
+                        f.value.set_files(path)
+                        break
+                except:
+                    num += 1
+                    if num == 3:
+                        raise Exception('上传文件失败')
+
                 expect(self.upload_suc).to_be_visible()
                 expect(self.upload_suc).not_to_be_visible()
                 self.sure_in_text_input.click()
@@ -102,9 +110,22 @@ class GaoJiPage(PageObject):
                 self.link_title.fill(send_content_dic[content]['title'])
                 self.link_address.fill(send_content_dic[content]['address'])
                 self.link_content.fill(send_content_dic[content]['content'])
-                with self.page.expect_file_chooser() as f:
-                    self.add_button.click()
-                f.value.set_files(send_content_dic[content]['picture_path'])
+
+                num = 0
+                try:
+                    with self.page.expect_file_chooser() as f:
+                        self.add_button.click()
+                        f.value.set_files(send_content_dic[content]['picture_path'])
+                        break
+                except:
+                    num += 1
+                    if num == 3:
+                        raise Exception('上传文件失败')
+
+                # with self.page.expect_file_chooser() as f:
+                #     self.add_button.click()
+                # f.value.set_files(send_content_dic[content]['picture_path'])
+
                 expect(self.upload_suc).to_be_visible()
                 expect(self.upload_suc).not_to_be_visible()
                 self.sure_in_text_input.click()
