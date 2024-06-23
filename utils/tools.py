@@ -40,6 +40,5 @@ def get_time_now(is_str=True):
         return int(time.time()*1000)
 
 
-
 if __name__ == '__main__':
     print(get_path('1.png'))

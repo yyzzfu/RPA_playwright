@@ -19,6 +19,7 @@ from playwright.sync_api import (
 import tempfile
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 @pytest.fixture(scope="session")
@@ -37,8 +38,8 @@ def browser_context_args(browser_context_args):
 
 
 @pytest.fixture()
-def pw_page(context):
-    page = context.new_page()
+def pw_page(context: BrowserContext):
+    page: Page = context.new_page()
     yield page
 
 
@@ -48,3 +49,10 @@ def data_for_test():
     wechat_name_list = ['fyq测试1']
     user = ('kf5', 'Qwer1234')
     yield wechat_name_list, user
+
+
+@pytest.fixture(scope='session')
+def global_map():
+    from utils.global_map import GlobalMap
+    global_map = GlobalMap()
+    yield global_map
