@@ -162,7 +162,8 @@ def data_for_test():
     # wechat_name_list = ['fyq测试1', 'fyq测试2']
     wechat_name_list = ['fyq测试1']
     user = ('kf5', 'Qwer1234')
-    yield wechat_name_list, user
+    group_name_list = ['yyy', 'x']
+    yield wechat_name_list, user, group_name_list
 
 
 @pytest.fixture(scope='session')
@@ -181,16 +182,25 @@ def get_send_content_dic():
         time_now = get_time_now()
         mrmy = get_my()
         task_name = f'{described}{time_now}'
-        send_content_dic = {"content_dic": {'text': f'{described}{time_now}(测试)' + mrmy,
-                                            # 'picture': get_path(r'/upload/pciture.jpg'),
-                                            # 'video': get_path(r'/upload/video.mp4'),
-                                            # 'link': {'title': f'链接的标题{time_now}', 'address': r'http://www.baidu.com',
-                                            #          'content': f'内容简介:{described}{time_now}',
-                                            #          'picture_path': get_path(r'/upload/pciture.jpg')},
-                                            # 'file': {'file_name': f'文件的名称{time_now}',
-                                            #          'file_path': get_path(r'/upload/file.pdf')},
-                                            # 'notice': f'{described}-群公告内容：{mrmy}{time_now}'
-                                            },
-                            "task_name": task_name}
+        text = f'(测试){described}{time_now}：' + mrmy
+        picture = get_path(r'/upload/pciture.jpg')
+        video = get_path(r'/upload/video.mp4')
+        link = {'title': f'链接标题{time_now}', 'address': r'http://www.baidu.com',
+                'content': f'内容简介:{described}{time_now}',
+                'picture_path': get_path(r'/upload/pciture.jpg')}
+        file = {'file_name': f'文件名称{time_now}', 'file_path': get_path(r'/upload/file.pdf')}
+        notice = f'{described}-群公告内容：{mrmy}{time_now}'
+        send_content_dic = {
+            "content_dic": {
+                'text': text,
+                'picture': picture,
+                'video': video,
+                'link': link,
+                'file': file,
+                'notice': notice,
+            },
+            "task_name": task_name
+        }
         return send_content_dic
+
     yield send_content_dic

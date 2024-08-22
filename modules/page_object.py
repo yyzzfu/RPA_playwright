@@ -15,7 +15,7 @@ class PageObject:
     def jump(self, path: str = None):
         if path[0] != "/":
             path = f"/{path}"
-        self.page.goto(path, wait_until='load')
+        self.page.goto(path, wait_until='networkidle')
 
     def page_login(self, username: str, password: str, url):
         """
@@ -41,4 +41,3 @@ class PageObject:
                 self.page.reload()
                 if num == 10:
                     raise Exception('登录失败！！！')
-                continue
