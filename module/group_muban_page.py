@@ -1,4 +1,4 @@
-from modules import *
+from module import *
 
 
 class GroupMuBanPage(PageObject):

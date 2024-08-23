@@ -9,9 +9,9 @@ from utils.tools import get_time_now
 
 
 @pytest.mark.smoke
-def test_create_pull_group(new_context, base_url, data_for_test, global_map, request):
+def test_create_pull_group(pw_page, base_url, data_for_test, global_map, request):
     """批量拉群--创建群聊--立即"""
-    my_page = PageIns.new_context_and_return_page_ins(new_context)
+    my_page = PageIns.login_and_return_page_ins(pw_page)
 
     wechat_name_list, user, _ = data_for_test
     my_page.pull_group_page.navigate()
@@ -52,7 +52,3 @@ def test_create_pull_group_by_regular(new_context, base_url, data_for_test, glob
                                           members_count, group_rate, regular=15)
     global_map.set(request.node.name, task_name)
 
-
-def test_login(pw_page):
-    my_page = PageIns(pw_page)
-    my_page.login_page.page_login('kf5', 'Qwer1234')
