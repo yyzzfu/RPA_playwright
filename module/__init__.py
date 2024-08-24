@@ -5,6 +5,8 @@ import sys
 import re
 import random
 from playwright.sync_api import Page, expect, BrowserContext, Locator
+
+from data_module.mydata import MyData
 from module.page_object import PageObject
 from utils.tools import get_path
 from filelock import FileLock
@@ -52,8 +54,8 @@ class PageIns:
         #         my_page.登录页.登录(用户名, 密码)
         #         my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
         # return my_page
-        username = 'kf5'
-        password = 'Qwer1234'
+        username = MyData().userinfo().get('username')
+        password = MyData().userinfo().get('password')
         with FileLock(get_path(f".temp/{username}.lock")):
             if os.path.exists(get_path(f".temp/{username}.json")):
                 context: BrowserContext = new_context(storage_state=get_path(f".temp/{username}.json"))
@@ -65,46 +67,24 @@ class PageIns:
                         f'//div[@class="mantis-main-stage-header"]//span[contains(text(), "{username}")]')).to_be_visible(
                         timeout=20_000)
                 except:
-                    my_page.login_page.page_login(username, password)
+                    my_page.login_page.login(username, password)
                     my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
             else:
                 context: BrowserContext = new_context()
                 page = context.new_page()
                 my_page = PageIns(page)
-                my_page.login_page.page_login(username, password)
+                my_page.login_page.login(username, password)
                 my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
         return my_page
 
     @staticmethod
-    def login_and_return_page_ins(page: Page):
-        username = 'kf5'
-        password = 'Qwer1234'
+    def login_and_return_page_ins(page: Page, kf=''):
+        test_data = MyData().data_for_test(kf)
+        username = test_data.get('username')
+        password = test_data.get('password')
         with FileLock(get_path(f".temp/{username}.lock")):
             my_page = PageIns(page)
-            my_page.login_page.page_login(username, password)
-            my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
+            my_page.login_page.login(username, password)
+            my_page.test_data = test_data
+            # my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
         return my_page
-
-    # @staticmethod
-    # def login_by_storage_state_and_return_page_ins(page: Page):
-    #     username = 'kf5'
-    #     password = 'Qwer1234'
-    #     with FileLock(get_path(f".temp/{username}.lock")):
-    #         if os.path.exists(get_path(f".temp/{username}.json")):
-    #             page.context.storage_state(path=get_path(f".temp/{username}.json"))  ------有问题
-    #             my_page = PageIns(page)
-    #             my_page.login_page.navigate()
-    #             page.reload()
-    #             my_page.fast_task_page.jump('/mantis')
-    #             try:
-    #                 expect(my_page.page.locator(
-    #                     f'//div[@class="mantis-main-stage-header"]//span[contains(text(), "{username}")]')).to_be_visible(
-    #                     timeout=20_000)
-    #             except:
-    #                 my_page.login_page.page_login(username, password)
-    #                 my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
-    #         else:
-    #             my_page = PageIns(page)
-    #             my_page.login_page.page_login(username, password)
-    #             my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
-    #     return my_page

@@ -28,3 +28,4 @@ class GroupMuBanPage(PageObject):
         self.text_input.type(text)
         self.sure_in_text_input.click()
         self.sure_to_submit.click()
+        expect(self.sure_to_submit).not_to_be_visible()

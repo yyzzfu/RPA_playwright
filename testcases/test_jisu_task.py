@@ -1,52 +1,51 @@
-import pytest
 from testcases import *
 
-from module.jisu_page import JiSuPage
-
 
 @pytest.mark.smoke
-def test_jisu_create_group_task(new_context, base_url, data_for_test, get_send_content_dic):
-    my_page = PageIns.new_context_and_return_page_ins(new_context)
-
+def test_jisu_create_group_task(pw_page, get_kf):
     described = "极速-群聊-立即"
-    wechat_name_list, user, group_name_list = data_for_test
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    jisu_create_group_task_data = my_page.test_data.get('jisu_create_group_task_data')
+    wechat_name_list = jisu_create_group_task_data.get('wechat_name_list')  # 选择的企微账号
+    group_name_list = jisu_create_group_task_data.get('group_name_list')  # 群发对象--指定群聊
     my_page.jisu_page.navigate()
-    send_content_dic = get_send_content_dic(described)
+    send_content_dic = MyData().send_content_dic(described)
     my_page.jisu_page.create_group_task(send_content_dic.get('task_name'), wechat_name_list, group_name_list,
-                                send_content_dic.get('content_dic'))
+                                        send_content_dic.get('content_dic'))
 
 
-def test_jisu_create_group_task_by_regular(new_context, base_url, data_for_test, get_send_content_dic):
-    my_page = PageIns.new_context_and_return_page_ins(new_context)
-
+def test_jisu_create_group_task_by_regular(pw_page, get_kf):
     described = "极速-群聊-定时"
-    wechat_name_list, user, group_name_list = data_for_test
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    jisu_create_group_task_data = my_page.test_data.get('jisu_create_group_task_data')
+    wechat_name_list = jisu_create_group_task_data.get('wechat_name_list')  # 选择的企微账号
+    group_name_list = jisu_create_group_task_data.get('group_name_list')  # 群发对象--指定群聊
     my_page.jisu_page.navigate()
-    send_content_dic = get_send_content_dic(described)
+    send_content_dic = MyData().send_content_dic(described)
     my_page.jisu_page.create_group_task(send_content_dic.get('task_name'), wechat_name_list, group_name_list,
-                                send_content_dic.get('content_dic'), regular=True)
+                                        send_content_dic.get('content_dic'), regular=True)
 
 
 @pytest.mark.smoke
-def test_jisu_create_person_task(new_context, base_url, data_for_test, get_send_content_dic):
-    my_page = PageIns.new_context_and_return_page_ins(new_context)
-
+def test_jisu_create_person_task(pw_page, get_kf):
     described = "极速-私聊-立即"
-    wechat_name_list, user, _ = data_for_test
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    jisu_create_person_task_data = my_page.test_data.get('jisu_create_person_task_data')
+    wechat_name_list = jisu_create_person_task_data.get('wechat_name_list')
+    kehu_list = jisu_create_person_task_data.get('kehu_list')
     my_page.jisu_page.navigate()
-    group_name_list = ['测试微信', '反派测试', '付益强', '中国加油']
-    send_content_dic = get_send_content_dic(described)
-    my_page.jisu_page.create_person_task(send_content_dic.get('task_name'), wechat_name_list, group_name_list,
-                                 send_content_dic.get('content_dic'))
+    send_content_dic = MyData().send_content_dic(described)
+    my_page.jisu_page.create_person_task(send_content_dic.get('task_name'), wechat_name_list, kehu_list,
+                                         send_content_dic.get('content_dic'))
 
 
-def test_jisu_create_person_task_by_regular(new_context, base_url, data_for_test, get_send_content_dic):
-    my_page = PageIns.new_context_and_return_page_ins(new_context)
-
+def test_jisu_create_person_task_by_regular(pw_page, get_kf):
     described = "极速-私聊-定时"
-    wechat_name_list, user, _ = data_for_test
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    jisu_create_person_task_data = my_page.test_data.get('jisu_create_person_task_data')
+    wechat_name_list = jisu_create_person_task_data.get('wechat_name_list')
+    kehu_list = jisu_create_person_task_data.get('kehu_list')
     my_page.jisu_page.navigate()
-    group_name_list = ['测试微信', '反派测试', '付益强', '中国加油']
-    send_content_dic = get_send_content_dic(described)
-    my_page.jisu_page.create_person_task(send_content_dic.get('task_name'), wechat_name_list, group_name_list,
-                                 send_content_dic.get('content_dic'), regular=True)
+    send_content_dic = MyData().send_content_dic(described)
+    my_page.jisu_page.create_person_task(send_content_dic.get('task_name'), wechat_name_list, kehu_list,
+                                         send_content_dic.get('content_dic'), regular=True)

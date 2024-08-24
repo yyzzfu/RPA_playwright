@@ -24,6 +24,7 @@ class JiSuPage(PageObject):
         self.text_input = self.page.locator('//div[@class="sendContent"]//div[@id="editDiv"]')
         self.sure_in_text_input = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button/span[text()="确 定"]')
         self.send_content_picture = self.page.locator('//div[@class="sendContent"]//span[text()="图片"]')
+        # self.add_button = self.page.locator('//div[@class="bscrmCSS-modal-content"]//div[@class="sop-data_module-btn"]')
         self.add_button = self.page.locator('//div[@class="bscrmCSS-modal-content"]//div[@class="sop-upload-btn"]')
         self.upload_suc = self.page.locator('//div[@class="bscrmCSS-message"]//span[text()="上传成功~"]')
         self.send_content_video = self.page.locator('//div[@class="sendContent"]//span[text()="视频"]')

@@ -14,7 +14,7 @@ class LoginPage(PageObject):
     def navigate(self):
         self.jump("/")
 
-    def page_login(self, username: str, password: str):
+    def login(self, username: str, password: str):
         """
         通过页面进行登录
         :param username:
@@ -33,6 +33,7 @@ class LoginPage(PageObject):
                 self.username.fill(username)
                 self.password.fill(password)
                 self.login_button.click()
+                expect(self.login_button).not_to_be_visible()
                 expect(self.page.locator(
                     f'//div[@class="mantis-main-stage-header"]//span[contains(text(), "{username}")]')).to_be_visible(
                     timeout=10_000)
