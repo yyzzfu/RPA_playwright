@@ -5,9 +5,10 @@ import sys
 import re
 import random
 from playwright.sync_api import Page, expect, BrowserContext, Locator
+import allure
 
-from data_module.mydata import MyData
-from module.page_object import PageObject
+from data_module.my_data import MyData
+from module.base_page import BasePage
 from utils.tools import get_path
 from filelock import FileLock
 from utils.global_map import GlobalMap
@@ -82,9 +83,12 @@ class PageIns:
         test_data = MyData().data_for_test(kf)
         username = test_data.get('username')
         password = test_data.get('password')
-        with FileLock(get_path(f".temp/{username}.lock")):
-            my_page = PageIns(page)
-            my_page.login_page.login(username, password)
-            my_page.test_data = test_data
-            # my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
+        my_page = PageIns(page)
+        my_page.login_page.login(username, password)
+        my_page.test_data = test_data
+        # with FileLock(get_path(f".temp/{username}.lock")):
+        #     my_page = PageIns(page)
+        #     my_page.login_page.login(username, password)
+        #     my_page.test_data = test_data
+        # my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
         return my_page

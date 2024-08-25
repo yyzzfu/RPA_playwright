@@ -24,29 +24,54 @@ import tempfile
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+#
+# @pytest.fixture(scope="session")
+# def playwright() -> Generator[Playwright, None, None]:
+#     pw = sync_playwright().start()
+#     session_start_time = time.time()
+#     yield pw
+#     print(f"-----------本轮测试耗时{int(time.time()-session_start_time)}秒----------")
+#     pw.stop()
+
 
 @pytest.fixture(scope="session")
-def playwright() -> Generator[Playwright, None, None]:
-    pw = sync_playwright().start()
-    session_start_time = time.time()
-    yield pw
-    print(f"-----------本轮测试耗时{int(time.time()-session_start_time)}秒----------")
-    pw.stop()
-
-
-@pytest.fixture(scope="session")
-def browser_context_args(browser_context_args):
+def browser_context_args(browser_context_args, pytestconfig):
+    width, height = pytestconfig.getoption("--viewport")
     return {
         **browser_context_args,
         "viewport": {
-            "width": 1440,
-            "height": 900,
+            "width": width,
+            "height": height,
         },
         "record_video_size": {
-            "width": 1440,
-            "height": 900,
+            "width": width,
+            "height": height,
         }
     }
+
+
+def pytest_addoption(parser: Any) -> None:
+    group = parser.getgroup("playwright", "Playwright")
+    group.addoption(
+        "--viewport",
+        action="store",
+        default=[1440, 900],
+        help="viewport size set",
+        type=int,
+        nargs=2,
+    )
+    group.addoption(
+        "--ui_timeout",
+        default=30_000,
+        help="locator timeout and expect timeout",
+    )
+
+
+@pytest.fixture(scope="session")
+def ui_timeout(pytestconfig):
+    timeout = float(pytestconfig.getoption("--ui_timeout"))
+    expect.set_options(timeout=timeout)  # 设置断言的超时时间
+    return timeout
 
 
 @pytest.fixture
@@ -55,6 +80,7 @@ def context(
         browser_context_args: Dict,
         pytestconfig: Any,
         request: pytest.FixtureRequest,
+        ui_timeout
 ) -> Generator[BrowserContext, None, None]:
     pages: List[Page] = []
 
@@ -83,6 +109,8 @@ def context(
     browser_context_args.update(additional_context_args)
 
     context = browser.new_context(**browser_context_args)
+    context.set_default_timeout(ui_timeout)   # 设置超时时间
+    context.set_default_navigation_timeout(ui_timeout * 2)
     context.on("page", lambda page: pages.append(page))
 
     tracing_option = pytestconfig.getoption("--tracing")
@@ -125,7 +153,7 @@ def context(
                     path=screenshot_path,
                     full_page=pytestconfig.getoption("--full-page-screenshot"),
                 )
-                # allure.attach.file(screenshot_path, '最终截图', allure.attachment_type.PNG)
+                allure.attach.file(screenshot_path, '最终截图', allure.attachment_type.PNG)
             except Error:
                 pass
 
@@ -146,14 +174,14 @@ def context(
                 video.save_as(
                     path=os.path.join(output_dir, request.node.name, file_name)
                 )
-                # allure.attach.file(os.path.join(output_dir, request.node.name, file_name), "过程录像", allure.attachment_type.WEBM)
+                allure.attach.file(os.path.join(output_dir, request.node.name, file_name), "过程录像", allure.attachment_type.WEBM)
             except Error:
                 # Silent catch empty videos.
                 pass
 
 
 @pytest.fixture()
-def pw_page(context: BrowserContext) -> Generator[Page, None, None]:
+def pw_page(context: BrowserContext):
     page = context.new_page()
     yield page
 
@@ -166,10 +194,14 @@ def global_map():
     global_map.delete_file()
 
 
-@pytest.fixture
-def get_kf():
-    kf = 'kf2'
-    yield kf
+@pytest.fixture()
+def get_kf(worker_id):
+    user_list = ['kf2', 'kf3']
+    if worker_id.startswith('gw'):
+        user = user_list[int(worker_id[2:])]
+    else:
+        user = 'kf2'
+    return user
 
 
 @pytest.fixture
@@ -206,26 +238,3 @@ def new_context(
     for context in contexts.copy():
         context.close()
 
-
-def pytest_addoption(parser: Any) -> None:
-    group = parser.getgroup("playwright", "Playwright")
-    group.addoption(
-        "--viewport",
-        action="store",
-        default=[1440, 900],
-        help="viewport size set",
-        type=int,
-        nargs=2,
-    )
-    group.addoption(
-        "--ui_timeout",
-        default=30_000,
-        help="locator timeout and expect timeout",
-    )
-
-
-@pytest.fixture(scope="session")
-def ui_timeout(pytestconfig):
-    timeout = float(pytestconfig.getoption("--ui_timeout"))
-    expect.set_options(timeout=timeout)
-    return timeout

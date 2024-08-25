@@ -2,7 +2,7 @@ from module import *
 from utils.tools import get_time
 
 
-class GaoJiPage(PageObject):
+class GaoJiPage(BasePage):
     """高级群发"""
 
     def __init__(self, page: Page):
@@ -52,7 +52,8 @@ class GaoJiPage(PageObject):
             '//span[@class="bscrmCSS-calendar-footer-btn"]/a[@class="bscrmCSS-calendar-ok-btn"]')
 
     def navigate(self):
-        self.jump("/mantis/bscrm/highMassTexting")
+        with allure.step('进入高级群发界面'):
+            self.jump("/mantis/bscrm/highMassTexting")
 
     def create_task_func(self, task_name, wechat_name_list, name_list, send_content_dic, task_type, **kwargs):
         num = 0
@@ -66,109 +67,143 @@ class GaoJiPage(PageObject):
             regular = False
         while True:
             try:
-                self.create_task.hover()
+                with allure.step('鼠标hover到新建任务按钮上'):
+                    self.create_task.hover()
                 if task_type == '群聊群发':
                     send_object = self.send_object_group
-                    self.group.click()
+                    with allure.step('点击群发群发'):
+                        self.group.click()
                 elif task_type == '私聊群发':
                     send_object = self.send_object_person
-                    self.person.click()
+                    with allure.step('点击私聊群发'):
+                        self.person.click()
                 else:
                     send_object = self.send_object_group
-                    self.notice.click()
+                    with allure.step('点击群发公告'):
+                        self.notice.click()
                 break
             except Exception as e:
                 num += 1
                 if num == 3:
                     raise e
-        self.task_name.fill(task_name)
-        self.choose_wechat.click()
+        with allure.step(f'输入任务名称：{task_name}'):
+            self.task_name.fill(task_name)
+        with allure.step('点击选择企微账号'):
+            self.choose_wechat.click()
         for wechat_name in wechat_name_list:
-            self.wechat(wechat_name).click()
-        self.sure.click()
-        send_object.click()
+            with allure.step(f'在选择企微账号界面，选择企微账号：{wechat_name}'):
+                self.wechat(wechat_name).click()
+        with allure.step('在选择企微账号界面，点击确定按钮'):
+            self.sure.click()
+        with allure.step('在群发对象中，点击选择客户群/选择客户'):
+            send_object.click()
         for name in name_list:
-            self.group_name.fill(name)
-            self.page.keyboard.press('Enter')
-        self.check_all.click()
-        self.sure_in_choose_send_object.click()
+            with allure.step(f'在选择客户/客户群界面，输入：{name}，并按回车键'):
+                self.group_name.fill(name)
+                self.page.keyboard.press('Enter')
+        with allure.step(f'在选择客户/客户群界面，点击全选本页'):
+            self.check_all.click()
+        with allure.step(f'在选择客户/客户群界面，点击确定按钮'):
+            self.sure_in_choose_send_object.click()
         notice_input_count = 0
         for content in send_content_dic:
             text_input = self.text_input
             if task_type == '群发公告':
+                notice = send_content_dic.get('notice')
                 if notice_input_count == 0:
-                    self.notice_input.type(send_content_dic.get('notice'))
+                    with allure.step(f'输入群公告内容：{notice}'):
+                        self.notice_input.type(notice)
                 text_input = self.notice_text
                 notice_input_count += 1
             if content == 'text':
-                self.send_content_text.click()
-                text_input.type(send_content_dic[content])
-                self.sure_in_text_input.click()
+                with allure.step('在追加内容中，点击文本按钮'):
+                    self.send_content_text.click()
+                content = send_content_dic[content]
+                with allure.step(f'在文本编辑--文本输入框中，输入内容：{content}'):
+                    text_input.type(content)
+                with allure.step(f'在文本编辑中，点击确定按钮'):
+                    self.sure_in_text_input.click()
             elif content in ['picture', 'video', 'file']:
                 if content == 'picture':
                     path = send_content_dic[content]
-                    self.send_content_picture.click()
+                    with allure.step('在追加内容中，点击图片按钮'):
+                        self.send_content_picture.click()
                 elif content == 'video':
                     path = send_content_dic[content]
-                    self.send_content_video.click()
+                    with allure.step('在追加内容中，点击视频按钮'):
+                        self.send_content_video.click()
                 else:
                     path = send_content_dic[content]['file_path']
                     file_name = send_content_dic[content]['file_name']
-                    self.send_content_file.click()
-                    self.file_name.fill(file_name)
+                    with allure.step('在追加内容中，点击文件按钮'):
+                        self.send_content_file.click()
+                    with allure.step(f'在上传文件界面--文件名称输入框中，输入文件名称：{file_name}'):
+                        self.file_name.fill(file_name)
                 num = 0
-                while True:
-                    try:
-                        self.page.wait_for_timeout(1_000)
-                        with self.page.expect_file_chooser() as f:
-                            self.add_button.click()
-                            break
-                    except Exception as e:
-                        num += 1
-                        if num == 3:
-                            raise e
+                with allure.step('上传图片/视频/文件'):
+                    while True:
+                        try:
+                            self.page.wait_for_timeout(1_000)
+                            with self.page.expect_file_chooser() as f:
+                                self.add_button.click()
+                                break
+                        except Exception as e:
+                            num += 1
+                            if num == 3:
+                                raise e
 
-                f.value.set_files(path)
-                expect(self.upload_suc).to_be_visible()
-                expect(self.upload_suc).not_to_be_visible()
-                self.sure_in_text_input.click()
+                    f.value.set_files(path)
+                    expect(self.upload_suc).to_be_visible()
+                    expect(self.add_button).not_to_be_visible()
+                with allure.step('在上传界面，点击确定按钮'):
+                    self.sure_in_text_input.click()
             elif content == 'link':
-                self.send_content_link.click()
+                with allure.step('在追加内容中，点击链接按钮'):
+                    self.send_content_link.click()
                 self.link_title.fill(send_content_dic[content]['title'])
                 self.link_address.fill(send_content_dic[content]['address'])
                 self.link_content.fill(send_content_dic[content]['content'])
 
                 num = 0
-                while True:
-                    try:
-                        self.page.wait_for_timeout(1_000)
-                        with self.page.expect_file_chooser() as f:
-                            self.add_button.click()
-                            break
-                    except Exception as e:
-                        num += 1
-                        if num == 3:
-                            raise e
-                f.value.set_files(send_content_dic[content]['picture_path'])
-                # with self.page.expect_file_chooser() as f:
-                #     self.add_button.click()
-                # f.value.set_files(send_content_dic[content]['picture_path'])
-
-                expect(self.upload_suc).to_be_visible()
-                expect(self.upload_suc).not_to_be_visible()
-                self.sure_in_text_input.click()
+                with allure.step('上传链接图片'):
+                    while True:
+                        try:
+                            self.page.wait_for_timeout(1_000)
+                            with self.page.expect_file_chooser() as f:
+                                self.add_button.click()
+                                break
+                        except Exception as e:
+                            num += 1
+                            if num == 3:
+                                raise e
+                    f.value.set_files(send_content_dic[content]['picture_path'])
+                    # with self.page.expect_file_chooser() as f:
+                    #     self.add_button.click()
+                    # f.value.set_files(send_content_dic[content]['picture_path'])
+                    expect(self.upload_suc).to_be_visible()
+                    expect(self.add_button).not_to_be_visible()
+                with allure.step('在添加链接界面，点击确定按钮'):
+                    self.sure_in_text_input.click()
         if one_by_one:
-            self.single_send.click()
+            with allure.step('在模式设置--发送模板中，勾选【指定的群单独发送】'):
+                self.single_send.click()
         if regular:
-            self.regular_button.click()
+            with allure.step(f'在发送类型中，点击定时发送'):
+                self.regular_button.click()
             self.time_input_button.click()
-            self.time_input.fill(get_time(regular))
-            self.sure_in_time.click()
-        self.sure_to_submit.click()
+            send_time = get_time(regular)
+            with allure.step(f'在日期选择界面--发送时间输入框中，输入发送时间：{send_time}'):
+                self.time_input.fill(send_time)
+            with allure.step(f'在日期选择界面，点击确定按钮'):
+                self.sure_in_time.click()
+        with allure.step(f'点击确定按钮--提交表单'):
+            self.sure_to_submit.click()
         expect(self.sure_to_submit).not_to_be_visible()
-        self.search_task_name.fill(task_name)
-        self.page.keyboard.press('Enter')
-        expect(self.task_name_in_card(task_name)).to_be_visible()
+        with allure.step(f'在高级群发列表--任务名称查询框中，输入任务名称：{task_name}，并按回车触发查询'):
+            self.search_task_name.fill(task_name)
+            self.page.keyboard.press('Enter')
+        with allure.step(f'在高级群发列表中，任务名称：【{task_name}】查询成功'):
+            expect(self.task_name_in_card(task_name)).to_be_visible()
 
     def create_group_task(self, task_name, wechat_name_list, group_name_list, send_content_dic, **kwargs):
         self.create_task_func(task_name, wechat_name_list, group_name_list, send_content_dic, task_type='群聊群发',

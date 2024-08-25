@@ -2,7 +2,7 @@ from module import *
 from utils.tools import get_time
 
 
-class GroupNameTaskPage(PageObject):
+class GroupNameTaskPage(BasePage):
     """群名任务"""
 
     def __init__(self, page: Page):
@@ -34,7 +34,8 @@ class GroupNameTaskPage(PageObject):
             '//span[@class="bscrmCSS-calendar-footer-btn"]/a[@class="bscrmCSS-calendar-ok-btn"]')
 
     def navigate(self):
-        self.jump("/mantis/bscrm/groupSend/group/name/task")
+        with allure.step('进入群名任务界面'):
+            self.jump("/mantis/bscrm/groupSend/group/name/task")
 
     def create_task_func(self, task_name, wechat_name_list, group_name, new_group_name, **kwargs):
         regular = kwargs.get('regular')

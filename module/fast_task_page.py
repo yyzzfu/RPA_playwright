@@ -2,7 +2,7 @@ from module import *
 from utils.tools import get_time
 
 
-class FastTaskPage(PageObject):
+class FastTaskPage(BasePage):
     """快捷任务"""
 
     def __init__(self, page: Page):
@@ -30,7 +30,8 @@ class FastTaskPage(PageObject):
             '//span[@class="bscrmCSS-calendar-footer-btn"]/a[@class="bscrmCSS-calendar-ok-btn"]')
 
     def navigate(self):
-        self.jump("/mantis/bscrm/groupSend/quick/task")
+        with allure.step('进入快捷任务界面'):
+            self.jump("/mantis/bscrm/groupSend/quick/task")
 
     def create_task_func(self, task_name, wechat_name_list, muban, **kwargs):
         regular = kwargs.get('regular')
@@ -38,23 +39,41 @@ class FastTaskPage(PageObject):
             regular = 5
         elif isinstance(regular, int):
             regular = regular
-        self.create_task.click()
-        self.task_name.fill(task_name)
-        self.choose_wechat.click()
+        with allure.step('点击新建任务'):
+            self.create_task.click()
+        with allure.step(f'输入任务名称：{task_name}'):
+            self.task_name.fill(task_name)
+        with allure.step('点击选择企微账号'):
+            self.choose_wechat.click()
         for wechat_name in wechat_name_list:
-            self.wechat(wechat_name).click()
-        self.sure_in.click()
-        self.send_muban.click()
-        self.search.fill(muban)
-        self.muban(muban).click()
-        self.sure_in.click()
+            with allure.step(f'在选择企微账号界面，选择企微账号：{wechat_name}'):
+                self.wechat(wechat_name).click()
+        with allure.step('在选择企微账号界面，点击确定按钮'):
+            self.sure_in.click()
+        with allure.step('点击选择模板'):
+            self.send_muban.click()
+        with allure.step(f'在选择模板界面--模板搜索框中，输入模板名称：{muban}，并按回车键'):
+            self.search.fill(muban)
+            self.page.keyboard.press('Enter')
+        with allure.step(f'在选择模板界面，勾选模板：{muban}'):
+            self.muban(muban).click()
+        with allure.step('在选择模板界面，点击确定按钮'):
+            self.sure_in.click()
         if regular:
-            self.regular_button.click()
+            with allure.step(f'在发送类型中，点击定时发送'):
+                self.regular_button.click()
             self.time_input_button.click()
-            self.time_input.fill(get_time(regular))
-            self.sure_in_time.click()
-        self.sure.click()
-        expect(self.sure).not_to_be_visible()
-        self.task_name_search.fill(task_name)
-        self.search_button.click()
-        expect(self.page.get_by_text(task_name)).to_be_visible()
+            send_time = get_time(regular)
+            with allure.step(f'在日期选择界面--发送时间输入框中，输入发送时间：{send_time}'):
+                self.time_input.fill(send_time)
+            with allure.step(f'在日期选择界面，点击确定按钮'):
+                self.sure_in_time.click()
+        with allure.step(f'点击确定按钮--提交表单'):
+            self.sure.click()
+        with allure.step('等待确定按钮消失'):
+            expect(self.sure).not_to_be_visible()
+        with allure.step(f'在快捷任务列表--任务名称查询框中，输入任务名称：{task_name}，并按回车触发查询'):
+            self.task_name_search.fill(task_name)
+            self.search_button.click()
+        with allure.step(f'在快捷任务列表中，任务名称：【{task_name}】查询成功'):
+            expect(self.page.get_by_text(task_name)).to_be_visible()

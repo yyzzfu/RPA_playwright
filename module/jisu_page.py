@@ -2,7 +2,7 @@ from module import *
 from utils.tools import get_time
 
 
-class JiSuPage(PageObject):
+class JiSuPage(BasePage):
     """极速群发"""
 
     def __init__(self, page: Page):
@@ -48,7 +48,8 @@ class JiSuPage(PageObject):
             '//span[@class="bscrmCSS-calendar-footer-btn"]/a[@class="bscrmCSS-calendar-ok-btn"]')
 
     def navigate(self):
-        self.jump("/mantis/bscrm/topspeedMassTexting")
+        with allure.step('进入极速群发界面'):
+            self.jump("/mantis/bscrm/topspeedMassTexting")
 
     def create_task_func(self, task_name, wechat_name_list, name_list, send_content_dic, task_type, **kwargs):
         regular = kwargs.get('regular')
@@ -117,7 +118,7 @@ class JiSuPage(PageObject):
                 #     self.add_button.click()
                 # f.value.set_files(path)
                 expect(self.upload_suc).to_be_visible()
-                expect(self.upload_suc).not_to_be_visible()
+                expect(self.add_button).not_to_be_visible()
                 self.sure_in_text_input.click()
             elif content == 'link':
                 self.send_content_link.click()
@@ -142,7 +143,7 @@ class JiSuPage(PageObject):
                 # f.value.set_files(send_content_dic[content]['picture_path'])
 
                 expect(self.upload_suc).to_be_visible()
-                expect(self.upload_suc).not_to_be_visible()
+                expect(self.add_button).not_to_be_visible()
                 self.sure_in_text_input.click()
         if regular:
             self.regular_button.click()
