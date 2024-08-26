@@ -8,7 +8,7 @@ from utils.tools import get_time_now
 @pytest.mark.smoke
 def test_create_pull_group(pw_page, global_map, request, get_kf):
     """批量拉群--创建群聊--立即"""
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
     create_pull_group_data = my_page.test_data.get('create_pull_group_data')
 
     my_page.pull_group_page.navigate()

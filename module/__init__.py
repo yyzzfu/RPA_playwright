@@ -79,9 +79,9 @@ class PageIns:
         return my_page
 
     @staticmethod
-    def login_and_return_page_ins(page: Page, kf=''):
-        test_data = MyData().data_for_test(kf)
-        username = test_data.get('username')
+    def login_and_return_page_ins(page: Page, kf='', kf_for_data=''):
+        test_data = MyData().data_for_test(kf_for_data)
+        username = kf
         password = test_data.get('password')
         my_page = PageIns(page)
         my_page.login_page.login(username, password)

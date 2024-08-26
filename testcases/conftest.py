@@ -1,4 +1,5 @@
 import hashlib
+import random
 import shutil
 import os
 import sys
@@ -21,17 +22,19 @@ from pytest_playwright.pytest_playwright import CreateContextCallback
 from slugify import slugify
 import tempfile
 
+from data_module.my_data import MyData
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-#
-# @pytest.fixture(scope="session")
-# def playwright() -> Generator[Playwright, None, None]:
-#     pw = sync_playwright().start()
-#     session_start_time = time.time()
-#     yield pw
-#     print(f"-----------本轮测试耗时{int(time.time()-session_start_time)}秒----------")
-#     pw.stop()
+
+@pytest.fixture(scope="session")
+def playwright() -> Generator[Playwright, None, None]:
+    pw = sync_playwright().start()
+    session_start_time = time.time()
+    yield pw
+    print(f"-----------本轮测试耗时{int(time.time()-session_start_time)}秒----------")
+    pw.stop()
 
 
 @pytest.fixture(scope="session")
@@ -194,14 +197,24 @@ def global_map():
     global_map.delete_file()
 
 
-@pytest.fixture()
-def get_kf(worker_id):
-    user_list = ['kf2', 'kf3']
+@pytest.fixture(scope='session')
+def user_list():
+    user_list = MyData().data_for_test('all')
+    yield user_list
+
+
+@pytest.fixture
+def get_kf(worker_id, user_list):
+
+    kf_for_data = 'kf3'
+    user_list = user_list.get(kf_for_data)
+    # user_list = ['kf2', 'kf5']
     if worker_id.startswith('gw'):
-        user = user_list[int(worker_id[2:])]
+        kf = user_list[int(worker_id[2:])]
     else:
-        user = 'kf2'
-    return user
+        kf = kf_for_data
+        # user = random.choice(user_list)
+    return kf, kf_for_data
 
 
 @pytest.fixture

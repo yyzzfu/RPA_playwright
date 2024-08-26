@@ -5,7 +5,7 @@ from testcases import *
 @pytest.mark.smoke
 def test_create_group_rename_task(pw_page, get_kf):
     """群名任务"""
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
     create_group_rename_task_data = my_page.test_data.get('create_group_rename_task_data')
     my_page.group_rename_task_page.navigate()
     time_now = get_time_now()

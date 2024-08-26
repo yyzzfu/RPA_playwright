@@ -4,7 +4,7 @@ from testcases import *
 @pytest.mark.smoke
 def test_create_gaoji_group_task(pw_page, get_kf):
     described = "高级-群聊-立即"
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
     create_gaoji_group_task_data = my_page.test_data.get('create_gaoji_group_task_data')
 
     wechat_name_list = create_gaoji_group_task_data.get('wechat_name_list')  # 选择的企微账号
@@ -47,7 +47,7 @@ def test_gaoji_create_group_by_regular(pw_page, get_kf):
 @pytest.mark.smoke
 def test_gaoji_create_person_task(pw_page, get_kf):
     described = "高级-私聊-立即"
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
     create_gaoji_person_task_data = my_page.test_data.get('create_gaoji_person_task_data')
     my_page.gaoji_page.navigate()
     wechat_name_list = create_gaoji_person_task_data.get('wechat_name_list')  # 选择的企微账号
@@ -72,7 +72,7 @@ def test_gaoji_create_person_task_by_regular(pw_page, get_kf):
 @pytest.mark.smoke
 def test_gaoji_create_notice_task(pw_page, get_kf):
     described = "高级-群发公告-立即"
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
     create_gaoji_notice_task_data = my_page.test_data.get('create_gaoji_notice_task_data')
     my_page.gaoji_page.navigate()
     wechat_name_list = create_gaoji_notice_task_data.get('wechat_name_list')
