@@ -10,7 +10,7 @@ class MyData:
         kehu_list_kf3 = ['测试微信', '反派测试', '付益强', '中国加油']
         group_name_list_kf3 = ['yyy', 'x']
 
-        user = {'kf3': {'username': 'kf3', 'password': 'Qwer1234', 'other_username': 'kf5',
+        user = {'kf3': {'username': 'kf3', 'password': 'Qwer1234', 'other_username': ['kf5'],
                         'create_pull_group_data': {'name_list': ['测试微信'], 'name_fixed_list': ['反派测试'],
                                                    'employee': 'kf2', 'wechat_name_list': wechat_name_kf3,
                                                    'name_pull_list': ['测试微信']},  # 批量拉群
@@ -27,7 +27,7 @@ class MyData:
                         'jisu_create_person_task_data': {'wechat_name_list': wechat_name_kf3,
                                                          'kehu_list': kehu_list_kf3}  # 极速群发--私聊群发
                         },
-                'kf2': {'username': 'kf2', 'password': 'Qwer1234', 'other_username': 'kf5',
+                'kf2': {'username': 'kf2', 'password': 'Qwer1234', 'other_username': ['kf5'],
                         'create_pull_group_data': {'name_list': ['测试微信'], 'name_fixed_list': ['反派测试'],
                                                    'employee': 'kf3', 'wechat_name_list': wechat_name_kf2,
                                                    'name_pull_list': ['测试微信']},  # 批量拉群
@@ -50,7 +50,8 @@ class MyData:
             for k, v in user.items():
                 account = []
                 account.append(v.get('username'))
-                account.append(v.get('other_username'))
+                for i in v.get('other_username'):
+                    account.append(i)
                 all_account[k] = account
             return all_account
         return user.get(kf)

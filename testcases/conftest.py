@@ -68,6 +68,11 @@ def pytest_addoption(parser: Any) -> None:
         default=30_000,
         help="locator timeout and expect timeout",
     )
+    group.addoption(
+        "--kf_for_data",
+        default='kf3',
+        help="use kf to get test data",
+    )
 
 
 @pytest.fixture(scope="session")
@@ -75,6 +80,30 @@ def ui_timeout(pytestconfig):
     timeout = float(pytestconfig.getoption("--ui_timeout"))
     expect.set_options(timeout=timeout)  # 设置断言的超时时间
     return timeout
+
+
+@pytest.fixture(scope="session")
+def kf_for_data(pytestconfig):
+    kf_for_data = pytestconfig.getoption("--kf_for_data")
+    return kf_for_data
+
+
+@pytest.fixture(scope='session')
+def user_list():
+    user_list = MyData().data_for_test('all')
+    yield user_list
+
+
+@pytest.fixture
+def get_kf(worker_id, user_list, kf_for_data):
+
+    # kf_for_data = 'kf3'
+    user_list = user_list.get(kf_for_data)
+    if worker_id.startswith('gw'):
+        kf = user_list[int(worker_id[2:])]
+    else:
+        kf = kf_for_data
+    return kf, kf_for_data
 
 
 @pytest.fixture
@@ -195,26 +224,6 @@ def global_map():
     global_map = GlobalMap()
     yield global_map
     global_map.delete_file()
-
-
-@pytest.fixture(scope='session')
-def user_list():
-    user_list = MyData().data_for_test('all')
-    yield user_list
-
-
-@pytest.fixture
-def get_kf(worker_id, user_list):
-
-    kf_for_data = 'kf3'
-    user_list = user_list.get(kf_for_data)
-    # user_list = ['kf2', 'kf5']
-    if worker_id.startswith('gw'):
-        kf = user_list[int(worker_id[2:])]
-    else:
-        kf = kf_for_data
-        # user = random.choice(user_list)
-    return kf, kf_for_data
 
 
 @pytest.fixture
