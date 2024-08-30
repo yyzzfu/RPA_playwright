@@ -81,10 +81,9 @@ class PageIns:
     @staticmethod
     def login_and_return_page_ins(page: Page, kf='', kf_for_data=''):
         test_data = MyData().data_for_test(kf_for_data)
-        username = kf
         password = test_data.get('password')
         my_page = PageIns(page)
-        my_page.login_page.login(username, password)
+        my_page.login_page.login(kf, password)
         my_page.test_data = test_data
         # with FileLock(get_path(f".temp/{username}.lock")):
         #     my_page = PageIns(page)

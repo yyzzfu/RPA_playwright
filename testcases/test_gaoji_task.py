@@ -44,7 +44,7 @@ def test_gaoji_create_group_by_regular(pw_page, get_kf):
                                          send_content_dic.get('content_dic'), regular=True)
 
 
-@pytest.mark.smoke
+# @pytest.mark.smoke
 def test_gaoji_create_person_task(pw_page, get_kf):
     described = "高级-私聊-立即"
     my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)

@@ -97,7 +97,6 @@ def user_list():
 @pytest.fixture
 def get_kf(worker_id, user_list, kf_for_data):
 
-    # kf_for_data = 'kf3'
     user_list = user_list.get(kf_for_data)
     if worker_id.startswith('gw'):
         kf = user_list[int(worker_id[2:])]
