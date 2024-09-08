@@ -24,7 +24,7 @@ class LoginPage(BasePage):
         """
         with allure.step('进入登录界面'):
             self.navigate()
-
+        self.page.reload()
         num = 0
         while True:
             try:

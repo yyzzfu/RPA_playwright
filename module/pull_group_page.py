@@ -52,7 +52,7 @@ class PullGroupPage(BasePage):
             self.jump("/mantis/bscrm/batchGrouping")
 
     def create_task_create_group(self, task_name, wechat_name_list, name_list, new_group_name, code,
-                                 name_fixed_list, employee, members_count, group_rate):
+                                 name_fixed_list, employee, members_count, group_rate, **kwargs):
         with allure.step('点击新建任务按钮'):
             self.create_task.click()
         with allure.step(f'在批量拉群编辑界面，输入任务名称：{task_name}'):

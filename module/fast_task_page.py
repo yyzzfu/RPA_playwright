@@ -33,6 +33,10 @@ class FastTaskPage(BasePage):
         with allure.step('进入快捷任务界面'):
             self.jump("/mantis/bscrm/groupSend/quick/task")
 
+    @property
+    def get_table(self):
+        return self.table(only_text='任务状态')
+
     def create_task_func(self, task_name, wechat_name_list, muban, **kwargs):
         regular = kwargs.get('regular')
         if isinstance(regular, bool) and regular:
@@ -77,3 +81,4 @@ class FastTaskPage(BasePage):
             self.search_button.click()
         with allure.step(f'在快捷任务列表中，任务名称：【{task_name}】查询成功'):
             expect(self.page.get_by_text(task_name)).to_be_visible()
+
