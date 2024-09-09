@@ -69,7 +69,7 @@ class JiSuPage(BasePage):
         with allure.step('在上传界面，点击确定按钮'):
             self.sure_in_text_input.click()
 
-    def create_task_func(self, task_name, wechat_name_list, task_type, name_list='', text='', picture='',
+    def create_task_func(self, task_name, wechat_name_list, task_type, send_name_list='', text='', picture='',
                          video='', link: dict='', file: dict='', **kwargs):
         regular = kwargs.get('regular')
         if isinstance(regular, bool) and regular:
@@ -98,19 +98,15 @@ class JiSuPage(BasePage):
             self.wechat(wechat_name).click()
         self.sure.click()
         send_object.click()
-        for name in name_list:
+        for name in send_name_list:
             self.group_name.fill(name)
             self.page.keyboard.press('Enter')
         self.check_all.click()
         self.sure_in_choose_send_object.click()
 
         if text:
-            with allure.step('在追加内容中，点击文本按钮'):
-                self.send_content_text.click()
-            with allure.step(f'在文本编辑--文本输入框中，输入内容：{text}'):
+            with allure.step(f'在群发内容中，输入内容：{text}'):
                 self.text_input.type(text)
-            with allure.step(f'在文本编辑中，点击确定按钮'):
-                self.sure_in_text_input.click()
         if picture:
             with allure.step('在追加内容中，点击图片按钮'):
                 self.send_content_picture.click()
@@ -145,10 +141,3 @@ class JiSuPage(BasePage):
         self.page.keyboard.press('Enter')
         expect(self.task_name_in_card(task_name)).to_be_visible()
 
-    def create_group_task(self, task_name, wechat_name_list, group_name_list, send_content_dic, **kwargs):
-        self.create_task_func(task_name, wechat_name_list, group_name_list, send_content_dic, task_type='群聊群发',
-                              **kwargs)
-
-    def create_person_task(self, task_name, wechat_name_list, person_name_list, send_content_dic, **kwargs):
-        self.create_task_func(task_name, wechat_name_list, person_name_list, send_content_dic, task_type='私聊群发',
-                              **kwargs)

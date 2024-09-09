@@ -2,7 +2,7 @@ from utils.tools import get_my, get_time_now
 from testcases import *
 
 
-def test_create_fast_task(pw_page, get_kf):
+def test_create_fast_task(pw_page, get_kf, kf_for_data):
     """快捷任务"""
     my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
     my_page.group_muban_page.navigate()
@@ -10,7 +10,7 @@ def test_create_fast_task(pw_page, get_kf):
     my_page.group_muban_page.create_muban_func(**data_1)
 
     my_page.fast_task_page.navigate()
-    data_2 = FastData.as_dict_class()
+    data_2 = FastData.as_dict_class(kf_for_data)
     data_2['muban'] = data_1.get('muban_name')
     my_page.fast_task_page.create_task_func(**data_2)
 

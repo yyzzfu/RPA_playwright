@@ -7,7 +7,7 @@ import random
 from playwright.sync_api import Page, expect, BrowserContext, Locator
 import allure
 
-from data_module.my_data import MyData
+from data_module.user_data import UserData
 from module.base_page import BasePage
 from utils.tools import get_path
 from filelock import FileLock
@@ -55,8 +55,8 @@ class PageIns:
         #         my_page.登录页.登录(用户名, 密码)
         #         my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
         # return my_page
-        username = MyData().userinfo().get('username')
-        password = MyData().userinfo().get('password')
+        username = UserData().userinfo().get('username')
+        password = UserData().userinfo().get('password')
         with FileLock(get_path(f".temp/{username}.lock")):
             if os.path.exists(get_path(f".temp/{username}.json")):
                 context: BrowserContext = new_context(storage_state=get_path(f".temp/{username}.json"))
@@ -80,7 +80,7 @@ class PageIns:
 
     @staticmethod
     def login_and_return_page_ins(page: Page, kf='', kf_for_data='', login_type=1):
-        test_data = MyData().data_for_test(kf_for_data)
+        test_data = UserData().data_for_test(kf_for_data)
         password = test_data.get('password')
         my_page = PageIns(page)
         my_page.login_page.login(kf, password, login_type)

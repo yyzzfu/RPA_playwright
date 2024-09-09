@@ -22,7 +22,7 @@ from pytest_playwright.pytest_playwright import CreateContextCallback
 from slugify import slugify
 import tempfile
 
-from data_module.my_data import MyData
+from data_module.user_data import UserData
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -90,7 +90,7 @@ def kf_for_data(pytestconfig):
 
 @pytest.fixture(scope='session')
 def user_list():
-    user_list = MyData().data_for_test('all')
+    user_list = UserData().data_for_test('all')
     yield user_list
 
 
