@@ -2,9 +2,9 @@ from testcases import *
 
 
 # @pytest.mark.smoke
-def test_jisu_create_group_task(pw_page, get_kf, kf_for_data):
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
-    data = JiSuGroupData.as_dict_class(kf_for_data)
+def test_jisu_create_group_task(pw_page, get_user, user_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+    data = JiSuGroupData.as_dict_class(user_marker)
     my_page.jisu_page.navigate()
     my_page.jisu_page.create_task_func(**data)
 
@@ -22,10 +22,10 @@ def test_jisu_create_group_task(pw_page, get_kf, kf_for_data):
 
 
 # @pytest.mark.smoke
-def test_jisu_create_person_task(pw_page, get_kf, kf_for_data):
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
+def test_jisu_create_person_task(pw_page, get_user, user_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
     my_page.jisu_page.navigate()
-    data = JiSuPersonData.as_dict_class(kf_for_data)
+    data = JiSuPersonData.as_dict_class(user_marker)
     my_page.jisu_page.create_task_func(**data)
 
 

@@ -1,17 +1,17 @@
 from testcases import *
 
 
-def test_create_gaoji_group_task(pw_page, get_kf, kf_for_data):
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
+def test_create_gaoji_group_task(pw_page, get_user, user_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
     my_page.gaoji_page.navigate()
-    data = GaoJiGroupData.as_dict_class(kf_for_data)
+    data = GaoJiGroupData.as_dict_class(user_marker)
     my_page.gaoji_page.create_task_func(**data)
 
 
-def test_gaoji_create_group_one_by_one_task(pw_page, get_kf, kf_for_data):
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
+def test_gaoji_create_group_one_by_one_task(pw_page, get_user, user_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
     my_page.gaoji_page.navigate()
-    data = GaoJiGroupDataOneByOne.as_dict_class(kf_for_data)
+    data = GaoJiGroupDataOneByOne.as_dict_class(user_marker)
     my_page.gaoji_page.create_task_func(**data)
 
 
@@ -29,9 +29,9 @@ def test_gaoji_create_group_one_by_one_task(pw_page, get_kf, kf_for_data):
 
 
 # @pytest.mark.smoke
-def test_gaoji_create_person_task(pw_page, get_kf, kf_for_data):
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
-    data = GaoJiPersonData.as_dict_class(kf_for_data)
+def test_gaoji_create_person_task(pw_page, get_user, user_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+    data = GaoJiPersonData.as_dict_class(user_marker)
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
 
@@ -49,9 +49,9 @@ def test_gaoji_create_person_task(pw_page, get_kf, kf_for_data):
 
 
 # @pytest.mark.smoke
-def test_gaoji_create_notice_task(pw_page, get_kf, kf_for_data):
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
-    data = GaoJiNoticeData.as_dict_class(kf_for_data)
+def test_gaoji_create_notice_task(pw_page, get_user, user_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+    data = GaoJiNoticeData.as_dict_class(user_marker)
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
 

@@ -69,9 +69,9 @@ def pytest_addoption(parser: Any) -> None:
         help="locator timeout and expect timeout",
     )
     group.addoption(
-        "--kf_for_data",
+        "--user_marker",
         default='kf3',
-        help="use kf to get test data",
+        help="use user_marker to get test data",
     )
 
 
@@ -83,26 +83,25 @@ def ui_timeout(pytestconfig):
 
 
 @pytest.fixture(scope="session")
-def kf_for_data(pytestconfig):
-    kf_for_data = pytestconfig.getoption("--kf_for_data")
-    return kf_for_data
+def user_marker(pytestconfig):
+    user_marker = pytestconfig.getoption("--user_marker")
+    return user_marker
 
 
 @pytest.fixture(scope='session')
-def user_list():
-    user_list = UserData().data_for_test('all')
+def user_list(user_marker):
+    user_list = UserData().data_for_test(user_marker).get('user_list')
     yield user_list
 
 
 @pytest.fixture
-def get_kf(worker_id, user_list, kf_for_data):
+def get_user(worker_id, user_list):
 
-    user_list = user_list.get(kf_for_data)
     if worker_id.startswith('gw'):
-        kf = user_list[int(worker_id[2:])]
+        user = user_list[int(worker_id[2:])]
     else:
-        kf = kf_for_data
-    return kf, kf_for_data
+        user = user_list[0]
+    return user
 
 
 @pytest.fixture

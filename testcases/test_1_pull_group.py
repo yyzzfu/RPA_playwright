@@ -1,10 +1,10 @@
 from testcases import *
 
 
-def test_create_pull_group(pw_page, global_map, get_kf, kf_for_data):
+def test_create_pull_group(pw_page, global_map, get_user, user_marker):
     """批量拉群--创建群聊--立即"""
-    my_page = PageIns.login_and_return_page_ins(pw_page, *get_kf)
-    data = PullGroupData.as_dict_class(kf_for_data)
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+    data = PullGroupData.as_dict_class(user_marker)
     my_page.pull_group_page.navigate()
     my_page.pull_group_page.create_task_create_group(**data)
 

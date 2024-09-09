@@ -51,8 +51,8 @@ class PullGroupPage(BasePage):
         with allure.step('进入批量拉群界面'):
             self.jump("/mantis/bscrm/batchGrouping")
 
-    def create_task_create_group(self, task_name, wechat_name_list, name_list, new_group_name, code,
-                                 name_fixed_list, employee, members_count, group_rate, **kwargs):
+    def create_task_create_group(self, task_name, wechat_name_list, pull_customer_list, new_group_name, members_count,
+                                 group_rate, code, fixed_customer_list, fixed_employee, **kwargs):
         with allure.step('点击新建任务按钮'):
             self.create_task.click()
         with allure.step(f'在批量拉群编辑界面，输入任务名称：{task_name}'):
@@ -66,7 +66,7 @@ class PullGroupPage(BasePage):
             self.sure.click()
         with allure.step(f'在被邀请客户中，点击选择客户'):
             self.send_object_person.click()
-        for name in name_list:
+        for name in pull_customer_list:
             with allure.step(f'在选择客户界面--备注中，输入客户名称：{name}，并按回车键'):
                 self.group_name.fill(name)
                 self.page.keyboard.press('Enter')
@@ -82,7 +82,7 @@ class PullGroupPage(BasePage):
             self.code.fill(code)
         with allure.step(f'新群固定客户中，点击选择客户'):
             self.fixed_kehu.click()
-        for name in name_fixed_list:
+        for name in fixed_customer_list:
             with allure.step(f'在选择客户界面--备注中，输入客户名称：{name}，并按回车键'):
                 self.group_name.fill(name)
                 self.page.keyboard.press('Enter')
@@ -92,9 +92,9 @@ class PullGroupPage(BasePage):
             self.sure_in_choose_send_object.click()
         with allure.step(f'在新群固定员工中，点击添加员工'):
             self.fixed_employee.click()
-        with allure.step(f'在选择员工界面--搜索框中，输入员工：{employee},并勾选该员工'):
-            self.search_employee.fill(employee)
-            self.employee(employee).click()
+        with allure.step(f'在选择员工界面--搜索框中，输入员工：{fixed_employee},并勾选该员工'):
+            self.search_employee.fill(fixed_employee)
+            self.employee(fixed_employee).click()
         with allure.step(f'在选择员工界面，点击确定按钮'):
             self.sure_in_employee.click()
         with allure.step(f'输入目标成员数：{members_count}'):
@@ -111,74 +111,75 @@ class PullGroupPage(BasePage):
         with allure.step(f'在批量拉群列表中，任务名称：【{task_name}】查询成功'):
             expect(self.task_name_in_card(task_name)).to_be_visible()
 
-    def create_task_pull_kehu(self, task_name, wechat_name_list, name_pull_list,
-                              pull_group_name, members_count, group_rate, **kwargs):
-        regular = kwargs.get('regular')
-        if isinstance(regular, bool) and regular:
-            regular = 5
-        elif isinstance(regular, int):
-            regular = regular
-
-        with allure.step('点击新建任务按钮'):
-            self.create_task.click()
-        with allure.step(f'在批量拉群编辑界面，输入任务名称：{task_name}'):
-            self.task_name.fill(task_name)
-        with allure.step('点击选择企微账号'):
-            self.choose_wechat.click()
-        for wechat_name in wechat_name_list:
-            with allure.step(f'勾选企微账号：{wechat_name}'):
-                self.wechat(wechat_name).click()
-        with allure.step(f'在选择企微账号界面，点击确定按钮'):
-            self.sure.click()
-        with allure.step(f'在被邀请客户中，点击选择客户'):
-            self.send_object_person.click()
-        for name in name_pull_list:
-            with allure.step(f'在选择客户界面--备注中，输入客户名称：{name}，并按回车键'):
-                self.group_name.fill(name)
-                self.page.keyboard.press('Enter')
-        with allure.step(f'在选择客户界面，点击全选本页'):
-            self.check_all.click()
-        with allure.step(f'在选择客户界面，点击确定按钮'):
-            self.sure_in_choose_send_object.click()
-        with allure.step(f'目标群聊--选择现有群中，点击选择客户群'):
-            self.send_object_group.click()
-
-        num = 0
-        while True:
-            try:
-                with allure.step(f'在选择客户群界面--群名称中，输入群名称：{pull_group_name}，并按回车键'):
-                    self.group_name.fill(pull_group_name)
-                    self.page.keyboard.press('Enter')
-                if self.group_name_exsit(pull_group_name).count():
-                    break
-                raise Exception
-            except Exception as e:
-                num += 1
-                if num == 5:
-                    raise e
-        with allure.step(f'在选择客户群界面，点击全选本页'):
-            self.check_all.click()
-        with allure.step(f'在选择客户群界面，点击确定按钮'):
-            self.sure_in_choose_send_object.click()
-        with allure.step(f'输入目标成员数：{members_count}'):
-            self.members_count.fill(members_count)
-        with allure.step(f'输入预计入群率：{group_rate}'):
-            self.group_rate.fill(group_rate)
-        if regular:
-            with allure.step(f'在发送类型中，点击单次定时'):
-                self.regular_button.click()
-            self.time_input_button.click()
-            send_time = get_time(regular)
-            with allure.step(f'在日期选择界面--发送时间输入框中，输入发送时间：{send_time}'):
-                self.time_input.fill(send_time)
-            with allure.step(f'在日期选择界面，点击确定按钮'):
-                self.sure_in_time.click()
-        with allure.step(f'点击确定按钮--提交表单'):
-            self.sure_to_submit.click()
-        with allure.step('等待确定按钮消失'):
-            expect(self.sure_to_submit).not_to_be_visible()
-        with allure.step(f'在批量拉群列表--任务名称查询框中，输入任务名称：{task_name}，并按回车触发查询'):
-            self.search_task_name.fill(task_name)
-            self.page.keyboard.press('Enter')
-        with allure.step(f'在批量拉群列表中，任务名称：【{task_name}】查询成功'):
-          expect(self.task_name_in_card(task_name)).to_be_visible()
+    # def create_task_pull_kehu(self, task_name, wechat_name_list, pull_customer_list,
+    #                           new_group_name, members_count, group_rate,
+    #                           code, fixed_customer_list, fixed_employee, **kwargs):
+    #     regular = kwargs.get('regular')
+    #     if isinstance(regular, bool) and regular:
+    #         regular = 5
+    #     elif isinstance(regular, int):
+    #         regular = regular
+    #
+    #     with allure.step('点击新建任务按钮'):
+    #         self.create_task.click()
+    #     with allure.step(f'在批量拉群编辑界面，输入任务名称：{task_name}'):
+    #         self.task_name.fill(task_name)
+    #     with allure.step('点击选择企微账号'):
+    #         self.choose_wechat.click()
+    #     for wechat_name in wechat_name_list:
+    #         with allure.step(f'勾选企微账号：{wechat_name}'):
+    #             self.wechat(wechat_name).click()
+    #     with allure.step(f'在选择企微账号界面，点击确定按钮'):
+    #         self.sure.click()
+    #     with allure.step(f'在被邀请客户中，点击选择客户'):
+    #         self.send_object_person.click()
+    #     for name in name_pull_list:
+    #         with allure.step(f'在选择客户界面--备注中，输入客户名称：{name}，并按回车键'):
+    #             self.group_name.fill(name)
+    #             self.page.keyboard.press('Enter')
+    #     with allure.step(f'在选择客户界面，点击全选本页'):
+    #         self.check_all.click()
+    #     with allure.step(f'在选择客户界面，点击确定按钮'):
+    #         self.sure_in_choose_send_object.click()
+    #     with allure.step(f'目标群聊--选择现有群中，点击选择客户群'):
+    #         self.send_object_group.click()
+    #
+    #     num = 0
+    #     while True:
+    #         try:
+    #             with allure.step(f'在选择客户群界面--群名称中，输入群名称：{pull_group_name}，并按回车键'):
+    #                 self.group_name.fill(pull_group_name)
+    #                 self.page.keyboard.press('Enter')
+    #             if self.group_name_exsit(pull_group_name).count():
+    #                 break
+    #             raise Exception
+    #         except Exception as e:
+    #             num += 1
+    #             if num == 5:
+    #                 raise e
+    #     with allure.step(f'在选择客户群界面，点击全选本页'):
+    #         self.check_all.click()
+    #     with allure.step(f'在选择客户群界面，点击确定按钮'):
+    #         self.sure_in_choose_send_object.click()
+    #     with allure.step(f'输入目标成员数：{members_count}'):
+    #         self.members_count.fill(members_count)
+    #     with allure.step(f'输入预计入群率：{group_rate}'):
+    #         self.group_rate.fill(group_rate)
+    #     if regular:
+    #         with allure.step(f'在发送类型中，点击单次定时'):
+    #             self.regular_button.click()
+    #         self.time_input_button.click()
+    #         send_time = get_time(regular)
+    #         with allure.step(f'在日期选择界面--发送时间输入框中，输入发送时间：{send_time}'):
+    #             self.time_input.fill(send_time)
+    #         with allure.step(f'在日期选择界面，点击确定按钮'):
+    #             self.sure_in_time.click()
+    #     with allure.step(f'点击确定按钮--提交表单'):
+    #         self.sure_to_submit.click()
+    #     with allure.step('等待确定按钮消失'):
+    #         expect(self.sure_to_submit).not_to_be_visible()
+    #     with allure.step(f'在批量拉群列表--任务名称查询框中，输入任务名称：{task_name}，并按回车触发查询'):
+    #         self.search_task_name.fill(task_name)
+    #         self.page.keyboard.press('Enter')
+    #     with allure.step(f'在批量拉群列表中，任务名称：【{task_name}】查询成功'):
+    #         expect(self.task_name_in_card(task_name)).to_be_visible()

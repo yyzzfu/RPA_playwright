@@ -7,7 +7,7 @@ from utils.tools import get_path, get_my, get_time_now
 
 class As_dict:
 
-    def as_dict(self, kf_for_data=None):
+    def as_dict(self, user_marker=None):
         time_str = get_time_now()
         return_dict = self.__dict__
         return_dict_new = return_dict.copy()
@@ -29,13 +29,23 @@ class As_dict:
                     value = str(value).replace("+名人名言", get_my())
                     return_dict_new.update({key: value})
                 if "企微账号" in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('wechat_name_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('wechat_name_list')})
                 if '群发对象-按客户' in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('send_customer_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('send_customer_list')})
                 if '群发对象-指定群' in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('send_group_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('send_group_list')})
                 if '智能助理' in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('agent')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('agent')})
+                if '批量拉群-被邀请客户' in value:
+                    return_dict_new.update(
+                        {key: UserData().data_for_test(user_marker).get('pull_group').get('pull_customer_list')})
+                if '批量拉群-新群固定客户' in value:
+                    return_dict_new.update(
+                        {key: UserData().data_for_test(user_marker).get('pull_group').get('fixed_customer_list')})
+                if '批量拉群-新群固定员工' in value:
+                    return_dict_new.update(
+                        {key: UserData().data_for_test(user_marker).get('pull_group').get('fixed_employee')})
+
             elif isinstance(value, dict):
                 for k, v in value.items():
                     if "时间戳" in v:
@@ -51,7 +61,7 @@ class As_dict:
                         return_dict_new.update({key: value})
 
     @classmethod
-    def as_dict_class(cls, kf_for_data=None):
+    def as_dict_class(cls, user_marker=None):
         time_str = get_time_now()
         return_dict = cls.__dict__
         return_dict_new = return_dict.copy()
@@ -73,15 +83,24 @@ class As_dict:
                     value = str(value).replace("+名人名言", get_my())
                     return_dict_new.update({key: value})
                 if "企微账号" in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('wechat_name_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('wechat_name_list')})
                 if "企微账号" in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('wechat_name_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('wechat_name_list')})
                 if '群发对象-按客户' in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('send_customer_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('send_customer_list')})
                 if '群发对象-指定群' in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('send_group_list')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('send_group_list')})
                 if '智能助理' in value:
-                    return_dict_new.update({key: UserData().data_for_test(kf_for_data).get('agent')})
+                    return_dict_new.update({key: UserData().data_for_test(user_marker).get('agent')})
+                if '批量拉群-被邀请客户' in value:
+                    return_dict_new.update(
+                        {key: UserData().data_for_test(user_marker).get('pull_group').get('pull_customer_list')})
+                if '批量拉群-新群固定客户' in value:
+                    return_dict_new.update(
+                        {key: UserData().data_for_test(user_marker).get('pull_group').get('fixed_customer_list')})
+                if '批量拉群-新群固定员工' in value:
+                    return_dict_new.update(
+                        {key: UserData().data_for_test(user_marker).get('pull_group').get('fixed_employee')})
             elif isinstance(value, dict):
                 for k, v in value.items():
                     if "时间戳" in v:
