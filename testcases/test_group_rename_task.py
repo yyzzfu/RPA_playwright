@@ -2,11 +2,11 @@ from utils.tools import get_time_now
 from testcases import *
 
 
-def test_create_group_rename_task(pw_page, get_user, user_marker):
+def test_create_group_rename_task(pw_page, get_user_and_marker):
     """群名任务"""
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
     my_page.group_rename_task_page.navigate()
-    data = GroupRenameData.as_dict_class(user_marker)
+    data = GroupRenameData.as_dict_class(get_user_and_marker.get('user_marker'))
     my_page.group_rename_task_page.create_task_func(**data)
 
 

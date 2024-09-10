@@ -1,6 +1,7 @@
 class UserData:
 
-    def data_for_test(self, kf):
+    @staticmethod
+    def data_for_test(kf):
 
         user = {
             'kf3': {
@@ -28,15 +29,6 @@ class UserData:
                 },
             },
         }
-        # if kf == 'all':
-        #     all_account = {}
-        #     for k, v in user.items():
-        #         account = list()
-        #         account.append(k)
-        #         for i in v.get('other_user'):
-        #             account.append(i[0])
-        #         all_account[k] = account
-        #     return all_account
         return user.get(kf)
 
 

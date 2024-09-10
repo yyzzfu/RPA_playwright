@@ -1,23 +1,23 @@
 from testcases import *
 
 
-def test_create_gaoji_group_task(pw_page, get_user, user_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+def test_create_gaoji_group_task(pw_page, get_user_and_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
     my_page.gaoji_page.navigate()
-    data = GaoJiGroupData.as_dict_class(user_marker)
+    data = GaoJiGroupData.as_dict_class(get_user_and_marker.get('user_marker'))
     my_page.gaoji_page.create_task_func(**data)
 
 
-def test_gaoji_create_group_one_by_one_task(pw_page, get_user, user_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
+def test_gaoji_create_group_one_by_one_task(pw_page, get_user_and_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
     my_page.gaoji_page.navigate()
-    data = GaoJiGroupDataOneByOne.as_dict_class(user_marker)
+    data = GaoJiGroupDataOneByOne.as_dict_class(get_user_and_marker.get('user_marker'))
     my_page.gaoji_page.create_task_func(**data)
 
 
 # def test_gaoji_create_group_by_regular(pw_page, get_kf):
 #     described = "高级-群聊-定时"
-#     my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)
+#     my_page = PageIns.login_and_return_page_ins(pw_page, get_kf)get_user_and_marker
 #     create_gaoji_group_task_data = my_page.test_data.get('create_gaoji_group_task_data')
 #
 #     wechat_name_list = create_gaoji_group_task_data.get('wechat_name_list')  # 选择的企微账号
@@ -29,9 +29,9 @@ def test_gaoji_create_group_one_by_one_task(pw_page, get_user, user_marker):
 
 
 # @pytest.mark.smoke
-def test_gaoji_create_person_task(pw_page, get_user, user_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
-    data = GaoJiPersonData.as_dict_class(user_marker)
+def test_gaoji_create_person_task(pw_page, get_user_and_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
+    data = GaoJiPersonData.as_dict_class(get_user_and_marker.get('user_marker'))
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
 
@@ -49,9 +49,9 @@ def test_gaoji_create_person_task(pw_page, get_user, user_marker):
 
 
 # @pytest.mark.smoke
-def test_gaoji_create_notice_task(pw_page, get_user, user_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user)
-    data = GaoJiNoticeData.as_dict_class(user_marker)
+def test_gaoji_create_notice_task(pw_page, get_user_and_marker):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
+    data = GaoJiNoticeData.as_dict_class(get_user_and_marker.get('user_marker'))
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
 

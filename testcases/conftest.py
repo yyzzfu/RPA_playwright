@@ -90,18 +90,18 @@ def user_marker(pytestconfig):
 
 @pytest.fixture(scope='session')
 def user_list(user_marker):
-    user_list = UserData().data_for_test(user_marker).get('user_list')
+    user_list = UserData.data_for_test(user_marker).get('user_list')
     yield user_list
 
 
 @pytest.fixture
-def get_user(worker_id, user_list):
+def get_user_and_marker(worker_id, user_list, user_marker):
 
     if worker_id.startswith('gw'):
         user = user_list[int(worker_id[2:])]
     else:
         user = user_list[0]
-    return user
+    return {'user': user, 'user_marker': user_marker}
 
 
 @pytest.fixture

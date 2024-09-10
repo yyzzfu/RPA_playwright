@@ -28,7 +28,7 @@ class GaoJiGroupDataOneByOne(As_dict):
     task_name = f'{described}+时间戳'  # 任务名称
     wechat_name_list = '企微账号'  # 企微账号
     send_name_list = '群发对象-指定群'
-    text = f'(测试){described}+时间戳：+名人名言'
+    text = f'(测试){described}+时间戳：+名人名言+@所有人'
     picture = get_path(r'/data_module/upload/pciture.jpg')
     video = get_path(r'/data_module/upload/video.mp4')
     link = {'title': f'链接标题+时间戳',
