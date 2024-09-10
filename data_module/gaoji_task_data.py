@@ -10,14 +10,18 @@ class GaoJiGroupData(As_dict):
     wechat_name_list = '企微账号'  # 企微账号
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言'
-    picture = get_path(r'/data_module/upload/pciture.jpg')
-    video = get_path(r'/data_module/upload/video.mp4')
-    link = {'title': f'链接标题+时间戳',
-            'address': r'http://www.baidu.com+时间戳',
-            'content': f'内容简介:{described}+时间戳',
-            'picture_path': get_path(r'/data_module/upload/pciture.jpg')}
-    file = {'file_name': f'文件名称+时间戳',
-            'file_path': get_path(r'/data_module/upload/file.pdf')}
+    picture = '图片路径'
+    video = '视频路径'
+    link = {
+        'title': '链接标题+时间戳',
+        'address': r'http://www.baidu.com+时间戳',
+        'content': f'内容简介:{described}+时间戳',
+        'picture_path': '图片路径'
+    }
+    file = {
+        'file_name': f'文件名称+时间戳',
+        'file_path': '文件路径'
+    }
     task_type = '群聊群发'
 
 
@@ -29,14 +33,18 @@ class GaoJiGroupDataOneByOne(As_dict):
     wechat_name_list = '企微账号'  # 企微账号
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言+@所有人'
-    picture = get_path(r'/data_module/upload/pciture.jpg')
-    video = get_path(r'/data_module/upload/video.mp4')
-    link = {'title': f'链接标题+时间戳',
-            'address': r'http://www.baidu.com/+时间戳',
-            'content': f'内容简介:{described}+时间戳',
-            'picture_path': get_path(r'/data_module/upload/pciture.jpg')}
-    file = {'file_name': f'文件名称+时间戳',
-            'file_path': get_path(r'/data_module/upload/file.pdf')}
+    picture = '图片路径'
+    video = '视频路径'
+    link = {
+        'title': '链接标题+时间戳',
+        'address': r'http://www.baidu.com/+时间戳',
+        'content': f'内容简介:{described}+时间戳',
+        'picture_path': '图片路径'
+    }
+    file = {
+        'file_name': '文件名称+时间戳',
+        'file_path': '文件路径'
+    }
     task_type = '群聊群发'
     one_by_one = True
 
@@ -49,15 +57,19 @@ class GaoJiNoticeData(As_dict):
     wechat_name_list = '企微账号'  # 企微账号
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言'
-    picture = get_path(r'/data_module/upload/pciture.jpg')
-    video = get_path(r'/data_module/upload/video.mp4')
-    link = {'title': f'链接标题+时间戳',
-            'address': r'http://www.baidu.com/+时间戳',
-            'content': f'内容简介:{described}+时间戳',
-            'picture_path': get_path(r'/data_module/upload/pciture.jpg')}
-    file = {'file_name': f'文件名称+时间戳',
-            'file_path': get_path(r'/data_module/upload/file.pdf')}
-    notice = f'{described}-群公告内容：{get_my()}+时间戳'
+    picture = '图片路径'
+    video = '视频路径'
+    link = {
+        'title': '链接标题+时间戳',
+        'address': r'http://www.baidu.com/+时间戳',
+        'content': f'内容简介:{described}+时间戳',
+        'picture_path': '图片路径'
+    }
+    file = {
+        'file_name': '文件名称+时间戳',
+        'file_path': '文件路径'
+    }
+    notice = f'{described}-群公告内容：+名人名言+时间戳'
     task_type = '群发公告'
 
 
@@ -68,14 +80,18 @@ class GaoJiPersonData(As_dict):
     wechat_name_list = '企微账号'  # 企微账号
     send_name_list = '群发对象-按客户'
     text = f'(测试){described}+时间戳：+名人名言'
-    picture = get_path(r'/data_module/upload/pciture.jpg')
-    video = get_path(r'/data_module/upload/video.mp4')
-    link = {'title': f'链接标题+时间戳',
-            'address': r'http://www.baidu.com/+时间戳',
-            'content': f'内容简介:{described}+时间戳',
-            'picture_path': get_path(r'/data_module/upload/pciture.jpg')}
-    file = {'file_name': f'文件名称+时间戳',
-            'file_path': get_path(r'/data_module/upload/file.pdf')}
+    picture = '图片路径'
+    video = '视频路径'
+    link = {
+        'title': f'链接标题+时间戳',
+        'address': r'http://www.baidu.com/+时间戳',
+        'content': f'内容简介:{described}+时间戳',
+        'picture_path': '图片路径'
+    }
+    file = {
+        'file_name': '文件名称+时间戳',
+        'file_path': '文件路径'
+    }
     task_type = '私聊群发'
 
 

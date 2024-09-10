@@ -69,9 +69,14 @@ def pytest_addoption(parser: Any) -> None:
         help="locator timeout and expect timeout",
     )
     group.addoption(
-        "--user_marker",
-        default='kf3',
-        help="use user_marker to get test data",
+        "--agent",
+        default='agent1',
+        help="use agent to get test data",
+    )
+    group.addoption(
+        "--WeCom",
+        default='WeCom1',
+        help="use WeCom to get test data",
     )
 
 
@@ -83,25 +88,31 @@ def ui_timeout(pytestconfig):
 
 
 @pytest.fixture(scope="session")
-def user_marker(pytestconfig):
-    user_marker = pytestconfig.getoption("--user_marker")
-    return user_marker
+def get_agent(pytestconfig):
+    agent = pytestconfig.getoption("--agent")
+    return agent
+
+
+@pytest.fixture(scope="session")
+def get_WeCom(pytestconfig):
+    WeCom = pytestconfig.getoption("--WeCom")
+    return WeCom
 
 
 @pytest.fixture(scope='session')
-def user_list(user_marker):
-    user_list = UserData.data_for_test(user_marker).get('user_list')
+def user_list(get_agent, get_WeCom):
+    user_list = UserData.data_for_test(get_agent, get_WeCom).get('user_list')
     yield user_list
 
 
 @pytest.fixture
-def get_user_and_marker(worker_id, user_list, user_marker):
+def get_user_and_marker(worker_id, user_list, get_agent, get_WeCom):
 
     if worker_id.startswith('gw'):
         user = user_list[int(worker_id[2:])]
     else:
         user = user_list[0]
-    return {'user': user, 'user_marker': user_marker}
+    return {'user': user, 'agent': get_agent, 'WeCom': get_WeCom}
 
 
 @pytest.fixture
