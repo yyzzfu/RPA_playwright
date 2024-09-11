@@ -73,7 +73,7 @@ class GaoJiPage(BasePage):
         with allure.step('在上传界面，点击确定按钮'):
             self.sure_in_text_input.click()
 
-    def create_task_func(self, task_name, wechat_name_list, task_type, send_name_list='', text='', picture='',
+    def create_task_func(self, task_name, wechat_name, task_type, send_name_list='', text='', picture='',
                          video='', link: dict='', file: dict='', notice='', **kwargs):
         num = 0
         one_by_one = kwargs.get('one_by_one')
@@ -109,7 +109,11 @@ class GaoJiPage(BasePage):
             self.task_name.fill(task_name)
         with allure.step('点击选择企微账号'):
             self.choose_wechat.click()
-        for wechat_name in wechat_name_list:
+        if isinstance(wechat_name, list):
+            for name in wechat_name:
+                with allure.step(f'在选择企微账号界面，选择企微账号：{name}'):
+                    self.wechat(name).click()
+        else:
             with allure.step(f'在选择企微账号界面，选择企微账号：{wechat_name}'):
                 self.wechat(wechat_name).click()
         with allure.step('在选择企微账号界面，点击确定按钮'):

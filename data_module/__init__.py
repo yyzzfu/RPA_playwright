@@ -7,9 +7,9 @@ from utils.tools import get_path, get_my, get_time_now
 
 class As_dict:
 
-    def as_dict(self, agent, WeCom):
+    def as_dict(self, WeCom_data=None):
 
-        data = UserData.data_for_test(agent, WeCom)
+        data = WeCom_data
         time_str = get_time_now()
         return_dict = self.__dict__
         return_dict_new = return_dict.copy()
@@ -39,20 +39,21 @@ class As_dict:
                 if "文件路径" in value:
                     value = get_path(r'/data_module/upload/file.pdf')
                     return_dict_new.update({key: value})
-                if "企微账号" in value:
-                    return_dict_new.update({key: data.get('wechat_name_list')})
-                if '群发对象-按客户' in value:
-                    return_dict_new.update({key: data.get('send_customer_list')})
-                if '群发对象-指定群' in value:
-                    return_dict_new.update({key: data.get('send_group_list')})
-                if '智能助理' in value:
-                    return_dict_new.update({key: data.get('agent')})
-                if '批量拉群-被邀请客户' in value:
-                    return_dict_new.update({key: data.get('pull_group').get('pull_customer_list')})
-                if '批量拉群-新群固定客户' in value:
-                    return_dict_new.update({key: data.get('pull_group').get('fixed_customer_list')})
-                if '批量拉群-新群固定员工' in value:
-                    return_dict_new.update({key: data.get('pull_group').get('fixed_employee')})
+                if WeCom_data:
+                    if "企微账号" in value:
+                        return_dict_new.update({key: data.get('wechat_name_list')})
+                    if '群发对象-按客户' in value:
+                        return_dict_new.update({key: data.get('send_customer_list')})
+                    if '群发对象-指定群' in value:
+                        return_dict_new.update({key: data.get('send_group_list')})
+                    if '智能助理' in value:
+                        return_dict_new.update({key: data.get('agent')})
+                    if '批量拉群-被邀请客户' in value:
+                        return_dict_new.update({key: data.get('pull_group').get('pull_customer_list')})
+                    if '批量拉群-新群固定客户' in value:
+                        return_dict_new.update({key: data.get('pull_group').get('fixed_customer_list')})
+                    if '批量拉群-新群固定员工' in value:
+                        return_dict_new.update({key: data.get('pull_group').get('fixed_employee')})
             elif isinstance(value, dict):
                 for k, v in value.items():
                     if "时间戳" in v:
@@ -77,8 +78,8 @@ class As_dict:
                         return_dict_new[key].update({key: value})
 
     @classmethod
-    def as_dict_class(cls, user_marker=None):
-        data = UserData.data_for_test(user_marker)
+    def as_dict_class(cls, WeCom_data=None):
+        data = WeCom_data
         time_str = get_time_now()
         return_dict = cls.__dict__
         return_dict_new = return_dict.copy()
@@ -108,20 +109,21 @@ class As_dict:
                 if "文件路径" in value:
                     value = get_path(r'/data_module/upload/file.pdf')
                     return_dict_new.update({key: value})
-                if "企微账号" in value:
-                    return_dict_new.update({key: data.get('wechat_name_list')})
-                if '群发对象-按客户' in value:
-                    return_dict_new.update({key: data.get('send_customer_list')})
-                if '群发对象-指定群' in value:
-                    return_dict_new.update({key: data.get('send_group_list')})
-                if '智能助理' in value:
-                    return_dict_new.update({key: data.get('agent')})
-                if '批量拉群-被邀请客户' in value:
-                    return_dict_new.update({key: data.get('pull_group').get('pull_customer_list')})
-                if '批量拉群-新群固定客户' in value:
-                    return_dict_new.update({key: data.get('pull_group').get('fixed_customer_list')})
-                if '批量拉群-新群固定员工' in value:
-                    return_dict_new.update({key: data.get('pull_group').get('fixed_employee')})
+                if data:
+                    if "企微账号" in value:
+                        return_dict_new.update({key: data.get('wechat_name_list')})
+                    if '群发对象-按客户' in value:
+                        return_dict_new.update({key: data.get('send_customer_list')})
+                    if '群发对象-指定群' in value:
+                        return_dict_new.update({key: data.get('send_group_list')})
+                    if '智能助理' in value:
+                        return_dict_new.update({key: data.get('agent')})
+                    if '批量拉群-被邀请客户' in value:
+                        return_dict_new.update({key: data.get('pull_group').get('pull_customer_list')})
+                    if '批量拉群-新群固定客户' in value:
+                        return_dict_new.update({key: data.get('pull_group').get('fixed_customer_list')})
+                    if '批量拉群-新群固定员工' in value:
+                        return_dict_new.update({key: data.get('pull_group').get('fixed_employee')})
             elif isinstance(value, dict):
                 for k, v in value.items():
                     if "时间戳" in v:

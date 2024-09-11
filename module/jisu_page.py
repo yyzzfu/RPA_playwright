@@ -69,7 +69,7 @@ class JiSuPage(BasePage):
         with allure.step('在上传界面，点击确定按钮'):
             self.sure_in_text_input.click()
 
-    def create_task_func(self, task_name, wechat_name_list, task_type, send_name_list='', text='', picture='',
+    def create_task_func(self, task_name, wechat_name, task_type, send_name_list='', text='', picture='',
                          video='', link: dict='', file: dict='', **kwargs):
         regular = kwargs.get('regular')
         if isinstance(regular, bool) and regular:
@@ -94,7 +94,10 @@ class JiSuPage(BasePage):
                     raise e
         self.task_name.fill(task_name)
         self.choose_wechat.click()
-        for wechat_name in wechat_name_list:
+        if isinstance(wechat_name, list):
+            for name in wechat_name:
+                self.wechat(name).click()
+        else:
             self.wechat(wechat_name).click()
         self.sure.click()
         send_object.click()

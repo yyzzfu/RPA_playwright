@@ -100,19 +100,20 @@ def get_WeCom(pytestconfig):
 
 
 @pytest.fixture(scope='session')
-def user_list(get_agent, get_WeCom):
-    user_list = UserData.data_for_test(get_agent, get_WeCom).get('user_list')
-    yield user_list
+def get_WeCom_data(get_agent, get_WeCom):
+    WeCom_data = UserData.data_for_test(get_agent, get_WeCom)
+    user_list = WeCom_data.get('user_list')
+    yield user_list, WeCom_data
 
 
 @pytest.fixture
-def get_user_and_marker(worker_id, user_list, get_agent, get_WeCom):
-
+def get_user_and_wecom_data(worker_id, get_WeCom_data):
+    user_list, WeCom_data = get_WeCom_data
     if worker_id.startswith('gw'):
         user = user_list[int(worker_id[2:])]
     else:
         user = user_list[0]
-    return {'user': user, 'agent': get_agent, 'WeCom': get_WeCom}
+    return {'user': user, 'WeCom_data': WeCom_data}
 
 
 @pytest.fixture

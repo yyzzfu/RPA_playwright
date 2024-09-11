@@ -37,7 +37,7 @@ class FastTaskPage(BasePage):
     def get_table(self):
         return self.table(only_text='任务状态')
 
-    def create_task_func(self, task_name, wechat_name_list, muban, **kwargs):
+    def create_task_func(self, task_name, wechat_name, muban, **kwargs):
         regular = kwargs.get('regular')
         if isinstance(regular, bool) and regular:
             regular = 5
@@ -49,7 +49,11 @@ class FastTaskPage(BasePage):
             self.task_name.fill(task_name)
         with allure.step('点击选择企微账号'):
             self.choose_wechat.click()
-        for wechat_name in wechat_name_list:
+        if isinstance(wechat_name, list):
+            for name in wechat_name:
+                with allure.step(f'在选择企微账号界面，选择企微账号：{name}'):
+                    self.wechat(name).click()
+        else:
             with allure.step(f'在选择企微账号界面，选择企微账号：{wechat_name}'):
                 self.wechat(wechat_name).click()
         with allure.step('在选择企微账号界面，点击确定按钮'):

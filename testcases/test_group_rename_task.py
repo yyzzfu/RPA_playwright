@@ -1,12 +1,11 @@
-from utils.tools import get_time_now
 from testcases import *
 
 
-def test_create_group_rename_task(pw_page, get_user_and_marker):
+def test_create_group_rename_task(pw_page, get_user_and_wecom_data):
     """群名任务"""
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
     my_page.group_rename_task_page.navigate()
-    data = GroupRenameData.as_dict_class(get_user_and_marker.get('user_marker'))
+    data = GroupRenameData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.group_rename_task_page.create_task_func(**data)
 
 
@@ -21,4 +20,4 @@ def test_create_group_rename_task(pw_page, get_user_and_marker):
 #     wechat_name_list = create_group_rename_task_data.get('wechat_name_list')  # 选择螳螂智能助理
 #     group_name = create_group_rename_task_data.get('group_name')  # 选择群组--指定群组
 #     new_group_name = f'新的群名{time_now}'  # 新群名
-#     my_page.group_rename_task_page.create_task_func(task_name, wechat_name_list, group_name, new_group_name, regular=True)
+#     my_page.group_rename_task_page.create_task_func(task_name, wechat_name_list, group_name, new_group_name, regular=True)get_user_and_wecom_data

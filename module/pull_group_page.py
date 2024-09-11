@@ -51,7 +51,7 @@ class PullGroupPage(BasePage):
         with allure.step('进入批量拉群界面'):
             self.jump("/mantis/bscrm/batchGrouping")
 
-    def create_task_create_group(self, task_name, wechat_name_list, pull_customer_list, new_group_name, members_count,
+    def create_task_create_group(self, task_name, wechat_name, pull_customer_list, new_group_name, members_count,
                                  group_rate, code, fixed_customer_list, fixed_employee, **kwargs):
         with allure.step('点击新建任务按钮'):
             self.create_task.click()
@@ -59,7 +59,11 @@ class PullGroupPage(BasePage):
             self.task_name.fill(task_name)
         with allure.step('点击选择企微账号'):
             self.choose_wechat.click()
-        for wechat_name in wechat_name_list:
+        if isinstance(wechat_name, list):
+            for name in wechat_name:
+                with allure.step(f'勾选企微账号：{name}'):
+                    self.wechat(name).click()
+        else:
             with allure.step(f'勾选企微账号：{wechat_name}'):
                 self.wechat(wechat_name).click()
         with allure.step(f'在选择企微账号界面，点击确定按钮'):

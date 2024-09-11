@@ -1,17 +1,17 @@
 from testcases import *
 
 
-def test_create_gaoji_group_task(pw_page, get_user_and_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
+def test_create_gaoji_group_task(pw_page, get_user_and_wecom_data):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
     my_page.gaoji_page.navigate()
-    data = GaoJiGroupData.as_dict_class(get_user_and_marker.get('user_marker'))
+    data = GaoJiGroupData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.gaoji_page.create_task_func(**data)
 
 
-def test_gaoji_create_group_one_by_one_task(pw_page, get_user_and_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
+def test_gaoji_create_group_one_by_one_task(pw_page, get_user_and_wecom_data):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
     my_page.gaoji_page.navigate()
-    data = GaoJiGroupDataOneByOne.as_dict_class(get_user_and_marker.get('user_marker'))
+    data = GaoJiGroupDataOneByOne.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.gaoji_page.create_task_func(**data)
 
 
@@ -29,9 +29,9 @@ def test_gaoji_create_group_one_by_one_task(pw_page, get_user_and_marker):
 
 
 # @pytest.mark.smoke
-def test_gaoji_create_person_task(pw_page, get_user_and_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
-    data = GaoJiPersonData.as_dict_class(get_user_and_marker.get('user_marker'))
+def test_gaoji_create_person_task(pw_page, get_user_and_wecom_data):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
+    data = GaoJiPersonData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
 
@@ -49,9 +49,9 @@ def test_gaoji_create_person_task(pw_page, get_user_and_marker):
 
 
 # @pytest.mark.smoke
-def test_gaoji_create_notice_task(pw_page, get_user_and_marker):
-    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_marker.get('user'))
-    data = GaoJiNoticeData.as_dict_class(get_user_and_marker.get('user_marker'))
+def test_gaoji_create_notice_task(pw_page, get_user_and_wecom_data):
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
+    data = GaoJiNoticeData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
 
