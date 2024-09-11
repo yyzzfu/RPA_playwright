@@ -15,7 +15,7 @@ class LoginPage(BasePage):
     def navigate(self):
         self.jump("/")
 
-    def login(self, username: str, password: str, login_type: int = 2):
+    def login(self, username: str, password: str, login_type_num: int):
         """
         通过页面进行登录
         :param username:
@@ -28,7 +28,7 @@ class LoginPage(BasePage):
         num = 0
         while True:
             try:
-                if login_type > 1:  # 登录方式大于1
+                if login_type_num > 1:  # 登录方式大于1
                     expect(self.login_by_username).to_be_visible(timeout=10_000)
                     self.login_by_username.click()
             except:

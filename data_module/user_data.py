@@ -56,6 +56,10 @@ class UserData:
                 # }
             },
         }
+        if agent == 'all':
+            ...
+        elif WeCom == 'all':
+            ...
         return test_data.get(agent).get(WeCom)
 
 

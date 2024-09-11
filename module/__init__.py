@@ -79,12 +79,9 @@ class PageIns:
         return my_page
 
     @staticmethod
-    def login_and_return_page_ins(page: Page, user, login_type=1):
+    def login_and_return_page_ins(page: Page, user):
+        user_account_password = user.get('user')
+        login_type_num = user.get('login_type_num')
         my_page = PageIns(page)
-        my_page.login_page.login(*user, login_type=login_type)
-        # with FileLock(get_path(f".temp/{username}.lock")):
-        #     my_page = PageIns(page)
-        #     my_page.login_page.login(username, password)
-        #     my_page.test_data = test_data
-        # my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
+        my_page.login_page.login(*user_account_password, login_type_num=login_type_num)
         return my_page

@@ -78,6 +78,11 @@ def pytest_addoption(parser: Any) -> None:
         default='WeCom1',
         help="use WeCom to get test data",
     )
+    group.addoption(
+        "--login_type_num",
+        default=1,
+        help="if login_type_num >1,need wait account login",
+    )
 
 
 @pytest.fixture(scope="session")
@@ -85,6 +90,12 @@ def ui_timeout(pytestconfig):
     timeout = float(pytestconfig.getoption("--ui_timeout"))
     expect.set_options(timeout=timeout)  # 设置断言的超时时间
     return timeout
+
+
+@pytest.fixture(scope="session")
+def get_login_type_num(pytestconfig):
+    login_type_num = float(pytestconfig.getoption("--login_type_num"))
+    return login_type_num
 
 
 @pytest.fixture(scope="session")
@@ -107,13 +118,13 @@ def get_WeCom_data(get_agent, get_WeCom):
 
 
 @pytest.fixture
-def get_user_and_wecom_data(worker_id, get_WeCom_data):
+def get_user_and_wecom_data(worker_id, get_WeCom_data, get_login_type_num):
     user_list, WeCom_data = get_WeCom_data
     if worker_id.startswith('gw'):
         user = user_list[int(worker_id[2:])]
     else:
         user = user_list[0]
-    return {'user': user, 'WeCom_data': WeCom_data}
+    return {'user': {'user': user, 'login_type_num': get_login_type_num}, 'WeCom_data': WeCom_data}
 
 
 @pytest.fixture

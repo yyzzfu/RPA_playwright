@@ -75,7 +75,6 @@ class GaoJiPage(BasePage):
 
     def create_task_func(self, task_name, wechat_name, task_type, send_name_list='', text='', picture='',
                          video='', link: dict='', file: dict='', notice='', **kwargs):
-        num = 0
         one_by_one = kwargs.get('one_by_one')
         regular = kwargs.get('regular')
         if isinstance(regular, bool) and regular:
@@ -84,27 +83,67 @@ class GaoJiPage(BasePage):
             regular = regular
         else:
             regular = False
-        while True:
-            try:
-                with allure.step('鼠标hover到新建任务按钮上'):
-                    self.create_task.hover()
-                if task_type == '群聊群发':
-                    send_object = self.send_object_group
-                    with allure.step('点击群发群发'):
-                        self.group.click()
-                elif task_type == '私聊群发':
-                    send_object = self.send_object_person
-                    with allure.step('点击私聊群发'):
-                        self.person.click()
-                else:
-                    send_object = self.send_object_group
-                    with allure.step('点击群发公告'):
-                        self.notice.click()
-                break
-            except Exception as e:
-                num += 1
-                if num == 3:
-                    raise e
+        # num = 0
+        # while True:
+        #     try:
+        #         with allure.step('鼠标hover到新建任务按钮上'):
+        #             self.create_task.hover(timeout=10_000)
+        #         if task_type == '群聊群发':
+        #             send_object = self.send_object_group
+        #             with allure.step('点击群发群发'):
+        #                 self.group.click()
+        #         elif task_type == '私聊群发':
+        #             send_object = self.send_object_person
+        #             with allure.step('点击私聊群发'):
+        #                 self.person.click()
+        #         else:
+        #             send_object = self.send_object_group
+        #             with allure.step('点击群发公告'):
+        #                 self.notice.click()
+        #         break
+        #     except Exception as e:
+        #         num += 1
+        #         if num == 10:
+        #             raise e
+
+        try:
+            with allure.step('鼠标hover到新建任务按钮上'):
+                self.create_task.hover()
+            if task_type == '群聊群发':
+                send_object = self.send_object_group
+                with allure.step('点击群发群发'):
+                    self.group.click()
+            elif task_type == '私聊群发':
+                send_object = self.send_object_person
+                with allure.step('点击私聊群发'):
+                    self.person.click()
+            else:
+                send_object = self.send_object_group
+                with allure.step('点击群发公告'):
+                    self.notice.click()
+        except:
+            num = 0
+            while True:
+                try:
+                    with allure.step('鼠标hover到新建任务按钮上'):
+                        self.create_task.hover(timeout=3_000)
+                    if task_type == '群聊群发':
+                        send_object = self.send_object_group
+                        with allure.step('点击群发群发'):
+                            self.group.click()
+                    elif task_type == '私聊群发':
+                        send_object = self.send_object_person
+                        with allure.step('点击私聊群发'):
+                            self.person.click()
+                    else:
+                        send_object = self.send_object_group
+                        with allure.step('点击群发公告'):
+                            self.notice.click()
+                    break
+                except Exception as e:
+                    num += 1
+                    if num == 10:
+                        raise e
         with allure.step(f'输入任务名称：{task_name}'):
             self.task_name.fill(task_name)
         with allure.step('点击选择企微账号'):
