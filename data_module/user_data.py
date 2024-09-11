@@ -39,7 +39,7 @@ class UserData:
                     'pull_group': {
                         'pull_customer_list': ['测试微信'],
                         'fixed_customer_list': ['反派测试'],
-                        'fixed_employee': 'kf3,',
+                        'fixed_employee': 'kf3',
                     },
                 },
                 # 'WeCom2': {
@@ -51,7 +51,7 @@ class UserData:
                 #     'pull_group': {
                 #         'pull_customer_list': ['测试微信'],
                 #         'fixed_customer_list': ['反派测试'],
-                #         'fixed_employee': 'kf3,',
+                #         'fixed_employee': 'kf3',
                 #     },
                 # }
             },

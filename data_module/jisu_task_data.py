@@ -7,7 +7,7 @@ class JiSuGroupData(As_dict):
 
     described = '极速-群聊-立即'
     task_name = f'{described}+时间戳'  # 任务名称
-    wechat_name_list = '企微账号'  # 企微账号
+    wechat_name = '企微账号'  # 企微账号
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言'
     picture = '图片路径'
@@ -25,7 +25,7 @@ class JiSuGroupData(As_dict):
 class JiSuPersonData(As_dict):
     described = '极速-私聊-立即'
     task_name = f'{described}+时间戳'  # 任务名称
-    wechat_name_list = '企微账号'  # 企微账号
+    wechat_name = '企微账号'  # 企微账号
     send_name_list = '群发对象-按客户'
     text = f'(测试){described}+时间戳：+名人名言'
     picture = '图片路径'

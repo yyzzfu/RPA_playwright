@@ -20,7 +20,7 @@ def get_path(path: str = None):
         return root_path
 
 
-def get_my():
+def get_my() -> str:
     with open(get_path(r'/utils/mrmy.txt'), 'r', encoding='utf-8') as f:
         all = f.readlines()
         all_len = len(all)

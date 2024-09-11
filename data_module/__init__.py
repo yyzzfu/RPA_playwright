@@ -41,7 +41,7 @@ class As_dict:
                     return_dict_new.update({key: value})
                 if WeCom_data:
                     if "企微账号" in value:
-                        return_dict_new.update({key: data.get('wechat_name_list')})
+                        return_dict_new.update({key: data.get('wechat_name')})
                     if '群发对象-按客户' in value:
                         return_dict_new.update({key: data.get('send_customer_list')})
                     if '群发对象-指定群' in value:
@@ -59,23 +59,23 @@ class As_dict:
                     if "时间戳" in v:
                         v = str(v).replace("+时间戳", time_str)
                         return_dict_new[key].update({k: v})
-                    if "随机数" in value:
+                    if "随机数" in v:
                         pattern = r'\d+'
                         res = re.findall(pattern, v)
                         v = str(random.randint(*[int(i) for i in res]))
                         return_dict_new[key].update({k: v})
-                    if "名人名言" in value:
-                        value = str(value).replace("+名人名言", get_my())
-                        return_dict_new[key].update({key: value})
-                    if "图片路径" in value:
-                        value = get_path(r'/data_module/upload/pciture.jpg')
-                        return_dict_new[key].update({key: value})
-                    if "视频路径" in value:
-                        value = get_path(r'/data_module/upload/video.mp4')
-                        return_dict_new[key].update({key: value})
-                    if "文件路径" in value:
-                        value = get_path(r'/data_module/upload/file.pdf')
-                        return_dict_new[key].update({key: value})
+                    if "名人名言" in v:
+                        v = str(value).replace("+名人名言", get_my())
+                        return_dict_new[key].update({k: v})
+                    if "图片路径" in v:
+                        v = get_path(r'/data_module/upload/pciture.jpg')
+                        return_dict_new[key].update({k: v})
+                    if "视频路径" in v:
+                        v = get_path(r'/data_module/upload/video.mp4')
+                        return_dict_new[key].update({k: v})
+                    if "文件路径" in v:
+                        v = get_path(r'/data_module/upload/file.pdf')
+                        return_dict_new[key].update({k: v})
 
     @classmethod
     def as_dict_class(cls, WeCom_data=None):
@@ -111,7 +111,7 @@ class As_dict:
                     return_dict_new.update({key: value})
                 if data:
                     if "企微账号" in value:
-                        return_dict_new.update({key: data.get('wechat_name_list')})
+                        return_dict_new.update({key: data.get('wechat_name')})
                     if '群发对象-按客户' in value:
                         return_dict_new.update({key: data.get('send_customer_list')})
                     if '群发对象-指定群' in value:
@@ -129,21 +129,21 @@ class As_dict:
                     if "时间戳" in v:
                         v = str(v).replace("+时间戳", time_str)
                         return_dict_new[key].update({k: v})
-                    if "随机数" in value:
+                    if "随机数" in v:
                         pattern = r'\d+'
                         res = re.findall(pattern, v)
                         v = str(random.randint(*[int(i) for i in res]))
                         return_dict_new[key].update({k: v})
-                    if "名人名言" in value:
+                    if "名人名言" in v:
                         v = str(v).replace("+名人名言", time_str)
                         return_dict_new[key].update({k: v})
-                    if "图片路径" in value:
-                        value = get_path(r'/data_module/upload/pciture.jpg')
-                        return_dict_new[key].update({key: value})
-                    if "视频路径" in value:
-                        value = get_path(r'/data_module/upload/video.mp4')
-                        return_dict_new[key].update({key: value})
-                    if "文件路径" in value:
-                        value = get_path(r'/data_module/upload/file.pdf')
-                        return_dict_new[key].update({key: value})
+                    if "图片路径" in v:
+                        v = get_path(r'/data_module/upload/pciture.jpg')
+                        return_dict_new[key].update({k: v})
+                    if "视频路径" in v:
+                        v = get_path(r'/data_module/upload/video.mp4')
+                        return_dict_new[key].update({k: v})
+                    if "文件路径" in v:
+                        v = get_path(r'/data_module/upload/file.pdf')
+                        return_dict_new[key].update({k: v})
         return return_dict_new
