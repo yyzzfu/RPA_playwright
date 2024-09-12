@@ -49,11 +49,11 @@ class As_dict:
                     if '智能助理' in value:
                         return_dict_new.update({key: data.get('agent')})
                     if '批量拉群-被邀请客户' in value:
-                        return_dict_new.update({key: data.get('pull_group').get('pull_customer_list')})
+                        return_dict_new.update({key: data.get('pull_customer_list')})
                     if '批量拉群-新群固定客户' in value:
-                        return_dict_new.update({key: data.get('pull_group').get('fixed_customer_list')})
+                        return_dict_new.update({key: data.get('fixed_customer_list')})
                     if '批量拉群-新群固定员工' in value:
-                        return_dict_new.update({key: data.get('pull_group').get('fixed_employee')})
+                        return_dict_new.update({key: data.get('fixed_employee')})
             elif isinstance(value, dict):
                 for k, v in value.items():
                     if "时间戳" in v:
@@ -120,11 +120,11 @@ class As_dict:
                     if '智能助理' in value:
                         return_dict_new.update({key: data.get('agent')})
                     if '批量拉群-被邀请客户' in value:
-                        return_dict_new.update({key: data.get('pull_group').get('pull_customer_list')})
+                        return_dict_new.update({key: data.get('pull_customer_list')})
                     if '批量拉群-新群固定客户' in value:
-                        return_dict_new.update({key: data.get('pull_group').get('fixed_customer_list')})
+                        return_dict_new.update({key: data.get('fixed_customer_list')})
                     if '批量拉群-新群固定员工' in value:
-                        return_dict_new.update({key: data.get('pull_group').get('fixed_employee')})
+                        return_dict_new.update({key: data.get('fixed_employee')})
             elif isinstance(value, dict):
                 for k, v in value.items():
                     if "时间戳" in v:
