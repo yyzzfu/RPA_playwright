@@ -112,8 +112,9 @@ def get_WeCom(pytestconfig):
 
 @pytest.fixture(scope='session')
 def get_WeCom_data(get_agent, get_WeCom):
-    WeCom_data = UserData.data_for_test(get_agent, get_WeCom)
-    user_list = WeCom_data.get('user_list')
+    agent_data = UserData.agent_data(get_agent)
+    user_list = agent_data.get('user_list')
+    WeCom_data = agent_data.get(get_WeCom)
     yield user_list, WeCom_data
 
 

@@ -37,12 +37,12 @@ class GroupNameTaskPage(BasePage):
         with allure.step('进入群名任务界面'):
             self.jump("/mantis/bscrm/groupSend/group/name/task")
 
-    def create_task_func(self, task_name, agent, group_name, new_group_name, **kwargs):
-        regular = kwargs.get('regular')
-        if isinstance(regular, bool) and regular:
-            regular = 5
-        elif isinstance(regular, int):
-            regular = regular
+    def create_task_func(self, task_name, agent, group_name, new_group_name, regular=None, **kwargs):
+        if regular:
+            if isinstance(regular, bool) and regular:
+                regular = 5
+            elif isinstance(regular, int):
+                regular = regular
         self.create_task.click()
         self.task_name.fill(task_name)
         self.choose_wechat.click()

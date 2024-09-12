@@ -79,18 +79,18 @@ class JiSuPage(BasePage):
         num = 0
         while True:
             try:
-                self.create_task.hover()
+                self.create_task.hover(timeout=3_000)
                 send_object = None
                 if task_type == '群聊群发':
                     send_object = self.send_object_group
-                    self.group.click()
+                    self.group.click(timeout=1_000)
                 elif task_type == '私聊群发':
                     send_object = self.send_object_person
-                    self.person.click()
+                    self.person.click(timeout=1_000)
                 break
             except Exception as e:
                 num += 1
-                if num == 3:
+                if num == 30:
                     raise e
         self.task_name.fill(task_name)
         self.choose_wechat.click()

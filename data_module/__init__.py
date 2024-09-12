@@ -76,6 +76,7 @@ class As_dict:
                     if "文件路径" in v:
                         v = get_path(r'/data_module/upload/file.pdf')
                         return_dict_new[key].update({k: v})
+        return return_dict_new
 
     @classmethod
     def as_dict_class(cls, WeCom_data=None):
