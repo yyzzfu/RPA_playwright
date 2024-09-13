@@ -77,16 +77,17 @@ class JiSuPage(BasePage):
         elif isinstance(regular, int):
             regular = regular
         num = 0
+        timeout = 5_000
         while True:
             try:
-                self.create_task.hover(timeout=3_000)
+                self.create_task.hover(timeout=timeout)
                 send_object = None
                 if task_type == '群聊群发':
                     send_object = self.send_object_group
-                    self.group.click(timeout=1_000)
+                    self.group.click(timeout=timeout)
                 elif task_type == '私聊群发':
                     send_object = self.send_object_person
-                    self.person.click(timeout=1_000)
+                    self.person.click(timeout=timeout)
                 break
             except Exception as e:
                 num += 1

@@ -1,3 +1,6 @@
+import copy
+
+
 class UserData:
     test_data = {
         'agent1': {
@@ -53,28 +56,34 @@ class UserData:
     }
 
     @classmethod
-    def data_template(cls):
-        data_template = {
-            'user_list': list,
-            'wechat_name': list,
-            'send_group_list': list,
-            'send_customer_list': list,
-            'agent': list,
-            'pull_group': {
-                'pull_customer_list': list,
-                'fixed_customer_list': list,
-                'fixed_employee': list,
+    def agent_data(cls, agent, WeCom=None):
+        data = {
+            'user_list': [],
+            'WeCom_data': {
+                'wechat_name': [],
+                'send_group_list': [],
+                'send_customer_list': [],
+                'agent': [],
+                'pull_group': []
             }
         }
-        return data_template
-
-    @classmethod
-    def agent_data(cls, agent, WeCom=None):
-        data_template = cls.data_template()
+        data_rel = copy.deepcopy(data)
         if agent == 'all' and WeCom == 'all':
             for agent, agent_data in cls.test_data.items():
-                for k, v in agent_data:
-                    data_template[k].append(v)
+                for k, v in agent_data.items():
+                    if isinstance(v, list):
+                        data[k].extend(v)
+                    elif isinstance(v, dict):
+                        for l, m in v.items():
+                            if isinstance(m, str):
+                                data['WeCom_data'][l].append(m)
+                            elif isinstance(m, list):
+                                data['WeCom_data'][l].extend(m)
+                            elif isinstance(m, dict):
+                                data['WeCom_data'][l].append(m)
+            # for k, v in data.items():
+            #     data_rel['user_list'] = setdata['user_list']
+            return data
         elif agent == 'all':
             ...
         elif WeCom == 'all':
@@ -83,4 +92,7 @@ class UserData:
 
 
 if __name__ == '__main__':
-    print(UserData.data_template())
+    print(UserData.agent_data('all', 'all'))
+
+
+

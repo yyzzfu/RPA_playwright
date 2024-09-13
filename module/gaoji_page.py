@@ -84,22 +84,23 @@ class GaoJiPage(BasePage):
         else:
             regular = False
         num = 0
+        timeout = 5_000
         while True:
             try:
                 with allure.step('鼠标hover到新建任务按钮上'):
-                    self.create_task.hover(timeout=3_000)
+                    self.create_task.hover(timeout=timeout)
                 if task_type == '群聊群发':
                     send_object = self.send_object_group
                     with allure.step('点击群发群发'):
-                        self.group.click(timeout=1_000)
+                        self.group.click(timeout=timeout)
                 elif task_type == '私聊群发':
                     send_object = self.send_object_person
                     with allure.step('点击私聊群发'):
-                        self.person.click(timeout=1_000)
+                        self.person.click(timeout=timeout)
                 else:
                     send_object = self.send_object_group
                     with allure.step('点击群发公告'):
-                        self.notice.click(timeout=1_000)
+                        self.notice.click(timeout=timeout)
                 break
             except Exception as e:
                 num += 1
