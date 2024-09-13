@@ -1,4 +1,3 @@
-import copy
 
 
 class UserData:
@@ -59,15 +58,12 @@ class UserData:
     def agent_data(cls, agent, WeCom=None):
         data = {
             'user_list': [],
-            'WeCom_data': {
-                'wechat_name': [],
-                'send_group_list': [],
-                'send_customer_list': [],
-                'agent': [],
-                'pull_group': []
-            }
+            'wechat_name': [],
+            'send_group_list': [],
+            'send_customer_list': [],
+            'agent': [],
+            'pull_group': []
         }
-        data_rel = copy.deepcopy(data)
         if agent == 'all' and WeCom == 'all':
             for agent, agent_data in cls.test_data.items():
                 for k, v in agent_data.items():
@@ -76,14 +72,11 @@ class UserData:
                     elif isinstance(v, dict):
                         for l, m in v.items():
                             if isinstance(m, str):
-                                data['WeCom_data'][l].append(m)
+                                data[l].append(m)
                             elif isinstance(m, list):
-                                data['WeCom_data'][l].extend(m)
-                            elif isinstance(m, dict):
-                                data['WeCom_data'][l].append(m)
-            # for k, v in data.items():
-            #     data_rel['user_list'] = setdata['user_list']
-            return data
+                                data[l].extend(m)
+            data_rel = {k: list(set(v)) for k, v in data.items()}
+            return data_rel
         elif agent == 'all':
             ...
         elif WeCom == 'all':
@@ -93,6 +86,3 @@ class UserData:
 
 if __name__ == '__main__':
     print(UserData.agent_data('all', 'all'))
-
-
-
