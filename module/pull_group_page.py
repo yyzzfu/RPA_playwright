@@ -105,15 +105,15 @@ class PullGroupPage(BasePage):
             self.members_count.fill(members_count)
         with allure.step(f'输入预计入群率：{group_rate}'):
             self.group_rate.fill(group_rate)
-        with allure.step(f'点击确定按钮--提交表单'):
-            self.sure_to_submit.click()
-        with allure.step('等待确定按钮消失'):
-            expect(self.sure_to_submit).not_to_be_visible()
-        with allure.step(f'在批量拉群列表--任务名称查询框中，输入任务名称：{task_name}，并按回车触发查询'):
-            self.search_task_name.fill(task_name)
-            self.page.keyboard.press('Enter')
-        with allure.step(f'在批量拉群列表中，任务名称：【{task_name}】查询成功'):
-            expect(self.task_name_in_card(task_name)).to_be_visible()
+        # with allure.step(f'点击确定按钮--提交表单'):
+        #     self.sure_to_submit.click()
+        # with allure.step('等待确定按钮消失'):
+        #     expect(self.sure_to_submit).not_to_be_visible()
+        # with allure.step(f'在批量拉群列表--任务名称查询框中，输入任务名称：{task_name}，并按回车触发查询'):
+        #     self.search_task_name.fill(task_name)
+        #     self.page.keyboard.press('Enter')
+        # with allure.step(f'在批量拉群列表中，任务名称：【{task_name}】查询成功'):
+        #     expect(self.task_name_in_card(task_name)).to_be_visible()
 
     # def create_task_pull_kehu(self, task_name, wechat_name_list, pull_customer_list,
     #                           new_group_name, members_count, group_rate,

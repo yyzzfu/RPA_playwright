@@ -9,6 +9,19 @@ def test_create_pull_group(pw_page, global_map, get_user_and_wecom_data):
     my_page.pull_group_page.create_task_create_group(**data)
 
 
+@pytest.mark.smoke
+def test_create_pull_group1(new_context, global_map, get_user_and_wecom_data):
+    """批量拉群--创建群聊--立即"""
+
+    data = PullGroupData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
+    # if not data.get('pull_group'):
+    #     get_user_and_wecom_data = UserData.test_data.popitem()
+    my_page = PageIns.new_context_and_return_page_ins(new_context, get_user_and_wecom_data.get('user'))
+    my_page.pull_group_page.navigate()
+    my_page.pull_group_page.create_task_create_group(**data)
+    assert 0
+
+
 # def test_create_pull_group_by_regular(pw_page, global_map, request, get_kf):
 #     """批量拉群--在已有的群中拉人--定时"""
 #     try:

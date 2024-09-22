@@ -1,68 +1,11 @@
-import json
-import os
-from filelock import FileLock
-
-from utils.tools import get_path
-
-
 class GlobalMap:
-    """文件全局变量，为了进程间能通讯"""
-
-    def __init__(self, file_path=".Auth/data.json"):
-        self.temp_lock_path = get_path(".Auth/temp.lock")
-        self.data_json_path = get_path(file_path)
-
-        os.makedirs(os.sep.join(self.data_json_path.split(os.sep)[:-1]), exist_ok=True)
-        with FileLock(self.temp_lock_path):
-            file_exists = os.path.exists(self.data_json_path)
-            if not file_exists:
-                with open(self.data_json_path, "w") as f:
-                    json.dump({}, f)
-
-    def __load(self):
-        with open(self.data_json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        return data
-
-    def __dump(self, data):
-        with open(self.data_json_path, "w", encoding='utf-8') as f:
-            json.dump(data, f)
+    my_dict = {}
 
     def set(self, key, value):
-        with FileLock(self.temp_lock_path):
-            data = self.__load()
-            data[key] = value
-            self.__dump(data)
+        self.my_dict[key] = value
 
-    def get(self, key, default=None):
-        with FileLock(self.temp_lock_path):
-            data = self.__load()
-            return data.get(key, default)
+    def get(self, key):
+        return self.my_dict[key]
 
     def delete(self, key):
-        with FileLock(self.temp_lock_path):
-            data = self.__load()
-            data.pop(key)
-            self.__dump(data)
-
-    def get_all(self):
-        with FileLock(self.temp_lock_path):
-            data = self.__load()
-            return data.items()
-
-    def set_all(self, **kwargs):
-        with FileLock(self.temp_lock_path):
-            data = self.__load()
-            data.updata(**kwargs)
-            self.__dump(data)
-
-    def delete_file(self):
-        with FileLock(self.temp_lock_path):
-            if os.path.exists(self.data_json_path):
-                os.remove(self.data_json_path)
-
-
-if __name__ == '__main__':
-    # GlobalMap().set('key2', 'haha2')
-    # print(GlobalMap().get('key2111'))
-    print(GlobalMap().delete('key2111'))
+        self.my_dict.pop(key)

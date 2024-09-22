@@ -62,7 +62,7 @@ class UserData:
             'send_group_list': [],
             'send_customer_list': [],
             'agent': [],
-            'pull_group': []
+            'pull_group': {}
         }
         if agent == 'all' and WeCom == 'all':
             for agent, agent_data in cls.test_data.items():
@@ -75,7 +75,17 @@ class UserData:
                                 data[l].append(m)
                             elif isinstance(m, list):
                                 data[l].extend(m)
+                            # elif isinstance(m, dict):
+                            #     data[l].update(m)
             data_rel = {k: list(set(v)) for k, v in data.items()}
+
+            # data_rel = {}
+            # for k, v in data.items():
+            #     if isinstance(v, list):
+            #         data_rel[k] = list(set(v))
+            #     elif isinstance(v, dict):
+            #         data_rel[k] = v
+
             return data_rel
         elif agent == 'all':
             ...

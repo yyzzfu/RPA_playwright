@@ -1,12 +1,10 @@
-import pytest
-import time
 import os
 import sys
 import re
 import random
 from playwright.sync_api import Page, expect, BrowserContext, Locator
 import allure
-
+import pytest
 from data_module.user_data import UserData
 from module.base_page import BasePage
 from utils.tools import get_path
@@ -33,50 +31,27 @@ class PageIns:
         self.login_page = LoginPage(self.page)
 
     @staticmethod
-    def new_context_and_return_page_ins(new_context):
-        global_map = GlobalMap()
-        # 被测环境 = global_map.get("env")
-        # 用户名 = MyData().userinfo(被测环境, 用户别名)["username"]
-        # 密码 = MyData().userinfo(被测环境, 用户别名)["password"]
-        # with FileLock(get_path(f".temp/{被测环境}-{用户别名}.lock")):
-        #     if os.path.exists(get_path(f".temp/{被测环境}-{用户别名}.json")):
-        #         context: BrowserContext = new_context(storage_state=get_path(f".temp/{被测环境}-{用户别名}.json"))
-        #         page = context.new_page()
-        #         my_page = PageIns(page)
-        #         my_page.我的任务.navigate()
-        #         expect(my_page.登录页.用户名输入框.or_(my_page.登录页.通知铃铛)).to_be_visible()
-        #         if my_page.登录页.用户名输入框.count():
-        #             my_page.登录页.登录(用户名, 密码)
-        #             my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
-        #     else:
-        #         context: BrowserContext = new_context()
-        #         page = context.new_page()
-        #         my_page = PageIns(page)
-        #         my_page.登录页.登录(用户名, 密码)
-        #         my_page.page.context.storage_state(path=get_path(f".temp/{被测环境}-{用户别名}.json"))
-        # return my_page
-        username = UserData().userinfo().get('username')
-        password = UserData().userinfo().get('password')
+    def new_context_and_return_page_ins(new_context, user):
+        username, password = user.get('user')
+        login_type_num = user.get('login_type_num')
+
         with FileLock(get_path(f".temp/{username}.lock")):
             if os.path.exists(get_path(f".temp/{username}.json")):
                 context: BrowserContext = new_context(storage_state=get_path(f".temp/{username}.json"))
                 page = context.new_page()
                 my_page = PageIns(page)
                 my_page.fast_task_page.jump('/mantis')
-                try:
-                    expect(my_page.page.locator(
-                        f'//div[@class="mantis-main-stage-header"]//span[contains(text(), "{username}")]')).to_be_visible(
-                        timeout=20_000)
-                except:
-                    my_page.login_page.login(username, password)
+                expect(my_page.login_page.username.or_(my_page.login_page.username_right(username))).to_be_visible()
+                if my_page.login_page.username.count():
+                    my_page.login_page.login(username, password, login_type_num)
                     my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
             else:
                 context: BrowserContext = new_context()
                 page = context.new_page()
                 my_page = PageIns(page)
-                my_page.login_page.login(username, password)
+                my_page.login_page.login(username, password, login_type_num)
                 my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
-        return my_page
+            return my_page
 
     @staticmethod
     def login_and_return_page_ins(page: Page, user):
