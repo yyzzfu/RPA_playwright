@@ -2,11 +2,12 @@ from module import *
 from utils.tools import get_time
 
 
-class GaoJiPage(BasePage):
+class XunLianYingPage(BasePage):
     """高级群发"""
 
     def __init__(self, page: Page):
         super().__init__(page)
+        self.xunlianying_search = self.page.get_by_placeholder('请输入训练营名称')
         self.create_task = self.page.get_by_text("新建任务")
         self.group = self.page.locator('//li[@class="bscrmCSS-dropdown-menu-item"][text()="群聊群发"]')
         self.person = self.page.locator('//li[@class="bscrmCSS-dropdown-menu-item"][text()="私聊群发"]')
@@ -52,7 +53,7 @@ class GaoJiPage(BasePage):
 
     def navigate(self):
         with allure.step('进入高级群发界面'):
-            self.jump("/mantis/bscrm/highMassTexting")
+            self.jump("/mantis/bscrm/customerManagement/trainingCamp/trainCamp")
 
     def upload(self, path):
         num = 0
@@ -73,42 +74,28 @@ class GaoJiPage(BasePage):
         with allure.step('在上传界面，点击确定按钮'):
             self.sure_in_text_input.click()
 
-    def create_task_func(self, task_name, wechat_name, task_type, send_object_type, send_name_list='', text='', picture='',
+    def create_task_func(self, task_name, wechat_name, task_type, send_name_list='', text='', picture='',
                          video='', link: dict='', file: dict='', notice='', **kwargs):
-        one_by_one = kwargs.get('one_by_one')
-        regular = kwargs.get('regular')
-        if isinstance(regular, bool) and regular:
-            regular = 5
-        elif isinstance(regular, int):
-            regular = regular
-        else:
-            regular = False
+
+
         num = 0
         timeout = 5_000
         while True:
             try:
                 with allure.step('鼠标hover到新建任务按钮上'):
                     self.create_task.hover(timeout=timeout)
-                with self.page.expect_response(r'https://qaks.bjmantis.net/e-wechat/device/queryParams') as response_info:
-
-                    if task_type == '群聊群发':
-                        send_object = self.send_object_group
-                        with allure.step('点击群发群发'):
-                            self.group.click(timeout=timeout)
-                    elif task_type == '私聊群发':
-                        send_object = self.send_object_person
-                        with allure.step('点击私聊群发'):
-                            self.person.click(timeout=timeout)
-                    else:
-                        send_object = self.send_object_group
-                        with allure.step('点击群发公告'):
-                            self.notice.click(timeout=timeout)
-                    response = response_info.value
-                    print(response)
-                    # response_info.json()
-                    print(response)
-                    # RPA_TASK_BUG_SEND_FLAG = response.get('data').get('RPA_TASK_BUG_SEND_FLAG')
-                    # print('RPA_TASK_BUG_SEND_FLAG---------', RPA_TASK_BUG_SEND_FLAG)
+                if task_type == '群聊群发':
+                    send_object = self.send_object_group
+                    with allure.step('点击群发群发'):
+                        self.group.click(timeout=timeout)
+                elif task_type == '私聊群发':
+                    send_object = self.send_object_person
+                    with allure.step('点击私聊群发'):
+                        self.person.click(timeout=timeout)
+                else:
+                    send_object = self.send_object_group
+                    with allure.step('点击群发公告'):
+                        self.notice.click(timeout=timeout)
                 break
             except Exception as e:
                 num += 1
@@ -127,19 +114,16 @@ class GaoJiPage(BasePage):
                 self.wechat(wechat_name).click()
         with allure.step('在选择企微账号界面，点击确定按钮'):
             self.sure.click()
-        if send_object_type == '指定群':
-            with allure.step('在群发对象中，点击选择客户群/选择客户'):
-                send_object.click()
-            for name in send_name_list:
-                with allure.step(f'在选择客户/客户群界面，输入：{name}，并按回车键'):
-                    self.group_name.fill(name)
-                    self.page.keyboard.press('Enter')
-            with allure.step(f'在选择客户/客户群界面，点击全选本页'):
-                self.check_all.click()
-            with allure.step(f'在选择客户/客户群界面，点击确定按钮'):
-                self.sure_in_choose_send_object.click()
-        elif send_object_type == '按条件':
-            self.form_radio_choose(label='群发对象', radio='按条件')
+        with allure.step('在群发对象中，点击选择客户群/选择客户'):
+            send_object.click()
+        for name in send_name_list:
+            with allure.step(f'在选择客户/客户群界面，输入：{name}，并按回车键'):
+                self.group_name.fill(name)
+                self.page.keyboard.press('Enter')
+        with allure.step(f'在选择客户/客户群界面，点击全选本页'):
+            self.check_all.click()
+        with allure.step(f'在选择客户/客户群界面，点击确定按钮'):
+            self.sure_in_choose_send_object.click()
         if notice:
             with allure.step(f'输入群公告内容：{notice}'):
                 self.notice_input.type(notice)
@@ -193,10 +177,3 @@ class GaoJiPage(BasePage):
             self.page.keyboard.press('Enter')
         with allure.step(f'在高级群发列表中，任务名称：【{task_name}】查询成功'):
             expect(self.task_name_in_card(task_name)).to_be_visible()
-
-    # with page.expect_download() as f:
-    #     page.locator("a").get_by_text("下载模板").click()
-    # file_path = get_path(f"download/{time.time_ns()}.xlsx")
-    # f.value.save_as(file_path)
-    # page.set_input_files('//input[@type="file"]', get_path("data_module/testupload.xlsx"))
-    # expect(page.get_by_text("testupload.xlsx")).to_be_visible()

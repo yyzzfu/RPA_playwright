@@ -1,7 +1,8 @@
 from playwright.sync_api import Page, expect, Browser, BrowserContext
 
 from data_module.fast_task_data import FastData
-from data_module.gaoji_task_data import GaoJiGroupData, GaoJiPersonData, GaoJiNoticeData, GaoJiGroupDataOneByOne
+from data_module.gaoji_task_data import GaoJiGroupData, GaoJiPersonData, GaoJiNoticeData, GaoJiGroupDataOneByOne, \
+    GaoJiGroupDataAllGroup
 from data_module.group_rename_task_data import GroupRenameData, GroupRenameRegularData
 from data_module.jisu_task_data import JiSuPersonData, JiSuGroupData
 from data_module.muban_data import MuBanData

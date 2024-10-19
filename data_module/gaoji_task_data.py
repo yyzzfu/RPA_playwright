@@ -21,6 +21,7 @@ class GaoJiGroupData(As_dict):
     described = '高级-群聊-立即'
     task_name = f'{described}+时间戳'  # 任务名称
     wechat_name = '企微账号'  # 企微账号
+    send_object_type = '指定群'
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言'
     picture = picture_common
@@ -31,11 +32,28 @@ class GaoJiGroupData(As_dict):
 
 
 @dataclass
+class GaoJiGroupDataAllGroup(As_dict):
+
+    described = '高级-群聊-所有群'
+    task_name = f'{described}+时间戳'  # 任务名称
+    wechat_name = '企微账号'  # 企微账号
+    send_object_type = '按条件'
+    send_name_list = '群发对象-指定群'
+    text = f'(测试){described}+时间戳：+名人名言'
+    picture = ''
+    video = ''
+    link = ''
+    file = ''
+    task_type = '群聊群发'
+
+
+@dataclass
 class GaoJiGroupDataOneByOne(As_dict):
 
     described = '高级-群聊-立即'
     task_name = f'{described}+时间戳'
     wechat_name = '企微账号'
+    send_object_type = '指定群'
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言+@所有人'
     picture = picture_common
@@ -52,6 +70,7 @@ class GaoJiNoticeData(As_dict):
     described = '高级-群发公告-立即'
     task_name = f'{described}+时间戳'
     wechat_name = '企微账号'
+    send_object_type = '指定群'
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言'
     picture = picture_common
@@ -67,6 +86,7 @@ class GaoJiPersonData(As_dict):
     described = '高级-私聊-立即'
     task_name = f'{described}+时间戳'
     wechat_name = '企微账号'
+    send_object_type = '指定群'
     send_name_list = '群发对象-按客户'
     text = f'(测试){described}+时间戳：+名人名言'
     picture = picture_common

@@ -2,9 +2,18 @@ from testcases import *
 
 
 def test_create_gaoji_group_task(pw_page, get_user_and_wecom_data):
+    """群发对象-指定群-选择客户群"""
     my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
     my_page.gaoji_page.navigate()
     data = GaoJiGroupData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
+    my_page.gaoji_page.create_task_func(**data)
+
+
+def test_create_gaoji_group_all_group_task(pw_page, get_user_and_wecom_data):
+    """群发对象-按条件-所有客户群"""
+    my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
+    my_page.gaoji_page.navigate()
+    data = GaoJiGroupDataAllGroup.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.gaoji_page.create_task_func(**data)
 
 
