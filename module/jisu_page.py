@@ -8,8 +8,9 @@ class JiSuPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
         self.create_task = self.page.get_by_text("新建任务")
-        self.group = self.page.locator('//li[@class="bscrmCSS-dropdown-menu-item"][text()="群聊群发"]')
-        self.person = self.page.locator('//li[@class="bscrmCSS-dropdown-menu-item"][text()="私聊群发"]')
+        self.send = lambda task_type: self.page.locator(
+            f'//li[@class="bscrmCSS-dropdown-menu-item"][text()="{task_type}"]')
+        self.task_name = self.page.get_by_placeholder("请输入任务名称")
         self.task_name = self.page.get_by_placeholder("请输入任务名称")
         self.choose_wechat = self.page.locator("//button/span[text()='选择企微账号']")
         self.wechat = lambda wechat_name: self.page.locator(
@@ -76,23 +77,14 @@ class JiSuPage(BasePage):
             regular = 5
         elif isinstance(regular, int):
             regular = regular
-        num = 0
-        timeout = 5_000
-        while True:
-            try:
-                self.create_task.hover(timeout=timeout)
-                send_object = None
-                if task_type == '群聊群发':
-                    send_object = self.send_object_group
-                    self.group.click(timeout=timeout)
-                elif task_type == '私聊群发':
-                    send_object = self.send_object_person
-                    self.person.click(timeout=timeout)
-                break
-            except Exception as e:
-                num += 1
-                if num == 30:
-                    raise e
+        with allure.step(f'鼠标hover到新建任务按钮上，并点击{task_type}'):
+            self.hover_with_retry(self.create_task, self.send(task_type))
+
+        if task_type == '群聊群发':
+            send_object = self.send_object_group
+        else:
+            send_object = self.send_object_person
+
         self.task_name.fill(task_name)
         self.choose_wechat.click()
         if isinstance(wechat_name, list):

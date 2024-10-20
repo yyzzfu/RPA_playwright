@@ -24,29 +24,31 @@ class LoginPage(BasePage):
         :param password:
         :return:
         """
-        with allure.step('进入登录界面'):
+        with allure.step(f'进入登录界面'):
             self.navigate()
         self.page.reload()
-        num = 0
-        while True:
-            try:
-                if login_type_num > 1:  # 登录方式大于1
-                    expect(self.login_by_username).to_be_visible(timeout=10_000)
-                    self.login_by_username.click()
-            except:
-                pass
-            try:
-                with allure.step(f'输入用户名：{username}'):
-                    self.username.fill(username)
-                with allure.step(f'输入密码：{password}'):
-                    self.password.fill(password)
-                with allure.step('点击登录按钮'):
-                    self.login_button.click()
-                expect(self.login_button).not_to_be_visible()
-                expect(self.username_right(username)).to_be_visible(timeout=10_000)
-                break
-            except:
-                num += 1
-                self.page.reload()
-                if num == 10:
-                    raise Exception('登录失败！！！')
+        with allure.step('登录账号'):
+            num = 0
+            while True:
+                try:
+                    if login_type_num > 1:  # 登录方式大于1
+                        expect(self.login_by_username).to_be_visible(timeout=10_000)
+                        self.login_by_username.click()
+                except:
+                    pass
+                try:
+                    with allure.step(f'输入用户名：{username}'):
+                        self.username.fill(username)
+                    with allure.step(f'输入密码：{password}'):
+                        self.password.fill(password)
+                    with allure.step('点击登录按钮'):
+                        self.login_button.click()
+                    expect(self.login_button).not_to_be_visible()
+                    expect(self.username_right(username)).to_be_visible(timeout=10_000)
+                    break
+                except:
+                    num += 1
+                    with allure.step(f'登录失败，刷新页面，重新登录'):
+                        self.page.reload()
+                    if num == 10:
+                        raise Exception('登录失败！！！')

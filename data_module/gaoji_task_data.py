@@ -86,7 +86,7 @@ class GaoJiPersonData(As_dict):
     described = '高级-私聊-立即'
     task_name = f'{described}+时间戳'
     wechat_name = '企微账号'
-    send_object_type = '指定群'
+    send_object_type = '按客户'
     send_name_list = '群发对象-按客户'
     text = f'(测试){described}+时间戳：+名人名言'
     picture = picture_common

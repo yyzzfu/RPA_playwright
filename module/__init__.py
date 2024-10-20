@@ -7,7 +7,7 @@ import allure
 import pytest
 from data_module.user_data import UserData
 from module.base_page import BasePage
-from utils.tools import get_path
+from utils.tools import get_path, 返回当前日期和减N天的日期
 from filelock import FileLock
 from utils.global_map import GlobalMap
 from module.fast_task_page import FastTaskPage

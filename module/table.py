@@ -4,6 +4,11 @@ from module import *
 class Table:
 
     def __init__(self, page: Page, only_text: str = '', table_index: int = -1):
+        """
+        :param page:
+        :param only_text: 唯一文字
+        :param table_index: 表格序号
+        """
         self.page = page
         self.page.wait_for_load_state('networkidle')
         self.table_div = self.page.locator('.bscrmCSS-spin-container>.MT_containers').filter(has_text=only_text).nth(
@@ -14,9 +19,17 @@ class Table:
         return self.table_header_tr.locator('th')
 
     def get_header_index(self, header: str) -> int:
+        """
+        :param header: 表头文字
+        :return:
+        """
         return self.get_header_locator().all_text_contents().index(header)
 
     def get_row_locator(self, row_locator_or_row_text) -> Locator:
+        """
+        :param row_locator_or_row_text: 行元素定位
+        :return:
+        """
         if isinstance(row_locator_or_row_text, Locator):
             return self.table_div.locator("tr").filter(has=row_locator_or_row_text)
         else:

@@ -48,6 +48,19 @@ def 返回当前时间xxxx_xx_xx加N天(add_day: int, time_type="使用中划线
         return (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime(str(time_type))
 
 
+def 返回当前日期和减N天的日期(add_day: int, time_type="使用中划线分隔符"):
+    if time_type == "使用斜杠分隔符":
+        return (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime("%Y/%m/%d")
+    elif time_type == "使用中划线分隔符":
+        return (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime("%Y-%m-%d")
+    elif time_type == "使用datetime格式":
+        return datetime.datetime.now() + datetime.timedelta(days=add_day)
+    elif time_type == "使用年月日格式":
+        return datetime.datetime.now().strftime("%Y年%m月%d日"), (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime("%Y年%m月%d日")
+    else:
+        return (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime(str(time_type))
+
+
 def get_bj_time():
     url = r'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
     res_json = requests.get(url).json()
@@ -71,4 +84,4 @@ def get_time(minutes):
 
 
 if __name__ == '__main__':
-    print(get_time.__doc__)
+    print(返回当前日期和减N天的日期(5, '使用年月日格式'))
