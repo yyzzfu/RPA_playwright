@@ -39,6 +39,7 @@ class GaoJiPage(BasePage):
         self.random_emoji_edit = self.page.locator('//div[@class="main_tool_L"]//div[text()="编辑"]')
         self.random_emoji_all = self.page.locator('//div[@class="emojiBox all"]/div')
         self.sure_in_random_emoji = self.page.locator('//div[@class="bscrmCSS-modal-footer"]').last.locator('//span[text()="确 定"]/..')
+        self.notice_input = self.page.locator('//div[@class="sendContent"]//div[@id="editDiv"]')
         self.notice_text = self.page.locator('//div[@class="bscrmCSS-modal-content"]//div[@id="editDiv"]')
         self.sure_in_text_input = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button/span[text()="确 定"]')
         self.add_button = self.page.locator('//div[@class="bscrmCSS-modal-content"]//div[@class="sop-upload-btn"]')
