@@ -4,7 +4,7 @@ from dataclasses import dataclass
 picture_common = '图片路径'
 video_common = '视频路径'
 link_common = {
-    'title': '链接标题+时间戳',
+    'title': '+时间戳',
     'address': r'http://www.baidu.com+时间戳',
     'content': f'内容简介: +时间戳',
     'picture_path': '图片路径'
