@@ -1,4 +1,5 @@
 import os
+import re
 import time
 import random
 import datetime
@@ -61,6 +62,14 @@ def 返回当前日期和减N天的日期(add_day: int, time_type="使用中划�
         return (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime(str(time_type))
 
 
+def 将日期中的01日替换为1日(date: str):
+    date1, date2 = date.split('月')
+    if date2.startswith('0'):
+        date2 = date2.replace('0', '')
+        return date1 + '月' + date2
+    return date
+
+
 def get_bj_time():
     url = r'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
     res_json = requests.get(url).json()
@@ -84,4 +93,4 @@ def get_time(minutes):
 
 
 if __name__ == '__main__':
-    print(返回当前日期和减N天的日期(5, '使用年月日格式'))
+    print(将日期中的01日替换为1日('2024年10月02日'))

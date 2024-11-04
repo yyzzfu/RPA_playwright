@@ -27,7 +27,9 @@ class JiSuGroupData(As_dict):
     video = video_common
     link = link_common
     file = file_common
+    mini_program = True
     task_type = '群聊群发'
+    send_object_type = '指定群'
 
 
 @dataclass
@@ -41,7 +43,9 @@ class JiSuPersonData(As_dict):
     video = video_common
     link = link_common
     file = file_common
+    mini_program = True
     task_type = '私聊群发'
+    send_object_type = '按客户'
 
 
 if __name__ == '__main__':

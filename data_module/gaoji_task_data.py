@@ -28,6 +28,7 @@ class GaoJiGroupData(As_dict):
     video = video_common
     link = link_common
     file = file_common
+    mini_program = True
     task_type = '群聊群发'
 
 
@@ -60,6 +61,7 @@ class GaoJiGroupDataOneByOne(As_dict):
     video = video_common
     link = link_common
     file = file_common
+    mini_program = True
     task_type = '群聊群发'
     one_by_one = True
 
@@ -77,6 +79,7 @@ class GaoJiNoticeData(As_dict):
     video = video_common
     link = link_common
     file = file_common
+    mini_program = True
     notice = f'{described}-群公告内容：+名人名言+时间戳'
     task_type = '群发公告'
 
@@ -93,6 +96,7 @@ class GaoJiPersonData(As_dict):
     video = video_common
     link = link_common
     file = file_common
+    mini_program = True
     task_type = '私聊群发'
 
 

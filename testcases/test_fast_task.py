@@ -1,8 +1,10 @@
 from testcases import *
 
 
+@allure.epic('智能助理')
+@allure.feature('快捷任务')
+@allure.title('快捷任务--立即发送')
 def test_create_fast_task(pw_page, get_user_and_wecom_data):
-    """快捷任务"""
     my_page = PageIns.login_and_return_page_ins(pw_page, get_user_and_wecom_data.get('user'))
     my_page.group_muban_page.navigate()
     data_1 = MuBanData.as_dict_class()

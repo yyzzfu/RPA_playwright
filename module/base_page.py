@@ -4,7 +4,7 @@ from module import *
 from module.locators import Locators
 from module.table import Table
 from utils.tools import get_time
-from utils.tools import 返回当前日期和减N天的日期
+from utils.tools import 返回当前日期和减N天的日期, 将日期中的01日替换为1日
 
 
 
@@ -290,7 +290,6 @@ class BasePage:
         choose_wechat = self.page.locator("//button/span[text()='选择企微账号']")
         wechat = lambda wechat_name1: self.page.locator(
             f'//table//td[text()="{wechat_name1}"]/../td[@class="bscrmCSS-table-selection-column"]')
-        sure = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button/span[text()="确 定"]')
 
         with allure.step('点击选择企微账号'):
             choose_wechat.click()
@@ -302,13 +301,12 @@ class BasePage:
                 with allure.step(f'在选择企微账号界面，选择企微账号：{wechat_name}'):
                     wechat(wechat_name).click()
             with allure.step('在选择企微账号界面，点击确定按钮'):
-                sure.click()
+                self.locators.button('确定').click()
 
     def choose_send_object(self, send_object_type, send_name_list):
         send_object = self.page.locator(f"//button/span[contains(text(), '选择客户')]")
         group_name = self.page.get_by_placeholder('可输入多个，按回车或后面的加号')
         check_all = self.page.get_by_text('全选所有')
-        sure_in_choose_send_object = self.page.locator('//div[@class="footer"]//button/span[text()="确 定"]')
 
         with allure.step(f'在群发对象中，选择{send_object_type}'):
             if send_object_type == '指定群' or send_object_type == '按客户':
@@ -322,14 +320,13 @@ class BasePage:
                     with allure.step(f'在选择客户/客户群界面，点击全选本页'):
                         check_all.click()
                     with allure.step(f'在选择客户/客户群界面，点击确定按钮'):
-                        sure_in_choose_send_object.click()
+                        self.locators.button('确定').click()
             elif send_object_type == '按条件':
                 self.form_radio_choose(label='群发对象', radio=send_object_type)
 
     def upload(self, path, file_type):
         add_button = self.page.locator('//div[@class="bscrmCSS-modal-content"]//div[@class="sop-upload-btn"]')
         upload_suc = self.page.locator('//div[@class="bscrmCSS-message"]//span[text()="上传成功~"]')
-        sure_in_text_input = self.page.locator('//div[@class="bscrmCSS-modal-content"]//button/span[text()="确 定"]')
 
         num = 0
         with allure.step(f'上传{file_type}'):
@@ -348,7 +345,7 @@ class BasePage:
             expect(add_button).not_to_be_visible()
         if file_type != '链接图片':
             with allure.step('在上传界面，点击确定按钮'):
-                sure_in_text_input.click()
+                self.locators.button('确定').click()
         # with page.expect_download() as f:
         #     page.locator("a").get_by_text("下载模板").click()
         # file_path = get_path(f"download/{time.time_ns()}.xlsx")
@@ -372,20 +369,25 @@ class BasePage:
         start_date = self.page.locator('//input[@placeholder="开始日期"]')
         date = lambda date1: self.page.locator(
             f'//div[@class="bscrmCSS-calendar-range-part bscrmCSS-calendar-range-left"]//td[@title="{date1}"]')
-        live_video = self.page.locator('//td[@class="bscrmCSS-table-selection-column"]').first  # 直播视频课
-        sure_in_choose_live_video = self.page.locator(
-            '//div[@class="bscrmCSS-modal MT_Modal SelectLiveModal"]//div[@class="bscrmCSS-modal-footer"]//span[text()="确 定"]/..')
+        live_video_tr = self.page.locator('//tbody[@class="bscrmCSS-table-tbody"]').last.locator('tr')
+        live_video_radio = live_video_tr.locator('td').nth(0)
+        live_video_info = live_video_tr.locator('td').nth(1)
 
         with allure.step('添加直播链接'):
             if click_button:
                 placeholder('直播链接').click()
             with allure.step('在选择直播界面，点击直播时间'):
                 start_date.click()
-                date_start, date_end = 返回当前日期和减N天的日期(-6, '使用年月日格式')
+                date_start, date_end = 返回当前日期和减N天的日期(-4, '使用年月日格式')
+                date_start = 将日期中的01日替换为1日(date_start)
+                date_end = 将日期中的01日替换为1日(date_end)
                 date(date_start).click()
                 date(date_end).click()
-                live_video.click()
-                sure_in_choose_live_video.click()
+                live_video_info = live_video_info.text_content()
+            with allure.step(f'在选择直播界面，选择直播课：{live_video_info}'):
+                live_video_radio.click()
+            with allure.step(f'在选择直播界面，点击确定按钮'):
+                self.locators.button('确定').click()
 
     def add_yingqi_link(self, click_button=True):
         placeholder = lambda placeholder1: self.page.locator(f'//div[@class="main_tool_L"]/span[text()="{placeholder1}"]').last  # 占位符按钮
@@ -396,32 +398,34 @@ class BasePage:
         yingqi = self.page.locator(
             '//ul[@class="bscrmCSS-select-dropdown-menu  bscrmCSS-select-dropdown-menu-root bscrmCSS-select-dropdown-menu-vertical"]').last.locator(
             '//li').first
-        yingqi_video = self.page.locator(
-            '//div[@class="SelectLiveModal_main_R"]//span[@class="bscrmCSS-radio"]').first
-        sure_in_choose_yingqi_video = self.page.locator(
-            '//div[@class="bscrmCSS-modal MT_Modal SelectLiveModal SelectCampModal"]//div[@class="bscrmCSS-modal-footer"]//span[text()="确 定"]/..')
+        yingqi_video_div = self.page.locator('//div[@class="ReactVirtualized__Grid__innerScrollContainer"]//div').first
+        yingqi_video_info = yingqi_video_div.locator('//span[@class="name"]')
         with allure.step('添加营期课链接'):
             if click_button:
                 placeholder('营期课链接').click()
             xunlianying_select.click()
+            xunlianying_name = xunlianying.text_content()
             xunlianying.click()
+            yingqi_name = yingqi.text_content()
             yingqi_select.click()
             yingqi.click()
-            yingqi_video.click()
-            sure_in_choose_yingqi_video.click()
+            yingqi_video_name = yingqi_video_info.text_content()
+            video_info = xunlianying_name + '--' + yingqi_name + '--' + yingqi_video_name
+            with allure.step(f'在选择营期课界面，选择课程：{video_info}'):
+                yingqi_video_info.click()
+            self.locators.button('确定').click()
 
-    def add_random_emoji(self):
+    def add_random_emoji(self, num):
         random_emoji = self.page.locator('//div[@class="main_tool_L"]//div[text()="随机表情"]')
         random_emoji_edit = self.page.locator('//div[@class="main_tool_L"]//div[text()="编辑"]')
         random_emoji_all = self.page.locator('//div[@class="emojiBox all"]/div')
-        sure_in_random_emoji = self.page.locator('//div[@class="bscrmCSS-modal-footer"]').last.locator(
-            '//span[text()="确 定"]/..')
+
         with allure.step('编辑随机、选择随机表情'):
             random_emoji_edit.click()
             emoji_len = random_emoji_all.count()
-            for i in random.sample(range(0, emoji_len), 10):
+            for i in random.sample(range(0, emoji_len), num):
                 random_emoji_all.nth(i).click()
-            sure_in_random_emoji.click()
+            self.locators.button('确定').click()
             random_emoji.click()
 
     def add_picture(self, picture):
@@ -454,7 +458,6 @@ class BasePage:
         link_type = ['指定链接', '营期课链接', '直播课链接']
         send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
         choose_class_button = self.page.locator('//button[@id="shareList"]')
-        sure = self.page.locator('//button[@class="bscrmCSS-btn MT_Button_Primary bscrmCSS-btn-primary"]').last
         link_title = self.page.get_by_placeholder('请输入链接标题')
         link_address = self.page.get_by_placeholder('请输入链接', exact=True)
         link_content = self.page.get_by_placeholder('请输入内容简介')
@@ -478,11 +481,28 @@ class BasePage:
                     self.form_radio_choose('链接类型', '直播课链接')
                     choose_class_button.click()
                     self.add_live_link(False)
-                content = link['content']
+                content = i + link['content']
                 with allure.step(f'在内容简介中输入{content}'):
                     link_content.fill(content)
                 self.upload(link['picture_path'], '链接图片')
-                sure.click()
+                self.locators.button('确定').click()
+
+    def add_mini_program(self):
+        send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
+        choose_sucai = self.page.locator('//div[@class="bscrmCSS-modal-content"]//span[text()="选择素材"]/..')
+        # sucai = self.page.locator('//div[@class="list-data-container"]/div//input').first
+        sucai_div = self.page.locator('//div[@class="list-data-container"]/div').first
+        sucai_input = sucai_div.locator('input')
+        sucai_title = sucai_div.locator('//div[@class="top-title"]')
+        with allure.step('点击小程序按钮'):
+            send_content('小程序').click()
+            with allure.step(f'在小程序素材选择界面，点击选择素材按钮'):
+                choose_sucai.click()
+                sucai_title = sucai_title.text_content()
+            with allure.step(f'点击素材:{sucai_title}'):
+                sucai_input.click()
+                self.locators.button('保存').click()
+                self.locators.button('确定').click()
 
     def regular_send(self, regular):
         regular_button = self.page.locator(
