@@ -39,11 +39,12 @@ class JiSuPage(BasePage):
         self.choose_wecome(wechat_name)
         self.choose_send_object(send_object_type, send_name_list)
         if text:
-            with allure.step(f'输入群发内容：{text}'):
-                self.text_input.type(text)
-            self.add_emoji(1)
-            self.add_live_link()
-            self.add_yingqi_link()
+            with allure.step(f'点击文本按钮'):
+                with allure.step(f'输入群发内容：{text}'):
+                    self.text_input.type(text)
+                self.add_emoji(1)
+                self.add_live_link()
+                self.add_yingqi_link()
         if picture:
             self.add_picture(picture)
         if video:

@@ -7,6 +7,7 @@ from data_module.group_rename_task_data import GroupRenameData, GroupRenameRegul
 from data_module.jisu_task_data import JiSuPersonData, JiSuGroupData
 from data_module.muban_data import MuBanData
 from data_module.user_data import UserData
+from data_module.train_camp_data import TrainCampGaoJiGroupData, TrainCampGaoJiPersonData, TrainCampGaoJiNoticeData, TrainCampGaoJiGroupDataOneByOne, TrainCampJiSuGroupData, TrainCampJiSuPersonData
 from module import PageIns
 import pytest
 import allure

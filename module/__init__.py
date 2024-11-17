@@ -7,6 +7,7 @@ import allure
 import pytest
 from data_module.user_data import UserData
 from module.base_page import BasePage
+from module.train_camp_page import TrainCampPage
 from utils.tools import get_path, 返回当前日期和减N天的日期
 from filelock import FileLock
 from utils.global_map import GlobalMap
@@ -29,6 +30,7 @@ class PageIns:
         self.jisu_page = JiSuPage(self.page)
         self.pull_group_page = PullGroupPage(self.page)
         self.login_page = LoginPage(self.page)
+        self.train_camp_page = TrainCampPage(self.page)
 
     @staticmethod
     def new_context_and_return_page_ins(new_context, user):

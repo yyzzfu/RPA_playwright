@@ -389,7 +389,7 @@ class BasePage:
             with allure.step(f'在选择直播界面，点击确定按钮'):
                 self.locators.button('确定').click()
 
-    def add_yingqi_link(self, click_button=True):
+    def add_yingqi_link(self, click_button=True, sop=False):
         placeholder = lambda placeholder1: self.page.locator(f'//div[@class="main_tool_L"]/span[text()="{placeholder1}"]').last  # 占位符按钮
         xunlianying_select = self.page.locator('//div[text()="请选择训练营"]')
         xunlianying = self.page.locator(
@@ -403,14 +403,17 @@ class BasePage:
         with allure.step('添加营期课链接'):
             if click_button:
                 placeholder('营期课链接').click()
-            xunlianying_select.click()
-            xunlianying_name = xunlianying.text_content()
-            xunlianying.click()
-            yingqi_name = yingqi.text_content()
-            yingqi_select.click()
-            yingqi.click()
-            yingqi_video_name = yingqi_video_info.text_content()
-            video_info = xunlianying_name + '--' + yingqi_name + '--' + yingqi_video_name
+            if not sop:
+                xunlianying_select.click()
+                xunlianying_name = xunlianying.text_content()
+                xunlianying.click()
+                yingqi_name = yingqi.text_content()
+                yingqi_select.click()
+                yingqi.click()
+                yingqi_video_name = yingqi_video_info.text_content()
+                video_info = xunlianying_name + '--' + yingqi_name + '--' + yingqi_video_name
+            else:
+                video_info = yingqi_video_info.text_content()
             with allure.step(f'在选择营期课界面，选择课程：{video_info}'):
                 yingqi_video_info.click()
             self.locators.button('确定').click()
@@ -428,35 +431,46 @@ class BasePage:
             self.locators.button('确定').click()
             random_emoji.click()
 
-    def add_picture(self, picture):
-        send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
+    def add_picture(self, picture, send_content=None):
+        if send_content:
+            send_content = send_content
+        else:
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="图片"]')
 
-        with allure.step('在追加内容中，点击图片按钮'):
-            send_content('图片').click()
+        with allure.step('点击图片按钮'):
+            send_content.click()
             self.upload(picture, '图片')
 
-    def add_video(self, video):
-        send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
-
-        with allure.step('在追加内容中，点击视频按钮'):
-            send_content('视频').click()
+    def add_video(self, video, send_content=None):
+        if send_content:
+            send_content = send_content
+        else:
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="视频"]')
+        with allure.step('点击视频按钮'):
+            send_content.click()
             self.upload(video, '视频')
 
-    def add_file(self, file):
-        send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
+    def add_file(self, file, send_content=None):
+        if send_content:
+            send_content = send_content
+        else:
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="文件"]')
         file_name_l = self.page.get_by_placeholder('请输入文件名称')
 
         file_name = file.get('file_name')
         file_path = file.get('file_path')
-        with allure.step('在追加内容中，点击文件按钮'):
-            send_content('文件').click()
+        with allure.step('点击文件按钮'):
+            send_content.click()
             with allure.step(f'在上传文件界面--文件名称输入框中，输入文件名称：{file_name}'):
                 file_name_l.fill(file_name)
             self.upload(file_path, '文件')
 
-    def add_link(self, link):
+    def add_link(self, link, send_content=None, sop=False):
         link_type = ['指定链接', '营期课链接', '直播课链接']
-        send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
+        if send_content:
+            send_content = send_content
+        else:
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="链接"]')
         choose_class_button = self.page.locator('//button[@id="shareList"]')
         link_title = self.page.get_by_placeholder('请输入链接标题')
         link_address = self.page.get_by_placeholder('请输入链接', exact=True)
@@ -464,7 +478,7 @@ class BasePage:
 
         for i in link_type:
             with allure.step('点击链接按钮'):
-                send_content('链接').click()
+                send_content.click()
 
                 title = i + link['title']
                 with allure.step(f'在链接标题中输入{title}'):
@@ -476,7 +490,7 @@ class BasePage:
                 elif i == '营期课链接':
                     self.form_radio_choose('链接类型', '营期课链接')
                     choose_class_button.click()
-                    self.add_yingqi_link(False)
+                    self.add_yingqi_link(False, sop=sop)
                 elif i == '直播课链接':
                     self.form_radio_choose('链接类型', '直播课链接')
                     choose_class_button.click()
@@ -487,15 +501,17 @@ class BasePage:
                 self.upload(link['picture_path'], '链接图片')
                 self.locators.button('确定').click()
 
-    def add_mini_program(self):
-        send_content = lambda content_type: self.page.locator(f'//div[@class="sendContent"]//span[text()="{content_type}"]')
+    def add_mini_program(self, send_content=None):
+        if send_content:
+            send_content = send_content
+        else:
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="小程序"]')
         choose_sucai = self.page.locator('//div[@class="bscrmCSS-modal-content"]//span[text()="选择素材"]/..')
-        # sucai = self.page.locator('//div[@class="list-data-container"]/div//input').first
         sucai_div = self.page.locator('//div[@class="list-data-container"]/div').first
         sucai_input = sucai_div.locator('input')
         sucai_title = sucai_div.locator('//div[@class="top-title"]')
         with allure.step('点击小程序按钮'):
-            send_content('小程序').click()
+            send_content.click()
             with allure.step(f'在小程序素材选择界面，点击选择素材按钮'):
                 choose_sucai.click()
                 sucai_title = sucai_title.text_content()

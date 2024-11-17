@@ -49,16 +49,17 @@ class GaoJiPage(BasePage):
             self.add_live_link()
             self.add_yingqi_link()
         if text:
-            self.send_content('文本').click()
-            self.text_input.fill(text)
-            self.add_emoji(1)
-            self.placeholder('插入员工姓名').click()
-            if task_type in ['群聊群发', '群发公告']:
-                self.placeholder('@所有人').click()
-            self.add_live_link()
-            self.add_yingqi_link()
-            self.add_random_emoji(10)
-            self.locators.button('确定').click()
+            with allure.step(f'点击文本按钮'):
+                self.send_content('文本').click()
+                self.text_input.fill(text)
+                self.add_emoji(1)
+                self.placeholder('插入员工姓名').click()
+                if task_type in ['群聊群发', '群发公告']:
+                    self.placeholder('@所有人').click()
+                self.add_live_link()
+                self.add_yingqi_link()
+                self.add_random_emoji(10)
+                self.locators.button('确定').click()
         if picture:
             self.add_picture(picture)
         if video:

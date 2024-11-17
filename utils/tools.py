@@ -83,14 +83,33 @@ def get_bj_time_timetuple():
     return bj_time_timetuple
 
 
-def get_time(minutes):
+def get_time(minutes, time_type="年月日时分秒"):
     """获取时间"""
     # bj_time = datetime.datetime.fromtimestamp(get_bj_time())
     time_end = datetime.datetime.now() + datetime.timedelta(minutes=minutes)
     time_end = time_end.timetuple()
-    time_end = time.strftime("%Y-%m-%d %H:%M:%S", time_end)
+    if time_type == '年月日时分秒':
+        time_end = time.strftime("%Y-%m-%d %H:%M:%S", time_end)
+    elif time_type == '时分':
+        time_end = time.strftime("%H:%M", time_end)
     return str(time_end)
 
 
+def get_days(date_str):
+    if not date_str:
+        raise Exception('未获取到开始日期')
+    from datetime import datetime
+    from datetime import date
+    today = date.today().strftime("%Y-%m-%d")
+    date_str = date_str
+    # 将字符串转换为日期对象
+    date1 = datetime.strptime(date_str, "%Y-%m-%d")
+    date2 = datetime.strptime(today, "%Y-%m-%d")
+    # 计算两个日期之间的天数差
+    delta = (date2 - date1).days
+    return delta
+
+
 if __name__ == '__main__':
-    print(将日期中的01日替换为1日('2024年10月02日'))
+    # print(将日期中的01日替换为1日('2024年10月02日'))
+    print(get_days('2024-11-14'))
