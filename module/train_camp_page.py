@@ -76,12 +76,13 @@ class TrainCampPage(BasePage):
                 self.send_content('文本').click()
                 self.text_input.fill(text)
                 self.add_emoji(1)
-                self.placeholder('插入员工姓名').click()
-                if task_type_2 in ['群聊群发', '群发公告']:
-                    self.placeholder('@所有人').click()
+                if task_type_1 == '高级群发':
+                    self.placeholder('插入员工姓名').click()
+                    if task_type_2 in ['群聊群发', '群发公告']:
+                        self.placeholder('@所有人').click()
+                    self.add_random_emoji(10)
                 self.add_live_link()
                 self.add_yingqi_link(sop=True)
-                self.add_random_emoji(10)
                 self.locators.button('确定').click()
         if picture:
             self.add_picture(picture, self.send_content('图片'))

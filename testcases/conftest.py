@@ -133,13 +133,14 @@ def get_WeCom_data(get_agent, get_WeCom):
 
 
 @pytest.fixture
-def get_user_and_wecom_data(worker_id, get_WeCom_data, get_login_type_num):
+def get_user_and_wecom_data(worker_id, get_WeCom_data, get_login_type_num, base_url):
     user_list, WeCom_data = get_WeCom_data
     if worker_id.startswith('gw'):
         user = user_list[int(worker_id[2:])]
     else:
         user = user_list[0]
-    return {'user': {'user': user, 'login_type_num': get_login_type_num}, 'WeCom_data': WeCom_data}
+    return {'user': {'user': user, 'login_type_num': get_login_type_num, 'login_url': base_url},
+            'WeCom_data': WeCom_data}
 
 
 @pytest.fixture
