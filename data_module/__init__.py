@@ -37,7 +37,7 @@ class As_dict:
                     value = get_path(r'/data_module/upload/video.mp4')
                     return_dict_new.update({key: value})
                 if "文件路径" in value:
-                    value = get_path(r'/data_module/upload/file.pdf')
+                    value = get_path(r'/data_module/upload/file.xlsx')
                     return_dict_new.update({key: value})
                 if WeCom_data:
                     if "企微账号" in value:
@@ -74,7 +74,7 @@ class As_dict:
                         v = get_path(r'/data_module/upload/video.mp4')
                         return_dict_new[key].update({k: v})
                     if "文件路径" in v:
-                        v = get_path(r'/data_module/upload/file.pdf')
+                        v = get_path(r'/data_module/upload/file.xlsx')
                         return_dict_new[key].update({k: v})
         return return_dict_new
 
@@ -108,7 +108,7 @@ class As_dict:
                     value = get_path(r'/data_module/upload/video.mp4')
                     return_dict_new.update({key: value})
                 if "文件路径" in value:
-                    value = get_path(r'/data_module/upload/file.pdf')
+                    value = get_path(r'/data_module/upload/file.xlsx')
                     return_dict_new.update({key: value})
                 if data:
                     if "企微账号" in value:
@@ -145,6 +145,6 @@ class As_dict:
                         v = get_path(r'/data_module/upload/video.mp4')
                         return_dict_new[key].update({k: v})
                     if "文件路径" in v:
-                        v = get_path(r'/data_module/upload/file.pdf')
+                        v = get_path(r'/data_module/upload/file.xlsx')
                         return_dict_new[key].update({k: v})
         return return_dict_new

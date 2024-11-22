@@ -355,13 +355,13 @@ class BasePage:
 
     def add_emoji(self, num):
         emoji_button = self.page.locator('//img[@class="emoji_btn"]')  # 表情按钮
-        emoji = self.page.locator('//div[@class="emojiBox"]/div').last
+        emoji = self.page.locator('//div[@class="emojiBox"]/div')
 
         with allure.step(f'插入{num}个表情'):
             emoji_len = emoji.count()
             for i in random.sample(range(0, emoji_len), num):
                 emoji_button.click()
-                self.page.wait_for_timeout(500)
+                # self.page.wait_for_timeout(500)
                 emoji.nth(i).click()
 
     def add_live_link(self, click_button=True):
@@ -470,7 +470,7 @@ class BasePage:
         if send_content:
             send_content = send_content
         else:
-            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="链接"]')
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="链接"]').last
         choose_class_button = self.page.locator('//button[@id="shareList"]')
         link_title = self.page.get_by_placeholder('请输入链接标题')
         link_address = self.page.get_by_placeholder('请输入链接', exact=True)
@@ -505,7 +505,7 @@ class BasePage:
         if send_content:
             send_content = send_content
         else:
-            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="小程序"]')
+            send_content = self.page.locator(f'//div[@class="sendContent"]//span[text()="小程序"]').last
         choose_sucai = self.page.locator('//div[@class="bscrmCSS-modal-content"]//span[text()="选择素材"]/..')
         sucai_div = self.page.locator('//div[@class="list-data-container"]/div').first
         sucai_input = sucai_div.locator('input')

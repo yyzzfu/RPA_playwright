@@ -32,10 +32,10 @@ class UserData:
             'WeCom1': {
                 'wechat_name': '付益强测试1',
                 'send_group_list': ['fff'],
-                'send_customer_list': ['测试微信', '反派测试', '付益强', '中国加油'],
+                'send_customer_list': ['再改下吧', '反派测试', '付益强', '中国加油'],
                 'agent': 'kf2',
                 'pull_group': {
-                    'pull_customer_list': ['测试微信'],
+                    'pull_customer_list': ['再改下吧'],
                     'fixed_customer_list': ['反派测试'],
                     'fixed_employee': 'kf3',
                 },

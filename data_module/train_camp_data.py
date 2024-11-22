@@ -78,6 +78,51 @@ class TrainCampGaoJiPersonData(As_dict):
 
 
 @dataclass
+class TrainCampGaoJiPersonData_2(As_dict):
+    task_type_1 = '高级群发'
+    task_type_2 = '私聊群发'
+    text = f'(测试){task_type_1}+ {task_type_2}+时间戳：+名人名言'
+    picture = picture_common
+    video = video_common
+    link = link_common
+    file = file_common
+    mini_program = True
+    train_camp = train_camp
+    camp = camp
+    send_object_type = '按到课'
+    class_status = '未到课'
+
+
+@dataclass
+class TrainCampVoiceData(As_dict):
+    task_type_1 = '智能语音'
+    text = f'(测试){task_type_1}+时间戳：+名人名言'
+    link = link_common
+    mini_program = True
+    train_camp = train_camp
+    camp = camp
+    send_object_type = '按到课'
+    class_status = '未到课'
+    robot = '邀客，lite-32k（勿动）'
+    connect_content = True
+    not_connect_content = True
+
+
+@dataclass
+class TrainCampVoiceData_2(As_dict):
+    task_type_1 = '智能语音'
+    text = f'(测试){task_type_1}+时间戳：+名人名言'
+    link = link_common
+    mini_program = True
+    train_camp = train_camp
+    camp = camp
+    send_object_type = '按条件'
+    robot = '邀客，lite-32k（勿动）'
+    connect_content = True
+    not_connect_content = True
+
+
+@dataclass
 class TrainCampJiSuGroupData(As_dict):
 
     task_type_1 = '极速群发'

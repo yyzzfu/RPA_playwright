@@ -38,8 +38,7 @@ class PageIns:
         login_type_num = user.get('login_type_num')
         login_url = user.get('login_url')
         with allure.step(f'访问地址：{login_url}'):
-            ...
-
+            allure.attach(f'账号：{username}，密码：{password}', name='账号密码', attachment_type=allure.attachment_type.TEXT)
         with FileLock(get_path(f".temp/{username}.lock")):
             if os.path.exists(get_path(f".temp/{username}.json")):
                 context: BrowserContext = new_context(storage_state=get_path(f".temp/{username}.json"))
@@ -49,7 +48,10 @@ class PageIns:
                 login_by_username = page.locator(
                     '//div[@class="ant-spin-container"]//div[@role="tab" and text()="账号密码登录"]')
                 expect(my_page.login_page.username.or_(my_page.login_page.username_right(username))).to_be_visible()
-                if my_page.login_page.username.count() or login_by_username.count():
+                if my_page.login_page.username_right(username).is_visible():
+                    with allure.step('已使用本地的storage_state，无需登录！'):
+                        ...
+                elif my_page.login_page.username.count() or login_by_username.count():
                     my_page.login_page.login(username, password, login_type_num)
                     my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
             else:
@@ -62,11 +64,11 @@ class PageIns:
 
     @staticmethod
     def login_and_return_page_ins(page: Page, user):
-        user_account_password = user.get('user')
+        username, password = user.get('user')
         login_type_num = user.get('login_type_num')
         login_url = user.get('login_url')
         my_page = PageIns(page)
         with allure.step(f'访问地址：{login_url}'):
-            ...
-        my_page.login_page.login(*user_account_password, login_type_num=login_type_num)
+            allure.attach(f'账号：{username}，密码：{password}', name='账号密码', attachment_type=allure.attachment_type.TEXT)
+        my_page.login_page.login(username, password, login_type_num=login_type_num)
         return my_page
