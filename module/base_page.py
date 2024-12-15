@@ -7,7 +7,6 @@ from utils.tools import get_time
 from utils.tools import 返回当前日期和减N天的日期, 将日期中的01日替换为1日
 
 
-
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
