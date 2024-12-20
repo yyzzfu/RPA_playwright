@@ -1,3 +1,7 @@
+import json
+
+from playwright._impl._network import Request
+
 from module import *
 from utils.tools import get_time, get_days
 
@@ -157,6 +161,16 @@ class TrainCampPage(BasePage):
             self.execute_time.click()
             self.execute_time.fill(execute_time)
             self.page.mouse.click(1, 1)
+
+        # 修改请求参数中的execTime（前端做了限制，必须输入5分钟后的时间，通过修改请求参数可以无视这个规则）
+        def handle_route(route):
+            req: Request = route.request
+            post_data = req.post_data  # 获取原始请求中的请求参数
+            post_data_dic = json.loads(post_data)  # 将json转换为字典
+            post_data_dic['execTime'] = get_time(1, '时分')
+            route.continue_(post_data=json.dumps(post_data_dic, ensure_ascii=False))  # 将字典转换为json，并使用修改后的post_data发送请求
+        self.page.route("**/saveSubTask", handle_route)
+
         with allure.step(f'点击保存按钮--提交表单'):
             self.locators.button('保存').click()
         expect(self.suc_msg).to_be_visible()

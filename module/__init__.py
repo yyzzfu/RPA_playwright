@@ -47,11 +47,15 @@ class PageIns:
                 my_page.fast_task_page.jump('/mantis')
                 login_by_username = page.locator(
                     '//div[@class="ant-spin-container"]//div[@role="tab" and text()="账号密码登录"]')
-                expect(my_page.login_page.username.or_(my_page.login_page.username_right(username))).to_be_visible()
-                if my_page.login_page.username_right(username).is_visible():
-                    with allure.step('已使用本地的storage_state，无需登录！'):
-                        ...
-                elif my_page.login_page.username.count() or login_by_username.count():
+                try:
+                    expect(my_page.login_page.username.or_(my_page.login_page.username_right(username))).to_be_visible(timeout=10_000)
+                    if my_page.login_page.username_right(username).is_visible():
+                        with allure.step('已使用本地的storage_state，无需登录！'):
+                            ...
+                    elif my_page.login_page.username.count() or login_by_username.count():
+                        my_page.login_page.login(username, password, login_type_num)
+                        my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
+                except AssertionError:
                     my_page.login_page.login(username, password, login_type_num)
                     my_page.page.context.storage_state(path=get_path(f".temp/{username}.json"))
             else:

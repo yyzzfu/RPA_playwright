@@ -14,7 +14,8 @@ file_common = {
     'file_path': '文件路径'
 }
 train_camp = 'fyq测试'
-camp = '1114-1'
+# camp = '1114-1'
+camp = '营期1220-1'
 
 
 @dataclass

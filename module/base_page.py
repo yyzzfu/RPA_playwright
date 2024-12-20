@@ -360,7 +360,6 @@ class BasePage:
             emoji_len = emoji.count()
             for i in random.sample(range(0, emoji_len), num):
                 emoji_button.click()
-                # self.page.wait_for_timeout(500)
                 emoji.nth(i).click()
 
     def add_live_link(self, click_button=True):
@@ -375,14 +374,15 @@ class BasePage:
         with allure.step('添加直播链接'):
             if click_button:
                 placeholder('直播链接').click()
-            with allure.step('在选择直播界面，点击直播时间'):
-                start_date.click()
-                date_start, date_end = 返回当前日期和减N天的日期(-4, '使用年月日格式')
-                date_start = 将日期中的01日替换为1日(date_start)
-                date_end = 将日期中的01日替换为1日(date_end)
-                date(date_start).click()
-                date(date_end).click()
-                live_video_info = live_video_info.text_content()
+            if not live_video_info.is_visible(timeout=10_000):
+                with allure.step('在选择直播界面，点击直播时间'):
+                    start_date.click()
+                    date_start, date_end = 返回当前日期和减N天的日期(-4, '使用年月日格式')
+                    date_start = 将日期中的01日替换为1日(date_start)
+                    date_end = 将日期中的01日替换为1日(date_end)
+                    date(date_start).click()
+                    date(date_end).click()
+            live_video_info = live_video_info.text_content()
             with allure.step(f'在选择直播界面，选择直播课：{live_video_info}'):
                 live_video_radio.click()
             with allure.step(f'在选择直播界面，点击确定按钮'):
@@ -399,6 +399,7 @@ class BasePage:
             '//li').first
         yingqi_video_div = self.page.locator('//div[@class="ReactVirtualized__Grid__innerScrollContainer"]//div').first
         yingqi_video_info = yingqi_video_div.locator('//span[@class="name"]')
+        chapter = self.page.locator('//div[@class="bscrmCSS-collapse-item"]//i').first
         with allure.step('添加营期课链接'):
             if click_button:
                 placeholder('营期课链接').click()
@@ -409,6 +410,9 @@ class BasePage:
                 yingqi_name = yingqi.text_content()
                 yingqi_select.click()
                 yingqi.click()
+                expect(chapter.or_(yingqi_video_info)).to_be_visible()
+                if chapter.is_visible():
+                    chapter.click()  # 点击了没有效果？？？
                 yingqi_video_name = yingqi_video_info.text_content()
                 video_info = xunlianying_name + '--' + yingqi_name + '--' + yingqi_video_name
             else:
@@ -479,13 +483,17 @@ class BasePage:
             with allure.step('点击链接按钮'):
                 send_content.click()
 
-                title = i + link['title']
-                with allure.step(f'在链接标题中输入{title}'):
-                    link_title.fill(title)
                 if i == '指定链接':
+                    title = i + link['title']
+                    with allure.step(f'在链接标题中输入{title}'):
+                        link_title.fill(title)
                     address = link['address']
                     with allure.step(f'在链接地址中输入{address}'):
                         link_address.fill(address)
+                    content = i + link['content']
+                    with allure.step(f'在内容简介中输入{content}'):
+                        link_content.fill(content)
+                    self.upload(link['picture_path'], '链接图片')
                 elif i == '营期课链接':
                     self.form_radio_choose('链接类型', '营期课链接')
                     choose_class_button.click()
@@ -494,10 +502,6 @@ class BasePage:
                     self.form_radio_choose('链接类型', '直播课链接')
                     choose_class_button.click()
                     self.add_live_link(False)
-                content = i + link['content']
-                with allure.step(f'在内容简介中输入{content}'):
-                    link_content.fill(content)
-                self.upload(link['picture_path'], '链接图片')
                 self.locators.button('确定').click()
 
     def add_mini_program(self, send_content=None):

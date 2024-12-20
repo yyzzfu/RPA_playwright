@@ -654,7 +654,7 @@ class Locator(_Locator):
                         self.page.wait_for_load_state()
                         if time.time() - start_time < int(time_out / 1333):
                             try:
-                                if attr in ["click", "fill", "hover", "check", "blur", "focus"]:
+                                if attr in ["click", "fill", "hover", "check", "checked", "set_checked", "blur", "focus"]:
                                     self.page.wait_for_timeout(100)
                                     api_length = len(api_Count)
                                     if api_Count:
