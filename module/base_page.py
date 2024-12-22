@@ -305,20 +305,29 @@ class BasePage:
     def choose_send_object(self, send_object_type, send_name_list):
         send_object = self.page.locator(f"//button/span[contains(text(), '选择客户')]")
         group_name = self.page.get_by_placeholder('可输入多个，按回车或后面的加号')
-        check_all = self.page.get_by_text('全选所有')
+        check_all = self.page.get_by_text('全选本页')
+        tag_select = self.page.locator('//div[@class="wrapper wechatTag"]//div[@class="bscrmCSS-select-selection__rendered"]')
+        tag_option = self.page.locator('//ul/li[@role="option"]').filter(has_text='含所有标签')
 
         with allure.step(f'在群发对象中，选择{send_object_type}'):
             if send_object_type == '指定群' or send_object_type == '按客户':
                 self.form_radio_choose(label='群发对象', radio=send_object_type)
-                with allure.step('点击选择客户/选择客户群'):
+                send_object_dic = {'指定群': '选择客户', '按客户': '选择客户群'}
+                send_object_str = send_object_dic.get(send_object_type)
+                with allure.step(f'点击{send_object_str}'):
                     send_object.click()
-                    for name in send_name_list:
-                        with allure.step(f'在选择客户/客户群界面，输入：{name}，并按回车键'):
-                            group_name.fill(name)
-                            self.page.keyboard.press('Enter')
-                    with allure.step(f'在选择客户/客户群界面，点击全选本页'):
+                    if isinstance(send_name_list, list):
+                        for name in send_name_list:
+                            with allure.step(f'在{send_object_str}界面，输入：{name}，并按回车键'):
+                                group_name.fill(name)
+                                self.page.keyboard.press('Enter')
+                    elif not send_name_list:  # 为空
+                        if send_object_type == '按客户':
+                            tag_select.click()
+                            tag_option.click()
+                    with allure.step(f'在{send_object_str}，点击全选本页'):
                         check_all.click()
-                    with allure.step(f'在选择客户/客户群界面，点击确定按钮'):
+                    with allure.step(f'在{send_object_str}，点击确定按钮'):
                         self.locators.button('确定').click()
             elif send_object_type == '按条件':
                 self.form_radio_choose(label='群发对象', radio=send_object_type)
@@ -398,8 +407,8 @@ class BasePage:
             '//ul[@class="bscrmCSS-select-dropdown-menu  bscrmCSS-select-dropdown-menu-root bscrmCSS-select-dropdown-menu-vertical"]').last.locator(
             '//li').first
         yingqi_video_div = self.page.locator('//div[@class="ReactVirtualized__Grid__innerScrollContainer"]//div').first
-        yingqi_video_info = yingqi_video_div.locator('//span[@class="name"]')
-        chapter = self.page.locator('//div[@class="bscrmCSS-collapse-item"]//i').first
+        yingqi_video_info = yingqi_video_div.locator('//span[@class="name"]').first
+        chapter = self.page.locator('//div[@class="bscrmCSS-collapse-item"]').first
         with allure.step('添加营期课链接'):
             if click_button:
                 placeholder('营期课链接').click()
@@ -411,11 +420,14 @@ class BasePage:
                 yingqi_select.click()
                 yingqi.click()
                 expect(chapter.or_(yingqi_video_info)).to_be_visible()
-                if chapter.is_visible():
-                    chapter.click()  # 点击了没有效果？？？
+                if chapter.is_visible(timeout=5_000):
+                    chapter.click()
                 yingqi_video_name = yingqi_video_info.text_content()
                 video_info = xunlianying_name + '--' + yingqi_name + '--' + yingqi_video_name
             else:
+                expect(chapter.or_(yingqi_video_info)).to_be_visible()
+                if chapter.is_visible(timeout=5_000):
+                    chapter.click()
                 video_info = yingqi_video_info.text_content()
             with allure.step(f'在选择营期课界面，选择课程：{video_info}'):
                 yingqi_video_info.click()
