@@ -374,6 +374,7 @@ def new_context(
             #  字典的update可以直接传字典,也可以解包,解包相当于kwargs
             browser_context_args_copy.update(video_option_dict)
         my_context = browser.new_context(**browser_context_args)
+        my_context.grant_permissions(permissions=['microphone'])  # 给与浏览器麦克风权限
         my_context.set_default_timeout(ui_timeout)
         my_context.set_default_navigation_timeout(ui_timeout * 2)
         original_close = my_context.close
@@ -731,18 +732,18 @@ class Locator(_Locator):
                                     }
                                 }''')
                             escaped_api_count = json.dumps(api_Count)
-                            self.page.evaluate(f'''() => {{
-                                    const span = document.createElement('span');
-                                    span.textContent = `当前列表内容为: {escaped_api_count}`;
-                                    span.style.position = 'absolute';
-                                    span.style.top = '0';
-                                    span.style.left = '50%';
-                                    span.style.transform = 'translateX(-50%)';
-                                    span.style.backgroundColor = 'red'; // 设置背景色以便更容易看到
-                                    span.style.zIndex = '9999';
-                                    span.id = 'ainotestgogogo';
-                                    document.body.appendChild(span);
-                                }}''')
+                            # self.page.evaluate(f'''() => {{
+                            #         const span = document.createElement('span');
+                            #         span.textContent = `当前列表内容为: {escaped_api_count}`;
+                            #         span.style.position = 'absolute';
+                            #         span.style.top = '0';
+                            #         span.style.left = '50%';
+                            #         span.style.transform = 'translateX(-50%)';
+                            #         span.style.backgroundColor = 'red'; // 设置背景色以便更容易看到
+                            #         span.style.zIndex = '9999';
+                            #         span.id = 'ainotestgogogo';
+                            #         document.body.appendChild(span);
+                            #     }}''')
                             if sys.platform != "linux":
                                 print("接口卡超时了,暂时放行,需要查看超时接口或调整接口监听范围:")
                                 print(escaped_api_count)

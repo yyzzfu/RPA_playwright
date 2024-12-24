@@ -6,7 +6,9 @@ from playwright.sync_api import Page, expect, BrowserContext, Locator
 import allure
 import pytest
 from data_module.user_data import UserData
+from module.WeCom_workbench_page import WeComWorkbenchPage
 from module.base_page import BasePage
+from module.home_page import HomePage
 from module.train_camp_page import TrainCampPage
 from utils.tools import get_path, 返回当前日期和减N天的日期
 from filelock import FileLock
@@ -31,6 +33,8 @@ class PageIns:
         self.pull_group_page = PullGroupPage(self.page)
         self.login_page = LoginPage(self.page)
         self.train_camp_page = TrainCampPage(self.page)
+        self.home_page = HomePage(self.page)
+        self.WeCom_workbench_page = WeComWorkbenchPage(self.page)
 
     @staticmethod
     def new_context_and_return_page_ins(new_context, user):
@@ -44,12 +48,12 @@ class PageIns:
                 context: BrowserContext = new_context(storage_state=get_path(f".temp/{username}.json"))
                 page = context.new_page()
                 my_page = PageIns(page)
-                my_page.fast_task_page.jump('/mantis')
+                my_page.home_page.navigate()
                 login_by_username = page.locator(
                     '//div[@class="ant-spin-container"]//div[@role="tab" and text()="账号密码登录"]')
                 try:
-                    expect(my_page.login_page.username.or_(my_page.login_page.username_right(username))).to_be_visible(timeout=10_000)
-                    if my_page.login_page.username_right(username).is_visible():
+                    expect(my_page.login_page.username.or_(my_page.home_page.username_right(username))).to_be_visible(timeout=10_000)
+                    if my_page.home_page.username_right(username).is_visible():
                         with allure.step('已使用本地的storage_state，无需登录！'):
                             ...
                     elif my_page.login_page.username.count() or login_by_username.count():

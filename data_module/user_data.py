@@ -3,7 +3,7 @@
 class UserData:
     test_data = {
         'agent1': {
-            'user_list': [('kf3', 'Qwer1234'), ('kf5', 'Qwer1234')],  # 关联员工、负责人
+            'user_list': [('kf3', 'Qwer1234'), ('kf5', 'Qwer1234')],
             'WeCom1': {
                 'wechat_name': 'fyq测试1',  # 选择的企微账号
                 'send_group_list': ['yyy', 'x'],  # 群发对象-指定群
@@ -28,7 +28,7 @@ class UserData:
             }
         },
         'agent2': {
-            'user_list': [('kf2', 'Qwer1234'), ('kf5', 'Qwer1234')],
+            'user_list': [('kf5', 'Qwer1234'), ('kf2', 'Qwer1234')],
             'WeCom1': {
                 'wechat_name': '付益强测试1',
                 # 'send_group_list': ['fff'],

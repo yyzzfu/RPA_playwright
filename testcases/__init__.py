@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect, Browser, BrowserContext
 
+from data_module.WeCom_workbench_data import CreateGroupData, SendMsgData
 from data_module.fast_task_data import FastData
 from data_module.gaoji_task_data import GaoJiGroupData, GaoJiPersonData, GaoJiNoticeData, GaoJiGroupDataOneByOne, \
     GaoJiGroupDataAllGroup
