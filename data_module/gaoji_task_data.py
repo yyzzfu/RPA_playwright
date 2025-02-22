@@ -24,10 +24,10 @@ class GaoJiGroupData(As_dict):
     send_object_type = '指定群'
     send_name_list = '群发对象-指定群'
     text = f'(测试){described}+时间戳：+名人名言'
-    picture = picture_common
-    video = video_common
+    # picture = picture_common
+    # video = video_common
     link = link_common
-    file = file_common
+    # file = file_common
     mini_program = True
     task_type = '群聊群发'
 

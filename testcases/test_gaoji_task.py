@@ -61,3 +61,4 @@ def test_gaoji_create_notice_task(pw_page, get_user_and_wecom_data):
     data = GaoJiNoticeData.as_dict_class(get_user_and_wecom_data.get('WeCom_data'))
     my_page.gaoji_page.navigate()
     my_page.gaoji_page.create_task_func(**data)
+

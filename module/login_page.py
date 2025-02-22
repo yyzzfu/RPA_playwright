@@ -11,6 +11,8 @@ class LoginPage(BasePage):
         self.login_button = self.page.get_by_role("button", name="登 录")
         self.login_by_username = self.page.locator(
             '//div[@class="ant-spin-container"]//div[@role="tab" and text()="账号密码登录"]')
+        self.protocol_radio = self.page.locator('//input[@type="checkbox"]')
+        self.login_info = self.page.locator('//span[@id="loginInfo"]')
 
     def navigate(self):
         self.jump("/")
@@ -39,9 +41,12 @@ class LoginPage(BasePage):
                         self.username.fill(username)
                     with allure.step(f'输入密码：{password}'):
                         self.password.fill(password)
+                    with allure.step('勾选同意协议'):
+                        self.protocol_radio.check()
                     with allure.step('点击登录按钮'):
                         self.login_button.click()
                     expect(self.login_button).not_to_be_visible()
+                    expect(self.login_info).to_be_visible()
                     break
                 except:
                     num += 1

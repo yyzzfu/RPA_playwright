@@ -31,8 +31,8 @@ class UserData:
             'user_list': [('kf5', 'Qwer1234'), ('kf2', 'Qwer1234')],
             'WeCom1': {
                 'wechat_name': '付益强测试1',
-                # 'send_group_list': ['fff'],
-                'send_group_list': None,
+                'send_group_list': ['fff'],
+                # 'send_group_list': None,
                 # 'send_customer_list': ['再改下吧', '反派测试', '付益强', '中国加油'],
                 'send_customer_list': None,
                 'agent': 'kf2',

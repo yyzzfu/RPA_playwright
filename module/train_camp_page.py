@@ -36,6 +36,7 @@ class TrainCampPage(BasePage):
         self.sure_to_submit = self.page.locator('//div[@class="btnBox"]//button/span[text()="确 定"]')
         self.single_send = self.page.locator('//input[@id="singleSendFlag"]/..')
         self.suc_msg = self.page.get_by_text('保存成功')
+        self.details_button = lambda sop_name: self.page.locator(f'//tbody[@class="bscrmCSS-table-tbody"]//td[text()="{sop_name}"]/..//span[text()="详情"]/..')
 
     def navigate(self):
         with allure.step('进入训练营界面'):
@@ -44,7 +45,7 @@ class TrainCampPage(BasePage):
     def create_task_func(self, train_camp, camp, task_type_1, task_type_2='', text='', picture='',
                          video='', link: dict='', file: dict='', notice='', mini_program='',
                          one_by_one='', send_object_type='', class_status='', robot='',
-                         connect_content=False, not_connect_content=False, **kwargs):
+                         connect_content=False, not_connect_content=False, sop_name='', **kwargs):
 
         with allure.step(f'训练营查询输入框中输入名称：{train_camp}'):
             self.train_camp_search.fill(train_camp)
@@ -55,6 +56,8 @@ class TrainCampPage(BasePage):
             self.camp(camp).click()
         with allure.step(f'点击智能助理SOP'):
             self.sop.click()
+        with allure.step(f'点击SOP：{sop_name}'):
+            self.details_button(sop_name).click()
         start_date = ''
         for i in range(10):
             self.page.wait_for_timeout(1_000)

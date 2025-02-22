@@ -16,6 +16,7 @@ file_common = {
 train_camp = 'fyq测试'
 # camp = '1114-1'
 camp = '营期1220-1'
+sop_name = 'sop测试'
 
 
 @dataclass
@@ -31,6 +32,7 @@ class TrainCampGaoJiGroupData(As_dict):
     mini_program = True
     train_camp = train_camp
     camp = camp
+    sop_name =sop_name
 
 
 @dataclass
@@ -46,6 +48,7 @@ class TrainCampGaoJiGroupDataOneByOne(As_dict):
     train_camp = train_camp
     camp = camp
     one_by_one = True
+    sop_name = sop_name
 
 
 @dataclass
@@ -61,6 +64,7 @@ class TrainCampGaoJiNoticeData(As_dict):
     train_camp = train_camp
     camp = camp
     notice = f'群公告内容：' + text
+    sop_name = sop_name
 
 
 @dataclass
@@ -76,6 +80,7 @@ class TrainCampGaoJiPersonData(As_dict):
     train_camp = train_camp
     camp = camp
     send_object_type = '按条件'
+    sop_name = sop_name
 
 
 @dataclass
@@ -92,6 +97,7 @@ class TrainCampGaoJiPersonData_2(As_dict):
     camp = camp
     send_object_type = '按到课'
     class_status = '未到课'
+    sop_name = sop_name
 
 
 @dataclass
@@ -107,6 +113,7 @@ class TrainCampVoiceData(As_dict):
     robot = '邀客，lite-32k（勿动）'
     connect_content = True
     not_connect_content = True
+    sop_name = sop_name
 
 
 @dataclass
@@ -121,6 +128,7 @@ class TrainCampVoiceData_2(As_dict):
     robot = '邀客，lite-32k（勿动）'
     connect_content = True
     not_connect_content = True
+    sop_name = sop_name
 
 
 @dataclass
@@ -136,6 +144,7 @@ class TrainCampJiSuGroupData(As_dict):
     mini_program = True
     train_camp = train_camp
     camp = camp
+    sop_name = sop_name
 
 
 @dataclass
@@ -151,3 +160,4 @@ class TrainCampJiSuPersonData(As_dict):
     train_camp = train_camp
     camp = camp
     send_object_type = '按条件'
+    sop_name = sop_name
