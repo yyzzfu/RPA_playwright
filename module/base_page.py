@@ -4,7 +4,7 @@ from module import *
 from module.locators import Locators
 from module.table import Table
 from utils.tools import get_time
-from utils.tools import 返回当前日期和减N天的日期, 将日期中的01日替换为1日
+from utils.tools import 返回当前日期和减N天的日期, 将日期中的01月01日替换为1月1日
 
 
 class BasePage:
@@ -387,8 +387,8 @@ class BasePage:
                 with allure.step('在选择直播界面，点击直播时间'):
                     start_date.click()
                     date_start, date_end = 返回当前日期和减N天的日期(-4, '使用年月日格式')
-                    date_start = 将日期中的01日替换为1日(date_start)
-                    date_end = 将日期中的01日替换为1日(date_end)
+                    date_start = 将日期中的01月01日替换为1月1日(date_start)
+                    date_end = 将日期中的01月01日替换为1月1日(date_end)
                     date(date_start).click()
                     date(date_end).click()
             live_video_info = live_video_info.text_content()

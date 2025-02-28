@@ -62,12 +62,14 @@ def 返回当前日期和减N天的日期(add_day: int, time_type="使用中划�
         return (datetime.datetime.now() + datetime.timedelta(days=add_day)).strftime(str(time_type))
 
 
-def 将日期中的01日替换为1日(date: str):
-    date1, date2 = date.split('月')
-    if date2.startswith('0'):
-        date2 = date2.replace('0', '')
-        return date1 + '月' + date2
-    return date
+def 将日期中的01月01日替换为1月1日(date: str):
+    year, date = date.split('年')
+    m, d = date.split('月')
+    if m.startswith('0'):
+        m = m.replace('0', '')
+    if d.startswith('0'):
+        d = d.replace('0', '')
+    return year + '年' + m + '月' + d
 
 
 def get_bj_time():
